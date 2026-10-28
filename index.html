@@ -13,6 +13,8 @@
 <title>Guvvatli Center</title>
 </head>
 <body>
+<title>Guvvatli Center</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800;900&family=Onest:wght@400;500;600&family=Nunito:wght@500;900&family=Cormorant+Garamond:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
@@ -905,9 +907,9 @@ Object.assign(I18N.en,{"Süni İntellekt":"Artificial Intelligence"});Object.ass
 const D=I18N[L]||{};
 const pick=o=>o[L]||o.az;
 const UI=pick({
-  az:{menu:'Menyu',close:'Bağla',open:'AÇ',err:'Ad və telefon nömrəsini yazın.',thanks:'Təşəkkürlər',ok:'Müraciətiniz qəbul olundu. 24 saat ərzində zəng edəcəyik.',proto:'Prototip: real saytda müraciət admin panelə düşəcək.',m:'Riyaziyyat',tb:'Dərslik',wb:'İş kitabı',wbs:'İş kitabı',leaf:'Vərəqləmək üçün açın',sample:'Üz qabığı və 1-ci fəsil',psample:'Prototip, üz qabığı və 1-ci fəsil',lang:'Dil',copied:'Kopyalandı',k1:'Təbriklər!',k2:'Gələcək üçün böyük bir addım atdın!',k3:'Guvvatliyə xoş gəldin!'},
-  en:{menu:'Menu',close:'Close',open:'OPEN',err:'Please enter your name and phone number.',thanks:'Thank you',ok:'Your application has been received. We will call you within 24 hours.',proto:'Prototype: on the live site the application goes to the admin panel.',m:'Mathematics',tb:'Textbook',wb:'Workbook',wbs:'Workbook',leaf:'Open to leaf through',sample:'Cover and Chapter 1',psample:'Prototype, cover and Chapter 1',lang:'Language',copied:'Copied',k1:'Congratulations!',k2:'You have taken a big step towards your future!',k3:'Welcome to Guvvatli!'},
-  ru:{menu:'Меню',close:'Закрыть',open:'ОТКР',err:'Укажите имя и номер телефона.',thanks:'Спасибо',ok:'Ваша заявка принята. Мы позвоним в течение 24 часов.',proto:'Прототип: на рабочем сайте заявка попадёт в панель администратора.',m:'Математика',tb:'Учебник',wb:'Рабочая тетрадь',wbs:'Тетрадь',leaf:'Откройте, чтобы листать',sample:'Обложка и 1-я глава',psample:'Прототип, обложка и 1-я глава',lang:'Язык',copied:'Скопировано',k1:'Поздравляем!',k2:'Ты сделал большой шаг в будущее!',k3:'Добро пожаловать в Guvvatli!'}});
+  az:{menu:'Menyu',close:'Bağla',open:'AÇ',err:'Ad və telefon nömrəsini yazın.',thanks:'Təşəkkürlər',ok:'Müraciətiniz qəbul olundu. 24 saat ərzində zəng edəcəyik.',fail:'Göndərmək alınmadı. Zəhmət olmasa +994 55 545 22 47 nömrəsinə zəng edin və ya yazın.',m:'Riyaziyyat',tb:'Dərslik',wb:'İş kitabı',wbs:'İş kitabı',leaf:'Vərəqləmək üçün açın',sample:'Üz qabığı və 1-ci fəsil',psample:'Prototip, üz qabığı və 1-ci fəsil',lang:'Dil',copied:'Kopyalandı',k1:'Təbriklər!',k2:'Gələcək üçün böyük bir addım atdın!',k3:'Guvvatliyə xoş gəldin!'},
+  en:{menu:'Menu',close:'Close',open:'OPEN',err:'Please enter your name and phone number.',thanks:'Thank you',ok:'Your application has been received. We will call you within 24 hours.',fail:'Sending failed. Please call or message us at +994 55 545 22 47.',m:'Mathematics',tb:'Textbook',wb:'Workbook',wbs:'Workbook',leaf:'Open to leaf through',sample:'Cover and Chapter 1',psample:'Prototype, cover and Chapter 1',lang:'Language',copied:'Copied',k1:'Congratulations!',k2:'You have taken a big step towards your future!',k3:'Welcome to Guvvatli!'},
+  ru:{menu:'Меню',close:'Закрыть',open:'ОТКР',err:'Укажите имя и номер телефона.',thanks:'Спасибо',ok:'Ваша заявка принята. Мы позвоним в течение 24 часов.',fail:'Не удалось отправить. Позвоните или напишите нам: +994 55 545 22 47.',m:'Математика',tb:'Учебник',wb:'Рабочая тетрадь',wbs:'Тетрадь',leaf:'Откройте, чтобы листать',sample:'Обложка и 1-я глава',psample:'Прототип, обложка и 1-я глава',lang:'Язык',copied:'Скопировано',k1:'Поздравляем!',k2:'Ты сделал большой шаг в будущее!',k3:'Добро пожаловать в Guvvatli!'}});
 if(L!=='az'){
   const norm=s=>s.replace(/\s+/g,' ').trim();
   $$('body *').forEach(el=>{ if(!el.isConnected||/^(SCRIPT|STYLE|CANVAS|path|circle)$/.test(el.tagName))return;
@@ -1016,17 +1018,34 @@ modal.addEventListener('click',e=>{if(e.target===modal)closeBook();});
 addEventListener('keydown',e=>{if(modal.hidden)return; if(e.key==='Escape')closeBook(); if(e.key==='ArrowRight')pf&&pf.flipNext(); if(e.key==='ArrowLeft')pf&&pf.flipPrev();});
 
 /* ---------- form ---------- */
-$('#fm').addEventListener('submit',e=>{
-  e.preventDefault();
+// Applications go straight into the panel (Supabase table "leads"; the public key may only insert, never read).
+const SB_URL='https://jcinfzxgwkvxamevlwea.supabase.co', SB_KEY='sb_publishable_tyrt31GR8_GY-VBrnQonsQ_8syshYPR';
+const UTM=(()=>{const q=new URLSearchParams(location.search),o={};['utm_source','utm_medium','utm_campaign','utm_content','gclid','fbclid'].forEach(k=>{const v=q.get(k);if(v)o[k]=v.slice(0,120)});try{if(Object.keys(o).length)sessionStorage.setItem('gc-utm',JSON.stringify(o));else return JSON.parse(sessionStorage.getItem('gc-utm')||'{}')}catch(_){}return o})();
+const SRC=(()=>{const s=(UTM.utm_source||'').toLowerCase(); if(UTM.gclid||s.includes('google'))return 'google'; if(UTM.fbclid||s.includes('facebook')||s==='fb')return 'facebook'; if(s.includes('insta')||s==='ig')return 'instagram'; if(s.includes('tiktok'))return 'tiktok'; return 'site'})();
+let sending=false;
+$('#fm').addEventListener('submit',async e=>{
+  e.preventDefault(); if(sending) return;
   const fd=new FormData(e.target);
-  const name=(fd.get('parent')||'').trim(), ph=(fd.get('phone')||'').replace(/\D/g,'');
+  const name=(fd.get('parent')||'').trim(), phRaw=(fd.get('phone')||'').trim(), ph=phRaw.replace(/\D/g,'');
   if(!name||ph.length<9){$('#err').textContent=UI.err;return;}
   $('#err').textContent='';
   const showOk=()=>{  const box=$('#formbox');
-  box.innerHTML=`<div class="okmsg" tabindex="-1"><b>${UI.thanks}, ${name.replace(/[<>&"]/g,'')}.</b><span>${UI.ok}</span><small>${UI.proto}</small></div>`;
+  box.innerHTML=`<div class="okmsg" tabindex="-1"><b>${UI.thanks}, ${name.replace(/[<>&"]/g,'')}.</b><span>${UI.ok}</span></div>`;
   const ok=$('.okmsg',box); ok.focus();
   if(MOTION) G.from(ok,{y:40,opacity:0,scale:.96,duration:.8,ease:'expo.out'});};
-  showOk(); // Koroğlu welcome paused: koroglu(showOk);
+  const g=parseInt(fd.get('grade'),10);
+  const row={parent_name:name.slice(0,120),phone:phRaw.slice(0,40),child_name:(fd.get('student')||'').trim().slice(0,120)||null,grade:g>=1&&g<=11?g:null,
+    subject:fd.get('dir')||null,sector:fd.get('sector')||null,format:fd.get('fmt')||null,lang:L,source:SRC,utm:UTM};
+  const btn=$('#fm .send'); sending=true; btn.disabled=true; btn.style.opacity=.6;
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/leads',{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)});
+    if(!r.ok) throw new Error(r.status);
+    showOk();
+  }catch(_){
+    if(!/guvvatli\.az$/.test(location.hostname)){showOk();return;} // preview pages cannot reach the database
+    sending=false; btn.disabled=false; btn.style.opacity='';
+    $('#err').textContent=UI.fail;
+  }
 });
 
 
