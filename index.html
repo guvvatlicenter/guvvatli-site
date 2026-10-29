@@ -371,7 +371,7 @@ p{margin:0}
 .xbtn,.nbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:12px 18px;cursor:pointer;font-size:14px;transition:background .3s}
 .xbtn:hover,.nbtn:hover{background:rgba(255,255,255,.16)}
 .fliphold{width:100%;flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center}
-.modal{gap:12px!important}
+.modal{gap:12px!important;z-index:90}
 .fb .pg{background:#fff;overflow:hidden}
 .fb .pg .pq{width:100%;height:100%;background-size:200% 200%;background-repeat:no-repeat;background-color:#fff}
 .fliphold .fb{margin:0 auto}
@@ -633,6 +633,83 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .sx.p-paper .sxl,.sx.p-paper .it p,.sx.p-paper .how p{color:#3A2A0C;opacity:1;-webkit-text-fill-color:#3A2A0C}
 .why .gold.gdk{background:linear-gradient(100deg,#7A5516 0%,#B8862E 20%,#E2B24F 38%,#F7DC8A 50%,#D9A63E 62%,#A87822 80%,#7A5516 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldsh 3.2s linear infinite;padding-bottom:.06em}
 @media (prefers-reduced-motion:reduce){.why .gold.gdk{animation:none}}
+
+/* service detail: editorial layout */
+.sx .hero2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,5vw,72px);align-items:center;margin-top:clamp(10px,3vh,30px)}
+.sx .hero2 h2{margin-top:0}
+.sx .stack{position:relative;height:clamp(300px,40vw,500px);perspective:1400px}
+.sx .stack button{all:unset;cursor:pointer;position:absolute;top:50%;left:50%;width:clamp(150px,19vw,250px);aspect-ratio:1/1.3694;border-radius:4px 10px 10px 4px;background-size:cover;background-position:center;box-shadow:-2px 0 0 rgba(0,0,0,.18) inset,0 30px 60px -20px rgba(0,0,0,.55),0 8px 18px rgba(0,0,0,.25);transition:transform .7s var(--ease)}
+.sx .stack button::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.12) 6%,transparent 12%,transparent 88%,rgba(0,0,0,.08))}
+.sx .stack button:nth-child(1){transform:translate(-112%,-46%) rotate(-11deg)}
+.sx .stack button:nth-child(2){transform:translate(-50%,-56%) rotate(-2deg);z-index:2}
+.sx .stack button:nth-child(3){transform:translate(14%,-44%) rotate(9deg);z-index:1}
+.sx .stack button:hover{transform:translate(-50%,-64%) rotate(0) scale(1.04);z-index:3}
+.sx .stack button:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+.sx .lead2{font-size:clamp(18px,1.7vw,23px);line-height:1.5;max-width:30ch;margin-top:22px}
+.sx .h3x{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,56px);letter-spacing:-.03em;line-height:1;margin-top:10px;max-width:16ch}
+.sx .sub2{font-size:16px;line-height:1.55;max-width:52ch;margin-top:14px;opacity:.85}
+.sx .shelf2{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;padding:26px 4px 18px;margin:0 -4px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.sx .shelf2 button{all:unset;cursor:pointer;flex:0 0 clamp(108px,11vw,148px);scroll-snap-align:start;display:flex;flex-direction:column;gap:10px}
+.sx .shelf2 .cv{aspect-ratio:1/1.3694;border-radius:3px 8px 8px 3px;background-size:cover;background-position:center;box-shadow:0 18px 30px -16px rgba(0,0,0,.6);transition:transform .45s var(--ease),box-shadow .45s var(--ease);position:relative}
+.sx .shelf2 .cv::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 9%)}
+.sx .shelf2 button:hover .cv{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 30px 40px -18px rgba(0,0,0,.65)}
+.sx .shelf2 button:focus-visible .cv{outline:3px solid currentColor;outline-offset:4px}
+.sx .shelf2 b{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.02em}
+.sx .pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,34px);margin-top:28px}
+.sx .pages figure{margin:0;min-width:0}
+.sx .pages .pg2{aspect-ratio:1300/1778;background-size:200% 200%;background-color:#fff;border-radius:4px;box-shadow:0 26px 50px -24px rgba(0,0,0,.6);transition:transform .6s var(--ease)}
+.sx .pages figure:nth-child(1) .pg2{transform:rotate(-2.2deg)}
+.sx .pages figure:nth-child(3) .pg2{transform:rotate(2deg)}
+.sx .pages figure:hover .pg2{transform:rotate(0) translateY(-6px) scale(1.02)}
+.sx .pages figcaption{margin-top:18px;font-size:15px;line-height:1.5;opacity:.88}
+.sx .pages figcaption b{display:block;font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:4px;opacity:1}
+.sx .medal{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,3vw,44px);align-items:center;margin-top:clamp(48px,8vh,90px);padding-block:clamp(28px,4vw,44px);border-block:1px solid rgba(255,255,255,.22)}
+.sx .medal .num{font-family:var(--display);font-weight:800;font-size:clamp(64px,10vw,150px);line-height:.9;letter-spacing:-.05em}
+.sx .medal p{font-size:clamp(17px,1.5vw,21px);line-height:1.5;max-width:40ch}
+.sx .rows{margin-top:22px}
+.sx .rw{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px clamp(20px,4vw,60px);padding-block:24px;border-top:1px solid currentColor}
+.sx .rw:last-child{border-bottom:1px solid currentColor}
+.sx .rw h4{font-family:var(--display);font-weight:600;font-size:clamp(20px,1.8vw,26px);margin:0;letter-spacing:-.01em}
+.sx .rw h4 small{display:block;font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:8px}
+.sx .rw p{font-size:16.5px;line-height:1.6;opacity:.88;margin:0}
+.sx.p-paper .rw p,.sx.p-paper .lead2,.sx.p-paper .sub2{color:#3A2A0C;-webkit-text-fill-color:#3A2A0C}
+.sx.p-paper .rw{border-color:#C9A65A}
+.sx.p-lime .medal{border-color:rgba(16,22,26,.2)}
+.sx .hero2 h2{font-size:clamp(40px,5.4vw,84px)}
+.sx .stack button:nth-child(1){transform:translate(-96%,-46%) rotate(-10deg)}
+.sx .shelf2 button{flex:1 1 0;min-width:96px;max-width:170px}
+
+/* detail page v2: no hairlines, bold type, filled shapes */
+.sx .x{border:0;background:rgba(255,255,255,.14);font-weight:600}
+.sx.p-lime .x{background:rgba(16,22,26,.08)}.sx.p-paper .x{background:#F3E4BE}
+.sx .bar .ov{font-family:var(--display);font-weight:600;letter-spacing:.06em;text-transform:none;font-size:14px;opacity:1}
+.sx .sec{font-family:var(--display);font-weight:800;font-size:clamp(30px,3.8vw,56px);letter-spacing:-.035em;line-height:1;text-transform:none;opacity:1;margin-top:clamp(56px,9vh,110px)}
+.sx .sub2{font-size:17px;opacity:.9}
+.sx .lead2,.sx .sxl{font-family:var(--display);font-weight:400;font-size:clamp(17px,1.5vw,21px);line-height:1.5;letter-spacing:-.01em;opacity:1}
+.sx .facts span{border:0;background:rgba(255,255,255,.14);font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.01em;opacity:1;padding:11px 18px}
+.sx.p-lime .facts span{background:rgba(16,22,26,.09)}.sx.p-paper .facts span{background:#F3E4BE;-webkit-text-fill-color:#5A3F0E;color:#5A3F0E}
+.sx .rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:26px}
+.sx .rw,.sx .rw:last-child{display:flex;flex-direction:column;gap:14px;border:0;padding:30px clamp(22px,2.4vw,34px) 32px;border-radius:28px;background:rgba(0,0,0,.2)}
+.sx .rw h4{font-weight:800;font-size:clamp(22px,2vw,30px);letter-spacing:-.03em;line-height:1.05}
+.sx .rw h4 small{display:inline-block;margin-top:14px;font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.02em;text-transform:none;opacity:1;padding:7px 12px;border-radius:999px;background:var(--lime);color:var(--green-deep)}
+.sx .rw p{font-size:16px;opacity:.92}
+.sx.p-lime .rw{background:rgba(16,22,26,.07)}.sx.p-lime .rw h4 small{background:var(--ink);color:var(--lime)}
+.sx.p-ink .rw{background:rgba(0,0,0,.18)}
+.sx.p-paper .rw{background:linear-gradient(180deg,#FFF6DF,#F6E7C2)}
+.sx .medal{border:0;border-radius:32px;background:rgba(0,0,0,.28);padding:clamp(28px,4vw,52px);margin-top:clamp(56px,9vh,110px)}
+.sx .medal p{font-family:var(--display);font-weight:500;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.015em}
+.sx .pages figcaption b{font-weight:800;font-size:19px;letter-spacing:-.02em;margin-bottom:6px}
+.sx .shelf2 b{font-weight:700}
+.sx .how div{border:0}
+.sx .how b{font-weight:800;letter-spacing:-.02em}
+.sx .bgw{display:none}
+.sx .rw h4 small{display:table;margin-top:14px}
+.sx .rw:last-child:nth-child(odd){grid-column:1/-1}
+.sx .x:focus-visible{outline:0;background:rgba(255,255,255,.3)}
+.sx.p-lime .x:focus-visible{background:rgba(16,22,26,.18)}.sx.p-paper .x:focus-visible{background:#EBD59E}
+@media (max-width:760px){.sx .rows{grid-template-columns:1fr}}
+@media (max-width:860px){.sx .hero2{grid-template-columns:1fr}.sx .stack{height:300px;margin-top:10px}.sx .pages{grid-template-columns:1fr 1fr}.sx .pages figure:nth-child(3){display:none}.sx .rw{grid-template-columns:1fr}.sx .medal{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.sx .stack button,.sx .shelf2 .cv,.sx .pages .pg2{transition:none}}
 </style>
 
 <div class="grain" aria-hidden="true"></div>
@@ -1010,10 +1087,10 @@ function openBook(i){
 }
 function closeBook(){
   if(pf){try{pf.destroy()}catch(e){} pf=null;}
-  hold.innerHTML=''; modal.hidden=true; document.body.style.overflow=''; lenis&&lenis.start();
+  hold.innerHTML=''; modal.hidden=true; const sxo=document.getElementById('sx'); if(!(sxo&&!sxo.hidden)){document.body.style.overflow=''; lenis&&lenis.start();}
   lastFocus&&lastFocus.focus&&lastFocus.focus();
 }
-$('#mclose').onclick=closeBook;
+$('#mclose').onclick=closeBook; window.__openBook=openBook; window.__BOOKS=BOOKS;
 $('#mprev').onclick=()=>pf&&pf.flipPrev();
 $('#mnext').onclick=()=>pf&&pf.flipNext();
 modal.addEventListener('click',e=>{if(e.target===modal)closeBook();});
@@ -1623,17 +1700,68 @@ const sx=document.createElement('div'); sx.className='sx'; sx.id='sx'; sx.hidden
 sx.setAttribute('role','dialog'); sx.setAttribute('aria-modal','true'); sx.setAttribute('aria-labelledby','sxt');
 document.body.appendChild(sx);
 let cur=-1, from=null, last=null;
-function render(i){const d=D[i], t=d.t;
+const MATH=P({
+ az:{books:'Öz kitablarımız',booksSub:'1 ilə 8-ci siniflər üçün dərslik və iş kitabı. Hər kitab Azərbaycan, ingilis və rus dillərindədir. Kitabı seçin və vərəqləyin.',
+  gr:['1-ci','2-ci','3-cü','4-cü','5-ci','6-cı','7-ci','8-ci'],grw:'sinif',
+  inside:'Kitabın içində',insideSub:'Hər fəsil bir səyahətdir: dayanacaqda tapmaca, yolda açarlar, sonda olimpiada məsələləri.',
+  pages:[[9,'Hekayə ilə başlayır','Hər fəsil karvanın yeni dayanacağında açılır. Uşaq mövzuya maraqla girir.'],[14,'Açarlar','Sinqapur, Yaponiya və Çin məktəblərinin üsulları, yanında da niyə işlədiyinin izahı.'],[31,'Olimpiada dəsti','RFM və RFO formatında məsələlər, ipucları və tam həllər.']],
+  medal:'Şagirdlərimiz Lütfi Zadə, RFM və RFO olimpiadalarında 100-dən çox qızıl medal qazanıb.',
+  prog:'Proqramlar',rows:[['İbtidai siniflər','1 ilə 4-cü siniflər','Ədəd duyğusu, sürətli hesab və məsələ həlli. Sinqapur model üsulu ilə uşaq məsələni əvvəl şəkildə görür, sonra hesablayır.'],
+   ['Məktəb proqramı','5 ilə 11-ci siniflər','Mövzular sinifdən bir addım irəli keçilir. Boşluqlar bağlanır, uşaq dərsdə əl qaldırmağa başlayır.'],
+   ['Olimpiada','Lütfi Zadə, RFM, RFO','Rayon mərhələsindən respublika finalına qədər hazırlıq. AMO, SASMO, Kenquru və FISO yarışlarına da hazırlaşırıq. Sınaq imtahanları pulsuzdur.'],
+   ['DİM','Buraxılış və qəbul','Mövzu üzrə sistemli təkrar, real formatda sınaqlar və hər sınaqdan sonra səhvlərin təhlili.'],
+   ['Rus bölməsi','Русский сектор','Bütün proqramlar rus dilində də keçilir, olimpiada hazırlığı da daxil olmaqla.']]},
+ en:{books:'Our own books',booksSub:'A textbook and a workbook for every grade from 1 to 8, each in Azerbaijani, English and Russian. Pick a book and leaf through it.',
+  gr:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6','Grade 7','Grade 8'],grw:'',
+  inside:'Inside the books',insideSub:'Every chapter is a journey: a riddle at each stop, keys along the road and olympiad problems at the end.',
+  pages:[[9,'It starts with a story','Each chapter opens at a new stop of the caravan, so children enter the topic with curiosity.'],[14,'The keys','Methods from Singapore, Japanese and Chinese schools, each with an explanation of why it works.'],[31,'Olympiad set','Problems in the RFM and RFO format, with hints and full solutions.']],
+  medal:'Our students have won more than 100 gold medals at the Lotfi Zadeh, RFM and RFO olympiads.',
+  prog:'Programmes',rows:[['Primary school','Grades 1 to 4','Number sense, fast mental maths and problem solving. With the Singapore model method children first see the problem as a picture, then calculate.'],
+   ['School curriculum','Grades 5 to 11','We stay one step ahead of the class. Gaps are closed and children start raising their hands in lessons.'],
+   ['Olympiad','Lotfi Zadeh, RFM, RFO','Preparation from the district round to the national final, plus AMO, SASMO, Kangaroo and FISO. Mock exams are free.'],
+   ['DIM','School leaving and entrance','Systematic topic revision, mock tests in the real format and a review of mistakes after every test.'],
+   ['Russian section','Русский сектор','Every programme is also taught in Russian, olympiad preparation included.']]},
+ ru:{books:'Наши книги',booksSub:'Учебник и рабочая тетрадь для каждого класса с 1 по 8, каждая книга на азербайджанском, английском и русском. Выберите книгу и полистайте.',
+  gr:['1 класс','2 класс','3 класс','4 класс','5 класс','6 класс','7 класс','8 класс'],grw:'',
+  inside:'Внутри книги',insideSub:'Каждая глава это путешествие: загадка на стоянке, ключи в дороге и олимпиадные задачи в конце.',
+  pages:[[9,'Начинается с истории','Каждая глава открывается на новой стоянке каравана, и ребёнок входит в тему с интересом.'],[14,'Ключи','Методы сингапурской, японской и китайской школ и объяснение, почему они работают.'],[31,'Олимпиадный набор','Задачи в формате RFM и RFO, подсказки и полные решения.']],
+  medal:'Наши ученики завоевали более 100 золотых медалей на олимпиадах Лютфи Заде, RFM и RFO.',
+  prog:'Программы',rows:[['Начальная школа','С 1 по 4 класс','Чувство числа, быстрый счёт и решение задач. По сингапурскому модельному методу ребёнок сначала видит задачу на рисунке, потом считает.'],
+   ['Школьная программа','С 5 по 11 класс','Идём на шаг впереди класса. Пробелы закрываются, и ребёнок начинает поднимать руку на уроке.'],
+   ['Олимпиады','Лютфи Заде, RFM, RFO','Подготовка от районного этапа до республиканского финала, а также AMO, SASMO, Кенгуру и FISO. Пробные экзамены бесплатно.'],
+   ['DİM','Выпускные и вступительные','Системное повторение по темам, пробные тесты в реальном формате и разбор ошибок после каждого теста.'],
+   ['Русский сектор','Rus bölməsi','Все программы ведутся и на русском языке, включая подготовку к олимпиадам.']]}});
+const MLEAD=P({az:'Uşaq riyaziyyatı əzbərləmir, başa düşür. Birinci sinifdən buraxılışa qədər hər il öz kitablarımızla bir xətt üzrə irəliləyir.',
+ en:'Children do not memorise mathematics, they understand it. From first grade to graduation they move along one line, year after year, with our own books.',
+ ru:'Ребёнок не заучивает математику, а понимает её. С первого класса до выпуска он идёт по одной линии, год за годом, по нашим книгам.'});
+const QP=['0% 0%','100% 0%','0% 100%','100% 100%'];
+function bookIdx(g){const B=window.__BOOKS||[];return B.findIndex(b=>b.g===g&&b.t==='tb');}
+function cover(g){const B=window.__BOOKS||[];const b=B.find(x=>x.g===g&&x.t==='tb');return b?b.p[0]:'';}
+function render(i){const d=D[i], t=d.t, math=d.dir===0;
  sx.className='sx '+THEMES[i];
- sx.innerHTML=`<div class="bgw" aria-hidden="true">${esc(d.bgw)}</div><div class="in">
- <div class="bar"><span class="ov">${esc(t.k)}</span><button type="button" class="x" data-x><span>${esc(UIX.close)}</span><i aria-hidden="true"></i></button></div>
- <h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${esc(t.lead)}</p>
- <div class="facts sxr">${t.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>
- <div class="sec sxr">${esc(UIX.prog)}</div>
- <div class="grid">${t.items.map(([a,b])=>`<div class="it sxr"><h4>${esc(a)}</h4><p>${esc(b)}</p></div>`).join('')}</div>
- <div class="sec sxr">${esc(UIX.how)}</div>
- <div class="how sxr">${HOW.map(([a,b])=>`<div><b>${esc(a)}</b><p>${esc(b)}</p></div>`).join('')}</div>
- <button type="button" class="cta sxr" data-cta>${esc(UIX.cta)}<i aria-hidden="true"></i></button></div>`;
+ const facts=`<div class="facts sxr">${t.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`;
+ let h=`<div class="bgw" aria-hidden="true">${esc(d.bgw)}</div><div class="in">
+ <div class="bar"><span class="ov">${esc(t.k)}</span><button type="button" class="x" data-x><span>${esc(UIX.close)}</span><i aria-hidden="true"></i></button></div>`;
+ if(math){
+  const M=MATH, L2=(document.documentElement.lang||'az');
+  h+=`<div class="hero2"><div><h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="lead2 sxr">${esc(MLEAD)}</p>${facts}</div>
+   <div class="stack sxr">${[6,8,7].map(g=>`<button type="button" data-book="${g}" aria-label="${esc(t.h)} ${g}" style="background-image:url('${cover(g)}')"></button>`).join('')}</div></div>
+   <div class="sec sxr">${esc(M.books)}</div><p class="sub2 sxr">${esc(M.booksSub)}</p>
+   <div class="shelf2 sxr">${[1,2,3,4,5,6,7,8].map(g=>`<button type="button" data-book="${g}"><span class="cv" style="background-image:url('${cover(g)}')"></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></button>`).join('')}</div>
+   <div class="sec sxr">${esc(M.inside)}</div><p class="sub2 sxr">${esc(M.insideSub)}</p>
+   <div class="pages">${M.pages.map(([n,a,b])=>{const B=window.__BOOKS||[];const bk=B.find(x=>x.g===8&&x.t==='tb');const q=bk&&bk.pg[n-1];return `<figure class="sxr"><div class="pg2" style="${q?`background-image:url('${q[0]}');background-position:${QP[q[1]]}`:''}"></div><figcaption><b>${esc(a)}</b>${esc(b)}</figcaption></figure>`}).join('')}</div>
+   <div class="medal sxr"><span class="num gold">100+</span><p>${esc(M.medal)}</p></div>
+   <div class="sec sxr">${esc(M.prog)}</div>
+   <div class="rows">${M.rows.map(([a,sm,b])=>`<div class="rw sxr"><h4>${esc(a)}<small>${esc(sm)}</small></h4><p>${esc(b)}</p></div>`).join('')}</div>`;
+ } else {
+  h+=`<h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${esc(t.lead)}</p>${facts}
+   <div class="sec sxr">${esc(UIX.prog)}</div>
+   <div class="rows">${t.items.map(([a,b])=>`<div class="rw sxr"><h4>${esc(a)}</h4><p>${esc(b)}</p></div>`).join('')}</div>
+   <div class="sec sxr">${esc(UIX.how)}</div>
+   <div class="how sxr">${HOW.map(([a,b])=>`<div><b>${esc(a)}</b><p>${esc(b)}</p></div>`).join('')}</div>`;
+ }
+ h+=`<button type="button" class="cta sxr" data-cta>${esc(UIX.cta)}<i aria-hidden="true"></i></button></div>`;
+ sx.innerHTML=h;
  sx.querySelectorAll('.sxr').forEach((el,k)=>el.style.transitionDelay=(0.12+Math.min(k,10)*0.05)+'s');
 }
 const clipOf=r=>`inset(${Math.max(0,r.top)}px ${Math.max(0,innerWidth-r.right)}px ${Math.max(0,innerHeight-r.bottom)}px ${Math.max(0,r.left)}px round 28px)`;
@@ -1659,10 +1787,11 @@ panels.forEach((p,i)=>{ if(!D[i])return;
  p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i);}});
 });
 sx.addEventListener('click',e=>{
+ const bb=e.target.closest('[data-book]'); if(bb){const k=bookIdx(+bb.dataset.book); if(k>=0&&window.__openBook)__openBook(k); return;}
  if(e.target.closest('[data-x]'))close();
  else if(e.target.closest('[data-cta]')){const dir=D[cur].dir; close(()=>{const inp=document.getElementById('dirs'+dir); if(inp)inp.checked=true; const ap=document.getElementById('muraciet'); if(ap){ if(window.__lenis)__lenis.scrollTo(ap,{duration:1.4}); else ap.scrollIntoView({behavior:'smooth'}); } });}
 });
-addEventListener('keydown',e=>{ if(cur<0)return; if(e.key==='Escape'){e.preventDefault();close();}
+addEventListener('keydown',e=>{ if(cur<0)return; const md=document.getElementById('modal'); if(md&&!md.hidden)return; if(e.key==='Escape'){e.preventDefault();close();}
  if(e.key==='Tab'){const f=[...sx.querySelectorAll('button')]; if(!f.length)return; const a=f[0], z=f[f.length-1];
   if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();} else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}});
 })();
