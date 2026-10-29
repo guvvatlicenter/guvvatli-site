@@ -747,7 +747,7 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 @media (max-width:760px){.sx .rows{grid-template-columns:1fr}}
 @media (max-width:860px){.sx .hero2{grid-template-columns:1fr}.sx .stack{height:300px;margin-top:10px}.sx .pages{grid-template-columns:1fr 1fr}.sx .pages figure:nth-child(3){display:none}.sx .rw{grid-template-columns:1fr}.sx .medal{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.sx .stack button,.sx .shelf2 .cv,.sx .pages .pg2{transition:none}}
-#formbox{scroll-margin-top:110px}
+#apply-top{scroll-margin-top:24px}
 .why .gtx{color:var(--green)}
 .panel .tags{display:none!important}
 .panel .more{font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:0;text-transform:none;padding:13px 24px;gap:0}
@@ -757,6 +757,13 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .ov{font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:.01em;text-transform:none}
 .panel .k .ov{opacity:1;font-size:15px;font-weight:700}
 .panel .bgw{display:none}
+.panel .ill{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:flex-end;padding-block:12px;pointer-events:none}
+.panel .ill svg{height:100%;max-height:250px;width:auto;max-width:100%;overflow:visible}
+.panel .ill .fl{animation:illf 6s ease-in-out infinite}
+.panel .ill .fl.b{animation-delay:-2s}.panel .ill .fl.c{animation-delay:-4s}
+@keyframes illf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (max-width:640px){.panel .ill{justify-content:center}.panel .ill svg{max-height:170px}}
+@media (prefers-reduced-motion:reduce){.panel .ill .fl{animation:none}}
 </style>
 
 <div class="grain" aria-hidden="true"></div>
@@ -840,26 +847,34 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
     <div class="track">
       <article class="panel p-green">
         <div class="k"><span class="ov">1-11 siniflər</span><span class="ov">Azərbaycanca, ingiliscə və rusca tədris</span></div>
+        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g class="fl a"><rect x="18" y="58" width="196" height="38" rx="12" fill="#C6F26B"/><rect x="18" y="108" width="118" height="38" rx="12" fill="#FFFFFF"/><rect x="142" y="108" width="72" height="38" rx="12" fill="#E8F7C8"/><rect x="18" y="158" width="152" height="38" rx="12" fill="#083F29"/><rect x="176" y="158" width="38" height="38" rx="12" fill="#C6F26B"/></g><g class="fl b"><circle cx="276" cy="70" r="46" fill="#C6F26B"/><text x="276" y="92" text-anchor="middle" font-family="Unbounded,Arial Black,sans-serif" font-weight="800" font-size="58" fill="#083F29">π</text></g><g class="fl c"><path d="M262 136 l42 21 l-42 21 l-42 -21z" fill="#FFFFFF"/><path d="M220 157 l42 21 v48 l-42 -21z" fill="#C6F26B"/><path d="M304 157 l-42 21 v48 l42 -21z" fill="#0E7A50"/></g><g fill="#C6F26B" class="fl b"><rect x="236" y="10" width="10" height="30" rx="5"/><rect x="226" y="20" width="30" height="10" rx="5"/></g></svg>
+</div>
         <div><h3>Riyaziyyat</h3><p style="margin-top:14px">İbtidai siniflərdən başlayır, təkmilləşdirmə, olimpiada və DİM hazırlığı ilə davam edir. Hər mövzu model üsulu ilə: əvvəl şəkil, sonra rəqəm.</p></div>
         <div class="tags"><span>Uşaqlar üçün riyaziyyat</span><span>Təkmilləşdirmə</span><span>DİM</span><span>Olimpiada</span></div>
         <div class="bgw" aria-hidden="true">Riyaziyyat</div>
       </article>
       <article class="panel p-lime">
         <div class="k"><span class="ov">Bütün yaşlar üçün</span><span class="ov">Danışığa əsaslanan dərslər</span></div>
+        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g class="fl a"><path d="M40 22 h176 a30 30 0 0 1 30 30 v54 a30 30 0 0 1 -30 30 h-118 l-34 30 v-30 h-24 a30 30 0 0 1 -30 -30 v-54 a30 30 0 0 1 30 -30z" fill="#10161A"/><text x="128" y="96" text-anchor="middle" font-family="Unbounded,Arial Black,sans-serif" font-weight="800" font-size="40" fill="#C6F26B">Hello!</text></g><g class="fl b"><path d="M168 118 h126 a26 26 0 0 1 26 26 v36 a26 26 0 0 1 -26 26 h-14 v26 l-30 -26 h-82 a26 26 0 0 1 -26 -26 v-36 a26 26 0 0 1 26 -26z" fill="#FFFFFF"/><circle cx="196" cy="162" r="10" fill="#10161A"/><circle cx="231" cy="162" r="10" fill="#0B5A3A"/><circle cx="266" cy="162" r="10" fill="#10161A"/></g></svg>
+</div>
         <div><h3>İngilis dili</h3><p style="margin-top:14px">Qrammatika danışığın içində öyrənilir, əzbər cədvəllərlə yox. Şagird ilk aydan danışmağa başlayır.</p></div>
         <div class="tags"><span>Danışıq</span><span>Söz ehtiyatı</span><span>Dinləmə</span></div>
         <div class="bgw" aria-hidden="true">English</div>
       </article>
       <article class="panel p-ink">
         <div class="k"><span class="ov">Məktəblilər üçün</span><span class="ov">Azərbaycanca və ingiliscə tədris</span></div>
+        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g stroke="#F6E2C3" stroke-width="8" stroke-linecap="round" fill="none" class="fl a"><path d="M52 52 C 110 52, 110 100, 168 100"/><path d="M40 140 C 100 140, 110 120, 168 120"/><path d="M60 196 C 120 196, 130 140, 180 140"/></g><g class="fl a"><circle cx="46" cy="52" r="16" fill="#C6F26B"/><circle cx="34" cy="140" r="16" fill="#FFFFFF"/><circle cx="54" cy="196" r="16" fill="#C6F26B"/></g><g class="fl b"><g fill="#F6E2C3"><rect x="186" y="18" width="14" height="30" rx="7"/><rect x="216" y="18" width="14" height="30" rx="7"/><rect x="246" y="18" width="14" height="30" rx="7"/><rect x="186" y="182" width="14" height="30" rx="7"/><rect x="216" y="182" width="14" height="30" rx="7"/><rect x="246" y="182" width="14" height="30" rx="7"/><rect x="282" y="78" width="30" height="14" rx="7"/><rect x="282" y="108" width="30" height="14" rx="7"/><rect x="282" y="138" width="30" height="14" rx="7"/></g><rect x="160" y="40" width="128" height="150" rx="28" fill="#F6E2C3"/><rect x="180" y="62" width="88" height="106" rx="18" fill="#5C3002"/><path d="M224 82 l9 22 l22 9 l-22 9 l-9 22 l-9 -22 l-22 -9 l22 -9z" fill="#C6F26B"/></g></svg>
+</div>
         <div><h3>Süni İntellekt</h3><p style="margin-top:14px">Uşaq süni intellektdən sadəcə istifadə etməyi yox, onunla düşünməyi, yoxlamağı və yaratmağı öyrənir.</p></div>
         <div class="tags"><span>Azərbaycan dilində</span><span>İngilis dilində</span></div>
         <div class="bgw" aria-hidden="true">Sİ</div>
       </article>
       <article class="panel p-paper">
         <div class="k"><span class="ov">Beynəlxalq proqramlar</span><span class="ov">İngiliscə tədris</span></div>
-        <div><h3>SAT, IB, IGCSE, A Level</h3><p style="margin-top:14px">Beynəlxalq proqramlara və xaricdə təhsilə hazırlıq. Dərslər tam ingilis dilində keçilir.</p></div>
-        <div class="tags"><span>SAT</span><span>IB</span><span>IGCSE</span><span>A Level</span></div>
+        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8C6419"/><stop offset=".45" stop-color="#E9CB7A"/><stop offset=".6" stop-color="#C39A42"/><stop offset="1" stop-color="#8C6419"/></linearGradient></defs><g class="fl a"><rect x="70" y="172" width="200" height="34" rx="8" fill="#10161A"/><rect x="82" y="182" width="176" height="6" rx="3" fill="#E9CB7A"/><rect x="86" y="140" width="176" height="32" rx="8" fill="url(#gd)"/><rect x="62" y="110" width="186" height="30" rx="8" fill="#0B5A3A"/><rect x="74" y="120" width="162" height="5" rx="2.5" fill="#C6F26B"/></g><g class="fl b"><path d="M170 14 l112 40 l-112 40 l-112 -40z" fill="#10161A"/><path d="M108 70 v26 c0 18 124 18 124 0 v-26 l-62 22z" fill="#1E282D"/><circle cx="170" cy="54" r="9" fill="url(#gd)"/><path d="M170 54 L252 70 v36" stroke="url(#gd)" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="242" y="102" width="20" height="26" rx="6" fill="url(#gd)"/></g></svg>
+</div>
+        <div><h3>SAT, AP, IB, IGCSE, A Level, CSCA</h3><p style="margin-top:14px">Beynəlxalq proqramlara və xaricdə təhsilə hazırlıq. Dərslər tam ingilis dilində keçilir.</p></div>
+        <div class="tags"><span>SAT</span><span>AP</span><span>IB</span><span>IGCSE</span><span>A Level</span><span>CSCA</span></div>
         <div class="bgw" aria-hidden="true">Premium</div>
       </article>
     </div>
@@ -953,7 +968,7 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 </figure>
   </div>
 </div>
-  <div class="wrap atop2"><h2 class="rv">Müraciət et</h2></div>
+  <div class="wrap atop2" id="apply-top"><h2 class="rv">Müraciət et</h2></div>
   <div class="wrap aform">
     <div class="side">
       <p class="alead">Formu doldurun, 24 saat ərzində zəng edib uşağınız üçün pulsuz yoxlama dərsi təyin edək.</p>
@@ -1445,7 +1460,7 @@ if(window.Lenis){
   lenis=new Lenis({lerp:.09,smoothWheel:true});window.__lenis=lenis;
   lenis.on('scroll',ST.update);
   G.ticker.add(t=>lenis.raf(t*1000)); G.ticker.lagSmoothing(0);
-  $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const f=id==='#muraciet'?$('#formbox'):null;const t=id==='#top'?0:(f||$(id));if(t!==null){e.preventDefault();lenis.scrollTo(t,{duration:1.6,offset:f?-110:0});}}));
+  $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const f=id==='#muraciet'?($('#apply-top')||$('#formbox')):null;const t=id==='#top'?0:(f||$(id));if(t!==null){e.preventDefault();lenis.scrollTo(t,{duration:1.6,offset:f?-24:0});}}));
 }
 
 // nav hide on scroll down
@@ -1718,26 +1733,32 @@ const D=[
     ['Проекты','Тексты, изображения, презентации и простые приложения. Ученик превращает свою идею в реальный результат.'],
     ['Безопасность и этика','Защищать личные данные, распознавать фейковые новости и изображения, ответственно пользоваться технологиями.']]}})},
  {dir:3,bgw:'Premium',t:P({
-  az:{k:'Premium',h:'SAT, IB, IGCSE, A Level',lead:'Beynəlxalq proqramlara və xaricdə təhsilə hazırlıq. Dərslər tam ingilis dilində, beynəlxalq proqramları yaxşı bilən müəllimlərlə keçilir.',
+  az:{k:'Premium',h:'SAT, AP, IB, IGCSE, A Level, CSCA',lead:'Beynəlxalq proqramlara və xaricdə təhsilə hazırlıq. Dərslər tam ingilis dilində, beynəlxalq proqramları yaxşı bilən müəllimlərlə keçilir.',
    facts:['Tam ingilis dilində','Premium xidmət','Onlayn'],
    items:[['SAT','Riyaziyyat və ingilis dili bölmələri üzrə hazırlıq, real formatda sınaq imtahanları və vaxtı idarə etmək bacarığı.'],
+    ['AP','Riyaziyyat və fizika üzrə AP imtahanlarına hazırlıq. Universitet səviyyəli kurslar hələ məktəbdə ikən.'],
     ['IB','Riyaziyyat və fizika üzrə dərslər, daxili qiymətləndirmə işlərinə və imtahan strategiyasına dəstək.'],
     ['IGCSE','Riyaziyyat və fizika, Cambridge imtahan formatına uyğun mövzu üzrə hazırlıq və keçmiş imtahan sualları.'],
     ['A Level','Riyaziyyat və fizika üzrə dərin hazırlıq, universitet səviyyəsinə keçid üçün möhkəm baza.'],
+    ['CSCA','Çin universitetlərinə qəbul üçün CSCA imtahanına hazırlıq, riyaziyyat və fizika üzrə.'],
     ['Xaricdə təhsilə hazırlıq','Hədəf universitetə uyğun fənn və imtahan planı. Şagird müraciət vaxtına hazır gəlir.']]},
-  en:{k:'Premium',h:'SAT, IB, IGCSE, A Level',lead:'Preparation for international programmes and study abroad. Lessons are taught entirely in English by teachers who know these programmes well.',
+  en:{k:'Premium',h:'SAT, AP, IB, IGCSE, A Level, CSCA',lead:'Preparation for international programmes and study abroad. Lessons are taught entirely in English by teachers who know these programmes well.',
    facts:['Fully in English','Premium service','Online'],
    items:[['SAT','Preparation for the Maths and English sections, mock exams in the real format and time management.'],
+    ['AP','Preparation for AP exams in Maths and Physics. University level courses while still at school.'],
     ['IB','Maths and Physics lessons, with support for internal assessments and exam strategy.'],
     ['IGCSE','Maths and Physics, topic by topic preparation in the Cambridge exam format with past papers.'],
     ['A Level','In depth preparation in Maths and Physics, a solid base for the step up to university.'],
+    ['CSCA','Preparation for the CSCA exam for admission to Chinese universities, in Maths and Physics.'],
     ['Study abroad preparation','A subject and exam plan matched to the target university, so students are ready when applications open.']]},
-  ru:{k:'Премиум',h:'SAT, IB, IGCSE, A Level',lead:'Подготовка к международным программам и учёбе за рубежом. Занятия полностью на английском с преподавателями, хорошо знающими эти программы.',
+  ru:{k:'Премиум',h:'SAT, AP, IB, IGCSE, A Level, CSCA',lead:'Подготовка к международным программам и учёбе за рубежом. Занятия полностью на английском с преподавателями, хорошо знающими эти программы.',
    facts:['Полностью на английском','Премиум сервис','Онлайн'],
    items:[['SAT','Подготовка к разделам по математике и английскому, пробные экзамены в реальном формате и управление временем.'],
+    ['AP','Подготовка к экзаменам AP по математике и физике. Курсы университетского уровня ещё в школе.'],
     ['IB','Занятия по математике и физике, поддержка внутренних оценочных работ и стратегия экзамена.'],
     ['IGCSE','Математика и физика, подготовка по темам в формате экзаменов Cambridge и прошлые экзаменационные задания.'],
     ['A Level','Глубокая подготовка по математике и физике, прочная база для перехода на университетский уровень.'],
+    ['CSCA','Подготовка к экзамену CSCA для поступления в университеты Китая, по математике и физике.'],
     ['Подготовка к учёбе за рубежом','План предметов и экзаменов под целевой университет, чтобы ученик был готов к моменту подачи документов.']]}})}
 ];
 const panels=$$('.svc .panel'); if(!panels.length)return;
@@ -1838,14 +1859,14 @@ panels.forEach((p,i)=>{ if(!D[i])return;
 sx.addEventListener('click',e=>{
  const bb=e.target.closest('[data-book]'); if(bb){const k=bookIdx(+bb.dataset.book); if(k>=0&&window.__openBook)__openBook(k); return;}
  if(e.target.closest('[data-x]'))close();
- else if(e.target.closest('[data-cta]')){const dir=D[cur].dir; close(()=>{const inp=document.getElementById('dirs'+dir); if(inp)inp.checked=true; const ap=document.getElementById('formbox')||document.getElementById('muraciet'); if(ap){ if(window.__lenis)__lenis.scrollTo(ap,{duration:1.4,offset:-110}); else ap.scrollIntoView({behavior:'smooth'}); } });}
+ else if(e.target.closest('[data-cta]')){const dir=D[cur].dir; close(()=>{const inp=document.getElementById('dirs'+dir); if(inp)inp.checked=true; const ap=document.getElementById('apply-top')||document.getElementById('formbox'); if(ap){ if(window.__lenis)__lenis.scrollTo(ap,{duration:1.4,offset:-24}); else ap.scrollIntoView({behavior:'smooth'}); } });}
 });
 addEventListener('keydown',e=>{ if(cur<0)return; const md=document.getElementById('modal'); if(md&&!md.hidden)return; if(e.key==='Escape'){e.preventDefault();close();}
  if(e.key==='Tab'){const f=[...sx.querySelectorAll('button')]; if(!f.length)return; const a=f[0], z=f[f.length-1];
   if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();} else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}});
 })();
 
-document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href="#muraciet"]');if(!a||window.__lenis)return;const f=document.getElementById('formbox');if(f){e.preventDefault();f.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}});
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href="#muraciet"]');if(!a||window.__lenis)return;const f=document.getElementById('apply-top')||document.getElementById('formbox');if(f){e.preventDefault();f.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}});
 </script>
 
 </body>
