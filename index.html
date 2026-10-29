@@ -740,6 +740,10 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .sx .stack button:nth-child(2),.sx .stack button:nth-child(2):hover{transform:translate(-50%,-56%) rotate(-2deg)}
 .sx .stack button:nth-child(3),.sx .stack button:nth-child(3):hover{transform:translate(-8%,-44%) rotate(8deg)}
 .sx h2#sxt{overflow-wrap:normal;word-break:normal;hyphens:none}.sx h2#sxt.one{white-space:nowrap}
+.sx .bar{position:static;background:none!important}
+.sx .endbar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:44px}
+.sx .endbar .cta{margin-top:0}
+.sx .nw{white-space:nowrap}
 @media (max-width:760px){.sx .rows{grid-template-columns:1fr}}
 @media (max-width:860px){.sx .hero2{grid-template-columns:1fr}.sx .stack{height:300px;margin-top:10px}.sx .pages{grid-template-columns:1fr 1fr}.sx .pages figure:nth-child(3){display:none}.sx .rw{grid-template-columns:1fr}.sx .medal{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.sx .stack button,.sx .shelf2 .cv,.sx .pages .pg2{transition:none}}
@@ -1767,6 +1771,7 @@ const MLEAD=P({az:'Uşaq riyaziyyatı əzbərləmir, başa düşür. Birinci sin
 const QP=['0% 0%','100% 0%','0% 100%','100% 100%'];
 function bookIdx(g){const B=window.__BOOKS||[];return B.findIndex(b=>b.g===g&&b.t==='tb');}
 function cover(g){const B=window.__BOOKS||[];const b=B.find(x=>x.g===g&&x.t==='tb');return b?b.p[0]:'';}
+const nb=x=>esc(x).replace(/(\d+)-([A-Za-zƏəĞğİıÖöÜüŞşÇç]+)/g,'<span class="nw">$1-$2</span>');
 function render(i){const d=D[i], t=d.t, math=d.dir===0;
  sx.className='sx '+THEMES[i];
  const facts=`<div class="facts sxr">${t.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`;
@@ -1774,23 +1779,23 @@ function render(i){const d=D[i], t=d.t, math=d.dir===0;
  <div class="bar"><span class="ov">${esc(t.k)}</span><button type="button" class="x" data-x><span>${esc(UIX.close)}</span><i aria-hidden="true"></i></button></div>`;
  if(math){
   const M=MATH, L2=(document.documentElement.lang||'az');
-  h+=`<div class="hero2"><div><h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="lead2 sxr">${esc(MLEAD)}</p>${facts}</div>
+  h+=`<div class="hero2"><div><h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="lead2 sxr">${nb(MLEAD)}</p>${facts}</div>
    <div class="stack sxr">${[6,8,7].map(g=>`<button type="button" data-book="${g}" aria-label="${esc(t.h)} ${g}"><span class="bk" style="background-image:url('${cover(g)}')"></span></button>`).join('')}</div></div>
-   <div class="sec sxr">${esc(M.books)}</div><p class="sub2 sxr">${esc(M.booksSub)}</p>
+   <div class="sec sxr">${esc(M.books)}</div><p class="sub2 sxr">${nb(M.booksSub)}</p>
    <div class="shelf2 sxr">${[1,2,3,4,5,6,7,8].map(g=>`<button type="button" data-book="${g}"><span class="cv" style="background-image:url('${cover(g)}')"></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></button>`).join('')}${[9,10,11].map(g=>`<div class="soon" aria-label="${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}, ${esc(M.soon)}"><span class="cv"><span class="n">${g}</span><span class="t">${esc(t.h)}</span><span class="pl">${esc(M.soon)}</span></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></div>`).join('')}</div>
    <div class="sec sxr">${esc(M.inside)}</div><p class="sub2 sxr">${esc(M.insideSub)}</p>
    <div class="pages">${M.pages.map(([n,a,b])=>`<figure class="sxr"><img class="pg3" src="books/${LG}/g8p${n}.jpg" alt="${esc(a)}" loading="lazy" decoding="async"><figcaption><b>${esc(a)}</b>${esc(b)}</figcaption></figure>`).join('')}</div>
-   <div class="medal sxr"><span class="num gold">100+</span><p>${esc(M.medal)}</p></div>
+   <div class="medal sxr"><span class="num gold">100+</span><p>${nb(M.medal)}</p></div>
    <div class="sec sxr">${esc(M.prog)}</div>
-   <div class="rows">${M.rows.map(([a,sm,b])=>`<div class="rw sxr"><h4>${esc(a)}<small>${esc(sm)}</small></h4><p>${esc(b)}</p></div>`).join('')}</div>`;
+   <div class="rows">${M.rows.map(([a,sm,b])=>`<div class="rw sxr"><h4>${esc(a)}<small>${nb(sm)}</small></h4><p>${nb(b)}</p></div>`).join('')}</div>`;
  } else {
-  h+=`<h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${esc(t.lead)}</p>${facts}
+  h+=`<h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${nb(t.lead)}</p>${facts}
    <div class="sec sxr">${esc(UIX.prog)}</div>
    <div class="rows">${t.items.map(([a,b])=>`<div class="rw sxr"><h4>${esc(a)}</h4><p>${esc(b)}</p></div>`).join('')}</div>
    <div class="sec sxr">${esc(UIX.how)}</div>
    <div class="how sxr">${HOW.map(([a,b])=>`<div><b>${esc(a)}</b><p>${esc(b)}</p></div>`).join('')}</div>`;
  }
- h+=`<button type="button" class="cta sxr" data-cta>${esc(UIX.cta)}<i aria-hidden="true"></i></button></div>`;
+ h+=`<div class="endbar sxr"><button type="button" class="cta" data-cta>${esc(UIX.cta)}<i aria-hidden="true"></i></button><button type="button" class="x" data-x><span>${esc(UIX.close)}</span><i aria-hidden="true"></i></button></div></div>`;
  sx.innerHTML=h;
  sx.querySelectorAll('.sxr').forEach((el,k)=>el.style.transitionDelay=(0.12+Math.min(k,10)*0.05)+'s');
  fitTitle(); setTimeout(fitTitle,250); setTimeout(fitTitle,900); document.fonts&&document.fonts.ready.then(fitTitle);
