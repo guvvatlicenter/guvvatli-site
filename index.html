@@ -707,6 +707,16 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .sx .rw:last-child:nth-child(odd){grid-column:1/-1}
 .sx .x:focus-visible{outline:0;background:rgba(255,255,255,.3)}
 .sx.p-lime .x:focus-visible{background:rgba(16,22,26,.18)}.sx.p-paper .x:focus-visible{background:#EBD59E}
+.sx .shelf2{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:22px clamp(12px,1.6vw,22px);overflow:visible;padding:26px 0 8px;margin:0;align-items:start}
+.sx .shelf2 button,.sx .shelf2 .soon{flex:none;min-width:0;max-width:none;width:100%;display:flex;flex-direction:column;gap:10px}
+.sx .shelf2 b{display:block;line-height:1.25}
+.sx .shelf2 .soon .cv{container-type:inline-size;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:9% 10% 10%;box-sizing:border-box;background:linear-gradient(160deg,#0E3B2A,#072A1D);box-shadow:0 18px 30px -16px rgba(0,0,0,.6);overflow:hidden}
+.sx .shelf2 .soon .cv::after{background:linear-gradient(90deg,rgba(0,0,0,.3),transparent 9%)}
+.sx .shelf2 .soon .n{font-family:var(--display);font-weight:800;font-size:44px;font-size:46cqw;line-height:.9;letter-spacing:-.05em;color:var(--lime)}
+.sx .shelf2 .soon .t{font-family:var(--display);font-weight:600;font-size:12px;font-size:10.5cqw;color:#fff;opacity:.85;margin-top:auto;margin-bottom:8%}
+.sx .shelf2 .soon .pl{font-family:var(--display);font-weight:700;font-size:11px;font-size:9.5cqw;padding:5% 9%;border-radius:999px;background:var(--lime);color:var(--green-deep);white-space:nowrap}
+.sx .shelf2 .soon b{opacity:.75}
+@media (max-width:520px){.sx .shelf2{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 12px}}
 @media (max-width:760px){.sx .rows{grid-template-columns:1fr}}
 @media (max-width:860px){.sx .hero2{grid-template-columns:1fr}.sx .stack{height:300px;margin-top:10px}.sx .pages{grid-template-columns:1fr 1fr}.sx .pages figure:nth-child(3){display:none}.sx .rw{grid-template-columns:1fr}.sx .medal{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.sx .stack button,.sx .shelf2 .cv,.sx .pages .pg2{transition:none}}
@@ -1595,7 +1605,7 @@ document.fonts&&document.fonts.ready.then(()=>ST.refresh());
 <script>
 (function(){
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const LG=(typeof L!=='undefined'&&['az','en','ru'].includes(L))?L:'az';
+const LG=['az','en','ru'].includes(document.documentElement.lang)?document.documentElement.lang:'az';
 const P=o=>o[LG]||o.az;
 const UIX=P({az:{more:'Ətraflı',close:'Bağla',prog:'Proqramlar',how:'Necə öyrədirik',cta:'Bu istiqamətə müraciət et'},
  en:{more:'Details',close:'Close',prog:'Programmes',how:'How we teach',cta:'Apply for this course'},
@@ -1701,8 +1711,8 @@ sx.setAttribute('role','dialog'); sx.setAttribute('aria-modal','true'); sx.setAt
 document.body.appendChild(sx);
 let cur=-1, from=null, last=null;
 const MATH=P({
- az:{books:'Öz kitablarımız',booksSub:'1 ilə 8-ci siniflər üçün dərslik və iş kitabı. Hər kitab Azərbaycan, ingilis və rus dillərindədir. Kitabı seçin və vərəqləyin.',
-  gr:['1-ci','2-ci','3-cü','4-cü','5-ci','6-cı','7-ci','8-ci'],grw:'sinif',
+ az:{books:'Öz kitablarımız',booksSub:'1 ilə 8-ci siniflər üçün dərslik və iş kitabları hazırdır, 9, 10 və 11-ci siniflərin kitabları isə hazırlanır. Hər kitab Azərbaycan, ingilis və rus dillərindədir. Kitabı seçin və vərəqləyin.',soon:'Hazırlanır',
+  gr:['1-ci','2-ci','3-cü','4-cü','5-ci','6-cı','7-ci','8-ci','9-cu','10-cu','11-ci'],grw:'sinif',
   inside:'Kitabın içində',insideSub:'Hər fəsil bir səyahətdir: dayanacaqda tapmaca, yolda açarlar, sonda olimpiada məsələləri.',
   pages:[[9,'Hekayə ilə başlayır','Hər fəsil karvanın yeni dayanacağında açılır. Uşaq mövzuya maraqla girir.'],[14,'Açarlar','Sinqapur, Yaponiya və Çin məktəblərinin üsulları, yanında da niyə işlədiyinin izahı.'],[31,'Olimpiada dəsti','RFM və RFO formatında məsələlər, ipucları və tam həllər.']],
   medal:'Şagirdlərimiz Lütfi Zadə, RFM və RFO olimpiadalarında 100-dən çox qızıl medal qazanıb.',
@@ -1711,8 +1721,8 @@ const MATH=P({
    ['Olimpiada','Lütfi Zadə, RFM, RFO','Rayon mərhələsindən respublika finalına qədər hazırlıq. AMO, SASMO, Kenquru və FISO yarışlarına da hazırlaşırıq. Sınaq imtahanları pulsuzdur.'],
    ['DİM','Buraxılış və qəbul','Mövzu üzrə sistemli təkrar, real formatda sınaqlar və hər sınaqdan sonra səhvlərin təhlili.'],
    ['Rus bölməsi','Русский сектор','Bütün proqramlar rus dilində də keçilir, olimpiada hazırlığı da daxil olmaqla.']]},
- en:{books:'Our own books',booksSub:'A textbook and a workbook for every grade from 1 to 8, each in Azerbaijani, English and Russian. Pick a book and leaf through it.',
-  gr:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6','Grade 7','Grade 8'],grw:'',
+ en:{books:'Our own books',booksSub:'Textbooks and workbooks for grades 1 to 8 are ready, and the books for grades 9, 10 and 11 are in preparation. Every book is in Azerbaijani, English and Russian. Pick a book and leaf through it.',soon:'Coming soon',
+  gr:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6','Grade 7','Grade 8','Grade 9','Grade 10','Grade 11'],grw:'',
   inside:'Inside the books',insideSub:'Every chapter is a journey: a riddle at each stop, keys along the road and olympiad problems at the end.',
   pages:[[9,'It starts with a story','Each chapter opens at a new stop of the caravan, so children enter the topic with curiosity.'],[14,'The keys','Methods from Singapore, Japanese and Chinese schools, each with an explanation of why it works.'],[31,'Olympiad set','Problems in the RFM and RFO format, with hints and full solutions.']],
   medal:'Our students have won more than 100 gold medals at the Lotfi Zadeh, RFM and RFO olympiads.',
@@ -1721,8 +1731,8 @@ const MATH=P({
    ['Olympiad','Lotfi Zadeh, RFM, RFO','Preparation from the district round to the national final, plus AMO, SASMO, Kangaroo and FISO. Mock exams are free.'],
    ['DIM','School leaving and entrance','Systematic topic revision, mock tests in the real format and a review of mistakes after every test.'],
    ['Russian section','Русский сектор','Every programme is also taught in Russian, olympiad preparation included.']]},
- ru:{books:'Наши книги',booksSub:'Учебник и рабочая тетрадь для каждого класса с 1 по 8, каждая книга на азербайджанском, английском и русском. Выберите книгу и полистайте.',
-  gr:['1 класс','2 класс','3 класс','4 класс','5 класс','6 класс','7 класс','8 класс'],grw:'',
+ ru:{books:'Наши книги',booksSub:'Учебники и рабочие тетради с 1 по 8 класс уже готовы, книги для 9, 10 и 11 классов готовятся. Каждая книга на азербайджанском, английском и русском. Выберите книгу и полистайте.',soon:'Готовится',
+  gr:['1 класс','2 класс','3 класс','4 класс','5 класс','6 класс','7 класс','8 класс','9 класс','10 класс','11 класс'],grw:'',
   inside:'Внутри книги',insideSub:'Каждая глава это путешествие: загадка на стоянке, ключи в дороге и олимпиадные задачи в конце.',
   pages:[[9,'Начинается с истории','Каждая глава открывается на новой стоянке каравана, и ребёнок входит в тему с интересом.'],[14,'Ключи','Методы сингапурской, японской и китайской школ и объяснение, почему они работают.'],[31,'Олимпиадный набор','Задачи в формате RFM и RFO, подсказки и полные решения.']],
   medal:'Наши ученики завоевали более 100 золотых медалей на олимпиадах Лютфи Заде, RFM и RFO.',
@@ -1747,7 +1757,7 @@ function render(i){const d=D[i], t=d.t, math=d.dir===0;
   h+=`<div class="hero2"><div><h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="lead2 sxr">${esc(MLEAD)}</p>${facts}</div>
    <div class="stack sxr">${[6,8,7].map(g=>`<button type="button" data-book="${g}" aria-label="${esc(t.h)} ${g}" style="background-image:url('${cover(g)}')"></button>`).join('')}</div></div>
    <div class="sec sxr">${esc(M.books)}</div><p class="sub2 sxr">${esc(M.booksSub)}</p>
-   <div class="shelf2 sxr">${[1,2,3,4,5,6,7,8].map(g=>`<button type="button" data-book="${g}"><span class="cv" style="background-image:url('${cover(g)}')"></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></button>`).join('')}</div>
+   <div class="shelf2 sxr">${[1,2,3,4,5,6,7,8].map(g=>`<button type="button" data-book="${g}"><span class="cv" style="background-image:url('${cover(g)}')"></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></button>`).join('')}${[9,10,11].map(g=>`<div class="soon" aria-label="${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}, ${esc(M.soon)}"><span class="cv"><span class="n">${g}</span><span class="t">${esc(t.h)}</span><span class="pl">${esc(M.soon)}</span></span><b>${esc(M.gr[g-1])}${M.grw?' '+esc(M.grw):''}</b></div>`).join('')}</div>
    <div class="sec sxr">${esc(M.inside)}</div><p class="sub2 sxr">${esc(M.insideSub)}</p>
    <div class="pages">${M.pages.map(([n,a,b])=>{const B=window.__BOOKS||[];const bk=B.find(x=>x.g===8&&x.t==='tb');const q=bk&&bk.pg[n-1];return `<figure class="sxr"><div class="pg2" style="${q?`background-image:url('${q[0]}');background-position:${QP[q[1]]}`:''}"></div><figcaption><b>${esc(a)}</b>${esc(b)}</figcaption></figure>`}).join('')}</div>
    <div class="medal sxr"><span class="num gold">100+</span><p>${esc(M.medal)}</p></div>
