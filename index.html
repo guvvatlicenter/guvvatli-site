@@ -287,12 +287,12 @@ p{margin:0}
 .panel .k .ov{opacity:.7}
 
 /* ========== MARQUEE ========== */
-.mq{background:var(--ink);padding-block:70px;overflow:hidden;border-block:1px solid var(--ink-3)}
+.mq{background:var(--green);padding-block:70px;overflow:hidden;border-block:1px solid rgba(255,255,255,.08)}
 .mq .row{display:flex;white-space:nowrap;will-change:transform}
 .mq .row span{font-family:var(--display);font-weight:800;font-size:clamp(44px,8vw,128px);letter-spacing:-.04em;line-height:1.05;display:inline-flex;align-items:center;gap:.35em;padding-right:.35em}
 .mq .row span .mk{width:.55em;color:var(--lime)}
-.mq .row.o span{color:transparent;-webkit-text-stroke:1.5px #3B4A51}
-.mq .row.o span .mk{color:#3B4A51}
+.mq .row.o span{color:var(--green);-webkit-text-stroke:3px #3C8A66;paint-order:stroke fill}
+.mq .row.o span .mk{color:#3C8A66}
 
 /* ========== STACK (why us) ========== */
 .why{background:var(--paper);color:var(--ink)}
