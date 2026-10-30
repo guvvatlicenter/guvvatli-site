@@ -754,15 +754,16 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .panel .more b{font-weight:700}
 .panel .more i{display:none}
 .panel:hover .more{gap:0}
+@media (max-width:700px){.panel{padding-bottom:calc(clamp(22px,3vw,40px) + 66px)}}
 .ov{font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:.01em;text-transform:none}
 .panel .k .ov{opacity:1;font-size:15px;font-weight:700}
 .panel .bgw{display:none}
-.panel .ill{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:flex-end;padding-block:12px;pointer-events:none}
-.panel .ill svg{height:100%;max-height:250px;width:auto;max-width:100%;overflow:visible}
+.panel .ill{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding-block:12px;pointer-events:none}
+.panel .ill img{height:100%;max-height:270px;width:auto;max-width:100%;object-fit:contain;border-radius:20px}
 .panel .ill .fl{animation:illf 6s ease-in-out infinite}
 .panel .ill .fl.b{animation-delay:-2s}.panel .ill .fl.c{animation-delay:-4s}
 @keyframes illf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@media (max-width:640px){.panel .ill{justify-content:center}.panel .ill svg{max-height:170px}}
+@media (max-width:640px){.panel .ill{justify-content:center}.panel .ill img{max-height:190px}}
 @media (prefers-reduced-motion:reduce){.panel .ill .fl{animation:none}}
 </style>
 
@@ -815,18 +816,6 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
   <div class="scrollcue" aria-hidden="true"><i></i></div>
 </section>
 
-<!-- CHAMPIONS -->
-<section class="champ" aria-label="Qızıl medalçılarımız">
-  <div class="wrap chd"><div><span class="ov">Nəticələr</span><h2 class="rv" style="margin-top:16px">Qızıl medalçılarımız</h2></div></div>
-  <div class="cstage"><div class="ctrack">
-    <figure class="mc"><img src="medals/m1.jpg" alt="Aysun Bədəlli, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 28%"><figcaption><span class="gb">Qızıl medal</span><b>Aysun Bədəlli</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-    <figure class="mc"><img src="medals/m2.jpg" alt="Atilla Abdulla, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Atilla Abdulla</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-    <figure class="mc"><img src="medals/m3.jpg" alt="Məryəm Babayeva, qızıl medal və sertifikatla" loading="lazy" style="object-position:62% 30%"><figcaption><span class="gb">Qızıl medal</span><b>Məryəm Babayeva</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-    <figure class="mc"><img src="medals/m4.jpg" alt="Yaşar Şirinov, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 26%"><figcaption><span class="gb">Qızıl medal</span><b>Yaşar Şirinov</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-    <figure class="mc"><img src="medals/m5.jpg" alt="Ramal Həsənli, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Ramal Həsənli</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-    <figure class="mc"><img src="medals/m6.jpg" alt="Suel Dəmirzadə, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Suel Dəmirzadə</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
-  </div></div>
-</section>
 
 
 
@@ -879,6 +868,19 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
       </article>
     </div>
   </div>
+</section>
+
+<!-- CHAMPIONS -->
+<section class="champ" aria-label="Qızıl medalçılarımız">
+  <div class="wrap chd"><div><span class="ov">Nəticələr</span><h2 class="rv" style="margin-top:16px">Qızıl medalçılarımız</h2></div></div>
+  <div class="cstage"><div class="ctrack">
+    <figure class="mc"><img src="medals/m1.jpg" alt="Aysun Bədəlli, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 28%"><figcaption><span class="gb">Qızıl medal</span><b>Aysun Bədəlli</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+    <figure class="mc"><img src="medals/m2.jpg" alt="Atilla Abdulla, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Atilla Abdulla</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+    <figure class="mc"><img src="medals/m3.jpg" alt="Məryəm Babayeva, qızıl medal və sertifikatla" loading="lazy" style="object-position:62% 30%"><figcaption><span class="gb">Qızıl medal</span><b>Məryəm Babayeva</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+    <figure class="mc"><img src="medals/m4.jpg" alt="Yaşar Şirinov, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 26%"><figcaption><span class="gb">Qızıl medal</span><b>Yaşar Şirinov</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+    <figure class="mc"><img src="medals/m5.jpg" alt="Ramal Həsənli, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Ramal Həsənli</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+    <figure class="mc"><img src="medals/m6.jpg" alt="Suel Dəmirzadə, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Suel Dəmirzadə</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
+  </div></div>
 </section>
 
 <!-- MARQUEE -->
@@ -1565,7 +1567,7 @@ $$('.rv').forEach(h=>{
   G.from($$('.ci',h),{yPercent:120,rotate:6,duration:1.1,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:h,start:'top 88%',once:true}});
 });
 
-G.from('.cstage',{y:80,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.champ',start:'top 80%',once:true}});
+G.from('.cstage',{y:80,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.champ',start:'top 80%',once:true,refreshPriority:-1}});
 // ---------- odometers ----------
 $$('.odo').forEach(o=>{
   const v=o.dataset.v; o.textContent=''; o.style.display='inline-flex';
