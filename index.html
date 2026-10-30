@@ -757,14 +757,6 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 @media (max-width:700px){.panel{padding-bottom:calc(clamp(22px,3vw,40px) + 66px)}}
 .ov{font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:.01em;text-transform:none}
 .panel .k .ov{opacity:1;font-size:15px;font-weight:700}
-.panel .bgw{display:none}
-.panel .ill{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding-block:12px;pointer-events:none}
-.panel .ill img{height:100%;max-height:270px;width:auto;max-width:100%;object-fit:contain;border-radius:20px}
-.panel .ill .fl{animation:illf 6s ease-in-out infinite}
-.panel .ill .fl.b{animation-delay:-2s}.panel .ill .fl.c{animation-delay:-4s}
-@keyframes illf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@media (max-width:640px){.panel .ill{justify-content:center}.panel .ill img{max-height:190px}}
-@media (prefers-reduced-motion:reduce){.panel .ill .fl{animation:none}}
 </style>
 
 <div class="grain" aria-hidden="true"></div>
@@ -836,32 +828,24 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
     <div class="track">
       <article class="panel p-green">
         <div class="k"><span class="ov">1-11 siniflər</span><span class="ov">Azərbaycanca, ingiliscə və rusca tədris</span></div>
-        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g class="fl a"><rect x="18" y="58" width="196" height="38" rx="12" fill="#C6F26B"/><rect x="18" y="108" width="118" height="38" rx="12" fill="#FFFFFF"/><rect x="142" y="108" width="72" height="38" rx="12" fill="#E8F7C8"/><rect x="18" y="158" width="152" height="38" rx="12" fill="#083F29"/><rect x="176" y="158" width="38" height="38" rx="12" fill="#C6F26B"/></g><g class="fl b"><circle cx="276" cy="70" r="46" fill="#C6F26B"/><text x="276" y="92" text-anchor="middle" font-family="Unbounded,Arial Black,sans-serif" font-weight="800" font-size="58" fill="#083F29">π</text></g><g class="fl c"><path d="M262 136 l42 21 l-42 21 l-42 -21z" fill="#FFFFFF"/><path d="M220 157 l42 21 v48 l-42 -21z" fill="#C6F26B"/><path d="M304 157 l-42 21 v48 l42 -21z" fill="#0E7A50"/></g><g fill="#C6F26B" class="fl b"><rect x="236" y="10" width="10" height="30" rx="5"/><rect x="226" y="20" width="30" height="10" rx="5"/></g></svg>
-</div>
         <div><h3>Riyaziyyat</h3><p style="margin-top:14px">İbtidai siniflərdən başlayır, təkmilləşdirmə, olimpiada və DİM hazırlığı ilə davam edir. Hər mövzu model üsulu ilə: əvvəl şəkil, sonra rəqəm.</p></div>
         <div class="tags"><span>Uşaqlar üçün riyaziyyat</span><span>Təkmilləşdirmə</span><span>DİM</span><span>Olimpiada</span></div>
         <div class="bgw" aria-hidden="true">Riyaziyyat</div>
       </article>
       <article class="panel p-lime">
         <div class="k"><span class="ov">Bütün yaşlar üçün</span><span class="ov">Danışığa əsaslanan dərslər</span></div>
-        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g class="fl a"><path d="M40 22 h176 a30 30 0 0 1 30 30 v54 a30 30 0 0 1 -30 30 h-118 l-34 30 v-30 h-24 a30 30 0 0 1 -30 -30 v-54 a30 30 0 0 1 30 -30z" fill="#10161A"/><text x="128" y="96" text-anchor="middle" font-family="Unbounded,Arial Black,sans-serif" font-weight="800" font-size="40" fill="#C6F26B">Hello!</text></g><g class="fl b"><path d="M168 118 h126 a26 26 0 0 1 26 26 v36 a26 26 0 0 1 -26 26 h-14 v26 l-30 -26 h-82 a26 26 0 0 1 -26 -26 v-36 a26 26 0 0 1 26 -26z" fill="#FFFFFF"/><circle cx="196" cy="162" r="10" fill="#10161A"/><circle cx="231" cy="162" r="10" fill="#0B5A3A"/><circle cx="266" cy="162" r="10" fill="#10161A"/></g></svg>
-</div>
         <div><h3>İngilis dili</h3><p style="margin-top:14px">Qrammatika danışığın içində öyrənilir, əzbər cədvəllərlə yox. Şagird ilk aydan danışmağa başlayır.</p></div>
         <div class="tags"><span>Danışıq</span><span>Söz ehtiyatı</span><span>Dinləmə</span></div>
         <div class="bgw" aria-hidden="true">English</div>
       </article>
       <article class="panel p-ink">
         <div class="k"><span class="ov">Məktəblilər üçün</span><span class="ov">Azərbaycanca və ingiliscə tədris</span></div>
-        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><g stroke="#F6E2C3" stroke-width="8" stroke-linecap="round" fill="none" class="fl a"><path d="M52 52 C 110 52, 110 100, 168 100"/><path d="M40 140 C 100 140, 110 120, 168 120"/><path d="M60 196 C 120 196, 130 140, 180 140"/></g><g class="fl a"><circle cx="46" cy="52" r="16" fill="#C6F26B"/><circle cx="34" cy="140" r="16" fill="#FFFFFF"/><circle cx="54" cy="196" r="16" fill="#C6F26B"/></g><g class="fl b"><g fill="#F6E2C3"><rect x="186" y="18" width="14" height="30" rx="7"/><rect x="216" y="18" width="14" height="30" rx="7"/><rect x="246" y="18" width="14" height="30" rx="7"/><rect x="186" y="182" width="14" height="30" rx="7"/><rect x="216" y="182" width="14" height="30" rx="7"/><rect x="246" y="182" width="14" height="30" rx="7"/><rect x="282" y="78" width="30" height="14" rx="7"/><rect x="282" y="108" width="30" height="14" rx="7"/><rect x="282" y="138" width="30" height="14" rx="7"/></g><rect x="160" y="40" width="128" height="150" rx="28" fill="#F6E2C3"/><rect x="180" y="62" width="88" height="106" rx="18" fill="#5C3002"/><path d="M224 82 l9 22 l22 9 l-22 9 l-9 22 l-9 -22 l-22 -9 l22 -9z" fill="#C6F26B"/></g></svg>
-</div>
         <div><h3>Süni İntellekt</h3><p style="margin-top:14px">Uşaq süni intellektdən sadəcə istifadə etməyi yox, onunla düşünməyi, yoxlamağı və yaratmağı öyrənir.</p></div>
         <div class="tags"><span>Azərbaycan dilində</span><span>İngilis dilində</span></div>
         <div class="bgw" aria-hidden="true">Sİ</div>
       </article>
       <article class="panel p-paper">
         <div class="k"><span class="ov">Beynəlxalq proqramlar</span><span class="ov">İngiliscə tədris</span></div>
-        <div class="ill" aria-hidden="true"><svg focusable="false" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8C6419"/><stop offset=".45" stop-color="#E9CB7A"/><stop offset=".6" stop-color="#C39A42"/><stop offset="1" stop-color="#8C6419"/></linearGradient></defs><g class="fl a"><rect x="70" y="172" width="200" height="34" rx="8" fill="#10161A"/><rect x="82" y="182" width="176" height="6" rx="3" fill="#E9CB7A"/><rect x="86" y="140" width="176" height="32" rx="8" fill="url(#gd)"/><rect x="62" y="110" width="186" height="30" rx="8" fill="#0B5A3A"/><rect x="74" y="120" width="162" height="5" rx="2.5" fill="#C6F26B"/></g><g class="fl b"><path d="M170 14 l112 40 l-112 40 l-112 -40z" fill="#10161A"/><path d="M108 70 v26 c0 18 124 18 124 0 v-26 l-62 22z" fill="#1E282D"/><circle cx="170" cy="54" r="9" fill="url(#gd)"/><path d="M170 54 L252 70 v36" stroke="url(#gd)" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="242" y="102" width="20" height="26" rx="6" fill="url(#gd)"/></g></svg>
-</div>
         <div><h3>SAT, AP, IB, IGCSE, A Level, CSCA</h3><p style="margin-top:14px">Beynəlxalq proqramlara və xaricdə təhsilə hazırlıq. Dərslər tam ingilis dilində keçilir.</p></div>
         <div class="tags"><span>SAT</span><span>AP</span><span>IB</span><span>IGCSE</span><span>A Level</span><span>CSCA</span></div>
         <div class="bgw" aria-hidden="true">Premium</div>
@@ -1592,7 +1576,6 @@ const hs=G.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'.svc',sta
   onUpdate:s=>G.set('.svc .prog i',{scaleX:s.progress})}});
 $$('.panel').forEach(p=>{
   G.fromTo($('.bgw',p),{xPercent:20},{xPercent:-25,ease:'none',scrollTrigger:{trigger:p,containerAnimation:hs,start:'left right',end:'right left',scrub:true}});
-  G.from($$('h3, p, .tags',p),{y:50,opacity:0,stagger:.08,duration:1,ease:'expo.out',scrollTrigger:{trigger:p,containerAnimation:hs,start:'left 75%',once:true}});
 });
 
 // ---------- velocity marquee ----------
