@@ -161,7 +161,7 @@ p{margin:0}
 .hero .mantra.gone .mw.last{visibility:hidden}
 .hero .mdust{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
 @media (max-width:700px){.hero .mantra{font-size:12.5vw}.hero .mantra .mw.big{font-size:1.3em}}
-.hero .wash{position:absolute;inset:0;background:var(--green);opacity:0;pointer-events:none;z-index:4}
+.hero .wash{position:absolute;inset:0;background:var(--mist);opacity:0;pointer-events:none;z-index:4}
 .scrollcue{position:absolute;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:1px;height:46px;background:rgba(255,255,255,.15);overflow:hidden}
 .scrollcue i{position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--lime);animation:cue 1.8s var(--ease) infinite}
 @keyframes cue{to{top:110%}}
@@ -252,6 +252,7 @@ p{margin:0}
 .svc .pinbox{height:100vh;height:100svh;min-height:600px;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:90px 40px}
 .svc .head{display:flex;justify-content:space-between;align-items:end;gap:20px}
 .svc h2{font-weight:800;font-size:clamp(40px,7.4vw,124px)}
+@media (max-width:640px){.svc .head{flex-wrap:wrap}.svc .head .prog{flex:1 1 100%}}
 .svc .prog{flex:0 0 160px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
 .svc .prog i{display:block;height:100%;background:var(--green);transform-origin:left;transform:scaleX(0)}
 .track{display:flex;gap:18px;padding-left:var(--gut-l);padding-right:var(--gut-r);will-change:transform}
@@ -526,6 +527,7 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .apply .side p.alead{font-weight:700;background-image:linear-gradient(100deg,#E8C7A0 0%,#F3D9B8 18%,#FFEBD2 30%,#FFF8EE 38%,#F6DDBD 48%,#E9C9A2 60%,#F5DBBA 72%,#FFF4E4 82%,#E8C7A0 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3.4s linear infinite;filter:drop-shadow(0 0 8px rgba(255,226,190,.22))}
 @media (prefers-reduced-motion:reduce){.apply .side p.alead{animation:none}}
 .morse .ci{display:inline-block;white-space:pre;vertical-align:baseline}
+.morse .cw{display:inline-block;white-space:nowrap}
 .morse .ci .mz{display:none;font-size:.4em;letter-spacing:.04em;font-weight:800;white-space:nowrap;-webkit-text-fill-color:var(--green);color:var(--green);margin:0 .12em;vertical-align:.45em}
 .morse .ci.m{background:none!important}
 .morse .ci.m .lt{display:none}
@@ -1202,7 +1204,7 @@ $('#fm').addEventListener('submit',async e=>{
   const M={a:'.-',b:'-...',c:'-.-.',ç:'-.-..',d:'-..',e:'.',ə:'..-..',f:'..-.',g:'--.',ğ:'--.-.',h:'....',x:'-..-',ı:'..',i:'..',j:'.---',k:'-.-',q:'--.-',l:'.-..',m:'--',n:'-.',o:'---',ö:'---.',p:'.--.',r:'.-.',s:'...',ş:'----',t:'-',u:'..-',ü:'..--',v:'...-',y:'-.--',z:'--..',w:'.--',
     а:'.-',б:'-...',в:'.--',г:'--.',д:'-..',е:'.',ё:'.',ж:'...-',з:'--..',и:'..',й:'.---',к:'-.-',л:'.-..',м:'--',н:'-.',о:'---',п:'.--.',р:'.-.',с:'...',т:'-',у:'..-',ф:'..-.',х:'....',ц:'-.-.',ч:'---.',ш:'----',щ:'--.-',ъ:'--.--',ы:'-.--',ь:'-..-',э:'..-..',ю:'..--',я:'.-.-'};
   const sym=s=>s.replace(/\./g,'•').replace(/-/g,'–');
-  h.innerHTML=[...txt].map(c=>{if(c===' ')return '<span class="ci sp"> </span>';const m=M[c.toLocaleLowerCase('tr')]||M[c.toLowerCase()]||'';return `<span class="ci${m&&!RM?' m':''}"><span class="lt">${c}</span><span class="mz" aria-hidden="true">${sym(m)}</span></span>`;}).join('');
+  h.innerHTML=txt.split(' ').map(w=>'<span class="cw">'+[...w].map(c=>{const m=M[c.toLocaleLowerCase('tr')]||M[c.toLowerCase()]||'';return `<span class="ci${m&&!RM?' m':''}"><span class="lt">${c}</span><span class="mz" aria-hidden="true">${sym(m)}</span></span>`;}).join('')+'</span>').join('<span class="ci sp"> </span>');
   h.setAttribute('aria-label',txt);
   if(RM||!('IntersectionObserver' in window)){$$('.ci',h).forEach(c=>c.classList.remove('m'));return;}
   const io=new IntersectionObserver(e=>{if(!e[0].isIntersecting)return;io.disconnect();
@@ -1211,7 +1213,7 @@ $('#fm').addEventListener('submit',async e=>{
 })();
 
 
-// grade chips: the numbers keep turning into Arabic, Chinese, Japanese, Morse and other numerals
+// grade chips: the numbers keep turning into Arabic, Chinese, Morse and other numerals
 (function(){const box=$('#grades');if(!box)return;
   const D=d=>d.split('');
   const map=(digits,n)=>String(n).split('').map(c=>digits[+c]).join('');
@@ -1219,7 +1221,6 @@ $('#fm').addEventListener('submit',async e=>{
     n=>[String(n),''],
     n=>[map('٠١٢٣٤٥٦٧٨٩',n),''],
     n=>[['','一','二','三','四','五','六','七','八','九','十','十一'][n],''],
-    n=>[['','壱','弐','参','四','五','六','七','八','九','拾','拾壱'][n],''],
     n=>[String(n).split('').map(c=>({'0':'−−−−−','1':'•−−−−','2':'••−−−','3':'•••−−','4':'••••−','5':'•••••','6':'−••••','7':'−−•••','8':'−−−••','9':'−−−−•'})[c]).join(' '),'mz'],
     n=>[['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'][n],n>7?'sm':''],
     n=>[map('०१२३४५६७८९',n),''],
@@ -1499,7 +1500,7 @@ htl.to(heroOuter,{y:()=>-(150+Math.random()*520),x:()=>(Math.random()-.5)*420,ro
    .fromTo('.bigmark',{rotate:-40},{rotate:114,ease:'none',duration:1.85},.15)
    .to('.hero h1',{opacity:0,ease:'power1.in',duration:.12},.08)
    .add(()=>{},0)
-   .to('.wash',{opacity:1,ease:'none'},1.36);
+   .to('.wash',{opacity:1,ease:'none',duration:.35},1.65);
 
 // scholarship title: brand name bold, the rest light
 (function(){const g=$('.sch .pinbox>.ov .gt');if(!g)return;const t=g.textContent.trim();g.innerHTML=t.split(/(Guvvatli)/).filter(Boolean).map(x=>x==='Guvvatli'?'<b>Guvvatli</b>':`<i class="th">${x}</i>`).join('');})();
