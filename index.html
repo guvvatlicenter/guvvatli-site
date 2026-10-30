@@ -811,15 +811,6 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 
 
 
-<!-- NUMBERS -->
-<section class="nums" aria-label="Rəqəmlərlə">
-  <div class="wrap">
-    <div class="stat"><div class="v"><span class="odo" data-v="200">200</span><sup>+</sup></div><p>Medal</p></div>
-    <div class="stat"><div class="v"><span class="odo" data-v="20">20</span><sup>+</sup></div><p>Dünya birincisi</p></div>
-    <div class="stat"><div class="v"><span class="odo" data-v="100">100</span><sup>+</sup></div><p>Qızıl medal</p></div>
-    <div class="stat"><div class="v"><span class="odo" data-v="50">50</span><sup>+</sup></div><p>Gümüş medal</p></div>
-  </div>
-</section>
 
 <!-- SERVICES -->
 <section class="svc" id="xidmetler">
@@ -865,6 +856,16 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
     <figure class="mc"><img src="medals/m5.jpg" alt="Ramal Həsənli, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Ramal Həsənli</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
     <figure class="mc"><img src="medals/m6.jpg" alt="Suel Dəmirzadə, qızıl medal və sertifikatla" loading="lazy" style="object-position:center 30%"><figcaption><span class="gb">Qızıl medal</span><b>Suel Dəmirzadə</b><span class="olym">Beynəlxalq olimpiada, riyaziyyat</span></figcaption></figure>
   </div></div>
+</section>
+
+<!-- NUMBERS -->
+<section class="nums" aria-label="Rəqəmlərlə">
+  <div class="wrap">
+    <div class="stat"><div class="v"><span class="odo" data-v="200">200</span><sup>+</sup></div><p>Medal</p></div>
+    <div class="stat"><div class="v"><span class="odo" data-v="20">20</span><sup>+</sup></div><p>Dünya birincisi</p></div>
+    <div class="stat"><div class="v"><span class="odo" data-v="100">100</span><sup>+</sup></div><p>Qızıl medal</p></div>
+    <div class="stat"><div class="v"><span class="odo" data-v="50">50</span><sup>+</sup></div><p>Gümüş medal</p></div>
+  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -1561,13 +1562,13 @@ $$('.odo').forEach(o=>{
     let h='';for(let r=0;r<3;r++)for(let k=0;k<10;k++)h+=`<span>${k}</span>`; col.innerHTML=h+`<span>${d}</span>`;od.appendChild(col);o.appendChild(od);
     meas.textContent=d; od.style.width=meas.getBoundingClientRect().width+'px'; // each column as wide as its final digit, so the number keeps natural spacing
     const steps=30; // land on the final digit after 3 full turns
-    G.fromTo(col,{yPercent:0},{yPercent:-(steps/(steps+1))*100,duration:2.2+i*.35,ease:'expo.out',scrollTrigger:{trigger:o,start:'top 85%',once:true},
+    G.fromTo(col,{yPercent:0},{yPercent:-(steps/(steps+1))*100,duration:2.2+i*.35,ease:'expo.out',scrollTrigger:{trigger:o,start:'top 85%',once:true,refreshPriority:-1},
       onComplete:()=>{if(--left===0){o.textContent=v;}}});
   });
   meas.remove();
 });
 document.fonts&&document.fonts.ready.then(()=>$$('.odo').forEach(o=>{const s=document.createElement('span');s.style.cssText='position:absolute;visibility:hidden;white-space:pre';o.appendChild(s);$$('.od',o).forEach(od=>{const d=od.querySelector('.col span:last-child').textContent;s.textContent=d;od.style.width=s.getBoundingClientRect().width+'px';});s.remove();}));
-G.from('.stat',{y:60,opacity:0,duration:1,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:'.nums',start:'top 75%',once:true}});
+G.from('.stat',{y:60,opacity:0,duration:1,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:'.nums',start:'top 75%',once:true,refreshPriority:-1}});
 
 // ---------- horizontal services ----------
 const track=$('.track');
