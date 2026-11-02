@@ -1831,15 +1831,15 @@ function bookIdx(g){const B=window.__BOOKS||[];return B.findIndex(b=>b.g===g&&b.
 function cover(g){const B=window.__BOOKS||[];const b=B.find(x=>x.g===g&&x.t==='tb');return b?b.p[0]:'';}
 const nb=x=>esc(x).replace(/(\d+)-([A-Za-zƏəĞğİıÖöÜüŞşÇç]+)/g,'<span class="nw">$1-$2</span>');
 const ENB=P({
- az:{books:'Öz kitablarımız',ge:'General English',geSub:'Yeniyetmələr və böyüklər üçün A1, A2, B1 və B2 səviyyələri. A1 dərslik və iş kitabı hazırdır: kitabı seçin və vərəqləyin. Digər səviyyələr hazırlanır.',
+ az:{books:'Öz kitablarımız',ge:'General English',geSub:'Yeniyetmələr və böyüklər üçün A1, A2, B1 və B2 səviyyələri. A1 dərslik və iş kitabı hazırdır: kitabı seçin və vərəqləyin. A2, B1 və B2 hazırlanır.',
   kids:'English Kids',kidsSub:'6 ilə 12 yaş üçün 6 səviyyə, hər səviyyədə dərslik və iş kitabı. Nümunə səhifələr tezliklə.',sb:'dərslik',wb:'iş kitabı',soon:'Hazırlanır'},
- en:{books:'Our own books',ge:'General English',geSub:'Levels A1, A2, B1 and B2 for teenagers and adults. The A1 Student&#8217;s Book and Workbook are ready: pick a book and leaf through it. The other levels are in preparation.',
+ en:{books:'Our own books',ge:'General English',geSub:'Levels A1, A2, B1 and B2 for teenagers and adults. The A1 Student&#8217;s Book and Workbook are ready: pick a book and leaf through it. A2, B1 and B2 are in preparation.',
   kids:'English Kids',kidsSub:'Six levels for ages 6 to 12, each with a Student&#8217;s Book and a Workbook. Sample pages coming soon.',sb:'Student&#8217;s Book',wb:'Workbook',soon:'Coming soon'},
- ru:{books:'Наши книги',ge:'General English',geSub:'Уровни A1, A2, B1 и B2 для подростков и взрослых. Учебник и рабочая тетрадь A1 готовы: выберите книгу и полистайте. Остальные уровни готовятся.',
+ ru:{books:'Наши книги',ge:'General English',geSub:'Уровни A1, A2, B1 и B2 для подростков и взрослых. Учебник и рабочая тетрадь A1 готовы: выберите книгу и полистайте. A2, B1 и B2 готовятся.',
   kids:'English Kids',kidsSub:'Шесть уровней для детей 6-12 лет, на каждом учебник и рабочая тетрадь. Примеры страниц скоро.',sb:'учебник',wb:'рабочая тетрадь',soon:'Готовится'}});
 function engBooks(){const E=ENB, u=s=>String(s).replace(/&#8217;/g,'\u2019');
  const ge=[['sb','gea1sb_0.jpg',"General English A1, Student's Book"],['wb','gea1wb_0.jpg','General English A1, Workbook']].map(([k,f,n])=>`<button type="button" data-gebook="${esc(n)}"><span class="cv" style="background-image:url('books/en/${f}')"></span><b>A1 ${esc(u(E[k]))}</b></button>`).join('')
-  +['A2','B1','B2'].map(c=>`<div class="kb2"><span class="cv" style="background-image:url('books/en/ge${c.toLowerCase()}sb_0.jpg')"></span><b>${c} ${esc(E.soon)}</b></div>`).join('');
+  +['A2','B1','B2'].map(c=>['sb','wb'].map(k=>`<div class="kb2"><span class="cv" style="background-image:url('books/en/ge${c.toLowerCase()}${k}_0.jpg')"></span><b>${c} ${esc(u(E[k]))}</b></div>`).join('')).join('');
  let kd=''; for(let n=1;n<=6;n++){kd+=['tb','wb'].map(t=>`<div class="kb2"><span class="cv" style="background-image:url('books/kids/k${n}${t}.jpg')"></span><b>Kids ${n} ${esc(u(t==='tb'?E.sb:E.wb))}</b></div>`).join('');}
  return `<div class="sec sxr">${esc(E.books)}</div><div class="bkgrp sxr">${esc(E.ge)}</div><p class="sub2 sxr">${esc(u(E.geSub))}</p><div class="shelf2 sxr">${ge}</div>
   <div class="bkgrp sxr">${esc(E.kids)}</div><p class="sub2 sxr">${esc(u(E.kidsSub))}</p><div class="shelf2 sxr">${kd}</div>`;}
