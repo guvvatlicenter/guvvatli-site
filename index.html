@@ -732,6 +732,11 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
 .sx .stack .bk::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.12) 6%,transparent 12%,transparent 88%,rgba(0,0,0,.08))}
 .sx .stack button:hover .bk{transform:translateY(-14px) scale(1.03)}
 .sx .shelf2 .cv{pointer-events:none}
+.sx .shelf2 .kb2{display:flex;flex-direction:column;gap:10px;min-width:0}
+.sx .shelf2 .kb2 b{opacity:.75}
+.sx .shelf2 .kb2 .cv{position:relative}
+.sx .bkgrp{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,24px);margin-top:26px}
+.sx .bkgrp+.sub2{margin-top:6px}
 @media (prefers-reduced-motion:reduce){.sx .stack .bk{transition:none}}
 .sx .pages .pg3{display:block;width:100%;height:auto;aspect-ratio:900/1230;border-radius:6px;background:#fff;box-shadow:0 26px 50px -24px rgba(0,0,0,.6);outline:1px solid transparent;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .sx .pages figure:nth-child(1) .pg3{transform:rotate(-1.6deg)}
@@ -1825,6 +1830,19 @@ const QP=['0% 0%','100% 0%','0% 100%','100% 100%'];
 function bookIdx(g){const B=window.__BOOKS||[];return B.findIndex(b=>b.g===g&&b.t==='tb');}
 function cover(g){const B=window.__BOOKS||[];const b=B.find(x=>x.g===g&&x.t==='tb');return b?b.p[0]:'';}
 const nb=x=>esc(x).replace(/(\d+)-([A-Za-zƏəĞğİıÖöÜüŞşÇç]+)/g,'<span class="nw">$1-$2</span>');
+const ENB=P({
+ az:{books:'Öz kitablarımız',ge:'General English',geSub:'Yeniyetmələr və böyüklər üçün A1, A2, B1 və B2 səviyyələri. A1 dərslik və iş kitabı hazırdır: kitabı seçin və vərəqləyin. Digər səviyyələr hazırlanır.',
+  kids:'English Kids',kidsSub:'6 ilə 12 yaş üçün 6 səviyyə, hər səviyyədə dərslik və iş kitabı. Nümunə səhifələr tezliklə.',sb:'dərslik',wb:'iş kitabı',soon:'Hazırlanır'},
+ en:{books:'Our own books',ge:'General English',geSub:'Levels A1, A2, B1 and B2 for teenagers and adults. The A1 Student&#8217;s Book and Workbook are ready: pick a book and leaf through it. The other levels are in preparation.',
+  kids:'English Kids',kidsSub:'Six levels for ages 6 to 12, each with a Student&#8217;s Book and a Workbook. Sample pages coming soon.',sb:'Student&#8217;s Book',wb:'Workbook',soon:'Coming soon'},
+ ru:{books:'Наши книги',ge:'General English',geSub:'Уровни A1, A2, B1 и B2 для подростков и взрослых. Учебник и рабочая тетрадь A1 готовы: выберите книгу и полистайте. Остальные уровни готовятся.',
+  kids:'English Kids',kidsSub:'Шесть уровней для детей 6-12 лет, на каждом учебник и рабочая тетрадь. Примеры страниц скоро.',sb:'учебник',wb:'рабочая тетрадь',soon:'Готовится'}});
+function engBooks(){const E=ENB, u=s=>String(s).replace(/&#8217;/g,'\u2019');
+ const ge=[['sb','gea1sb_0.jpg',"General English A1, Student's Book"],['wb','gea1wb_0.jpg','General English A1, Workbook']].map(([k,f,n])=>`<button type="button" data-gebook="${esc(n)}"><span class="cv" style="background-image:url('books/en/${f}')"></span><b>A1 ${esc(u(E[k]))}</b></button>`).join('')
+  +['A2','B1','B2'].map(c=>`<div class="kb2"><span class="cv" style="background-image:url('books/en/ge${c.toLowerCase()}sb_0.jpg')"></span><b>${c} ${esc(E.soon)}</b></div>`).join('');
+ let kd=''; for(let n=1;n<=6;n++){kd+=['tb','wb'].map(t=>`<div class="kb2"><span class="cv" style="background-image:url('books/kids/k${n}${t}.jpg')"></span><b>Kids ${n} ${esc(u(t==='tb'?E.sb:E.wb))}</b></div>`).join('');}
+ return `<div class="sec sxr">${esc(E.books)}</div><div class="bkgrp sxr">${esc(E.ge)}</div><p class="sub2 sxr">${esc(u(E.geSub))}</p><div class="shelf2 sxr">${ge}</div>
+  <div class="bkgrp sxr">${esc(E.kids)}</div><p class="sub2 sxr">${esc(u(E.kidsSub))}</p><div class="shelf2 sxr">${kd}</div>`;}
 function render(i){const d=D[i], t=d.t, math=d.dir===0;
  sx.className='sx '+THEMES[i];
  const facts=`<div class="facts sxr">${t.facts.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`;
@@ -1842,7 +1860,7 @@ function render(i){const d=D[i], t=d.t, math=d.dir===0;
    <div class="sec sxr">${esc(M.prog)}</div>
    <div class="rows">${M.rows.map(([a,sm,b])=>`<div class="rw sxr"><h4>${esc(a)}<small>${nb(sm)}</small></h4><p>${nb(b)}</p></div>`).join('')}</div>`;
  } else {
-  h+=`<h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${nb(t.lead)}</p>${facts}
+  h+=`<h2 id="sxt" class="sxr">${esc(t.h)}</h2><p class="sxl sxr">${nb(t.lead)}</p>${facts}${d.dir===1?engBooks():''}
    <div class="sec sxr">${esc(UIX.prog)}</div>
    <div class="rows">${t.items.map(([a,b])=>`<div class="rw sxr"><h4>${esc(a)}</h4><p>${esc(b)}</p></div>`).join('')}</div>
    <div class="sec sxr">${esc(UIX.how)}</div>
@@ -1879,6 +1897,7 @@ panels.forEach((p,i)=>{ if(!D[i])return;
  p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i);}});
 });
 sx.addEventListener('click',e=>{
+ const gb=e.target.closest('[data-gebook]'); if(gb){const B=window.__BOOKS||[];const k=B.findIndex(b=>b.name===gb.dataset.gebook); if(k>=0&&window.__openBook)__openBook(k); return;}
  const bb=e.target.closest('[data-book]'); if(bb){const k=bookIdx(+bb.dataset.book); if(k>=0&&window.__openBook)__openBook(k); return;}
  if(e.target.closest('[data-x]'))close();
  else if(e.target.closest('[data-cta]')){const dir=D[cur].dir; close(()=>{const inp=document.getElementById('dirs'+dir); if(inp)inp.checked=true; const ap=document.getElementById('apply-top')||document.getElementById('formbox'); if(ap){ if(window.__lenis)__lenis.scrollTo(ap,{duration:1.4,offset:-24}); else ap.scrollIntoView({behavior:'smooth'}); } });}
