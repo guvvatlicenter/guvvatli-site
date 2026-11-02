@@ -131,6 +131,13 @@ p{margin:0}
 .hero h1 .lime{color:var(--lime)}
 @media (max-width:700px){.hero h1{font-size:clamp(28px,9vw,60px)}.hero h1 .ln.ln{white-space:normal}}
 .hero h1 .ln{display:block;white-space:nowrap}
+.hero h1 .qs{display:grid;align-items:center;justify-items:center}
+.hero h1 .q{grid-area:1/1;display:block;transition:opacity .55s ease,transform .55s ease,filter .55s ease}
+.hero h1 .q1{transition-delay:.5s}
+.hero h1 .q2{opacity:0;transform:translateY(.2em);filter:blur(6px);pointer-events:none}
+.hero h1.alt .q1{opacity:0;transform:translateY(-.2em);filter:blur(6px);transition-delay:0s}
+.hero h1.alt .q2{opacity:1;transform:none;filter:none;transition-delay:.5s}
+@media (prefers-reduced-motion:reduce){.hero h1 .q{transition:opacity .3s linear;transform:none!important}}
 .hero h1{text-align:center}
 .hero h1 .ln2{color:var(--lime)}
 .ch{display:inline-block;will-change:transform}
@@ -806,10 +813,12 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
   <div class="wash" aria-hidden="true"></div>
   <div class="wrap in">
     <div class="top ov"></div>
-    <h1 aria-label="“Biz daşı yox, onun sirrini gətirmişik.”">
-      <span class="ln split" aria-hidden="true">“Biz daşı yox,</span>
-      <span class="ln" aria-hidden="true"><span class="split lime">onun sirrini</span> <span class="split">gətirmişik.”</span></span>
-    </h1>
+    <h1 aria-label="“Biz daşı yox, onun sirrini gətirmişik.” “Qüvvət elmdədir, başqa cür heç kəs, heç kəsə üstünlük eyləyə bilməz!”"><span class="qs">
+      <span class="q q1"><span class="ln split" aria-hidden="true">“Biz daşı yox,</span>
+      <span class="ln" aria-hidden="true"><span class="split lime">onun sirrini</span> <span class="split">gətirmişik.”</span></span></span>
+      <span class="q q2"><span class="ln" aria-hidden="true"><span class="split lime">“Qüvvət</span> <span class="split">elmdədir, başqa cür heç kəs,</span></span>
+      <span class="ln split" aria-hidden="true">Heç kəsə üstünlük eyləyə bilməz!”</span></span>
+    </span></h1>
     <div class="foot solo">
       <div class="roll" aria-live="off"><span class="mk rmk" aria-label="Guvvatli Center"></span><span class="win"><span class="rw">Riyaziyyat</span></span></div>
     </div>
@@ -1063,7 +1072,9 @@ if(L!=='az'){
   $$('[aria-label],[placeholder],img[alt]').forEach(el=>{['aria-label','placeholder','alt'].forEach(a=>{const v=el.getAttribute(a);if(v&&D[v.trim()]!==undefined)el.setAttribute(a,D[v.trim()]);});});
   const HERO={en:{a:'“We didn’t bring the stone, we brought its secret.”',l1:'“We didn’t bring the stone,',l2:'<span class="split">we brought</span> <span class="split lime">its secret.”</span>'},
               ru:{a:'«Мы принесли не камень, а его тайну.»',l1:'«Мы принесли не камень,',l2:'<span class="split">а</span> <span class="split lime">его тайну.»</span>'}}[L];
-  const h1=$('.hero h1'), ln=$$('.ln',h1); h1.setAttribute('aria-label',HERO.a); ln[0].textContent=HERO.l1; ln[1].innerHTML=HERO.l2;
+  const HERO2={en:{a:'“Power lies in knowledge; in no other way can anyone rise above another!”',l1:'<span class="split lime">“Power</span> <span class="split">lies in knowledge; in no other way</span>',l2:'can anyone rise above another!”'},
+               ru:{a:'«Сила в знании, иначе никто никого превзойти не сможет!»',l1:'<span class="split lime">«Сила</span> <span class="split">в знании, иначе никто</span>',l2:'никого превзойти не сможет!»'}}[L];
+  const h1=$('.hero h1'), ln=$$('.ln',h1); h1.setAttribute('aria-label',HERO.a+' '+HERO2.a); ln[0].textContent=HERO.l1; ln[1].innerHTML=HERO.l2; ln[2].innerHTML=HERO2.l1; ln[3].textContent=HERO2.l2;
 }
 function setLang(l,fly){try{localStorage.setItem('gv-lang',l)}catch(e){} window.name='gvlang:'+l+(fly?'|gvfly':''); try{history.replaceState(null,'','#'+l)}catch(e){location.hash=l} location.reload();}
 const LNAME={az:'Azərbaycan',en:'English',ru:'Русский'}, LSHORT={az:'AZ',en:'ENG',ru:'RU'};
@@ -1437,11 +1448,13 @@ function koroglu(done){
   fit(); addEventListener('resize',fit); document.fonts&&document.fonts.ready.then(fit);})();
 
 
+// hero: the two quotes take turns every 4 seconds
+(function(){const h1=$('.hero h1');if(!h1||!$('.q2',h1))return;setTimeout(()=>setInterval(()=>{if(document.hidden)return;const r=h1.getBoundingClientRect();if(r.bottom<0)return;h1.classList.toggle('alt');},4000),2500);})();
 // per-language fitting: shrink display type only where a language runs longer
 (function(){
-  const fitHero=()=>{const h1=$('.hero h1');h1.style.fontSize='';if(innerWidth<=700)return;const ls=$$('.ln',h1);const cw=h1.clientWidth;
-    const mw=Math.max(...ls.map(l=>{const r=document.createRange();r.selectNodeContents(l);return r.getBoundingClientRect().width}));
-    if(mw>cw*.97)h1.style.fontSize=(parseFloat(getComputedStyle(h1).fontSize)*cw*.97/mw)+'px';};
+  const fitHero=()=>{const h1=$('.hero h1');h1.style.fontSize='';const qs=$$('.q',h1);qs.forEach(q=>q.style.fontSize='');if(innerWidth<=700)return;const cw=h1.clientWidth,fs=parseFloat(getComputedStyle(h1).fontSize);
+    qs.forEach(q=>{const mw=Math.max(...$$('.ln',q).map(l=>{const r=document.createRange();r.selectNodeContents(l);return r.getBoundingClientRect().width}));
+    if(mw>cw*.97)q.style.fontSize=(fs*cw*.97/mw)+'px';});};
   const fitWords=()=>$$('.svc h2,.why h2,.lib h2,.voi h2,.apply h2,.sch h2,.panel h3,.card h3,.ty b,.mnav>a').forEach(el=>{el.style.fontSize='';const par=el.parentElement;if(!par.clientWidth)return;const pc=getComputedStyle(par),avail=par.clientWidth-parseFloat(pc.paddingLeft)-parseFloat(pc.paddingRight);let s=parseFloat(getComputedStyle(el).fontSize),g=0;while(el.scrollWidth>avail+1&&g++<30){s*=.94;el.style.fontSize=s+'px';}});
   const fitMani=()=>{const p=$('.mani .words');if(p)p.style.fontSize='';return;let s=parseFloat(getComputedStyle(p).fontSize),g=0;while(t.offsetHeight>innerHeight-140&&s>14&&g++<40){s-=1;p.style.fontSize=s+'px';}};
   const all=()=>{fitHero();fitWords();fitMani();};
@@ -1509,8 +1522,8 @@ function splitWords(el,cls){const nodes=[...el.childNodes];el.textContent='';con
 // ---------- preloader + hero intro ----------
 const heroChars=$$('.hero .split').flatMap(splitChars);
 // hang the quote marks outside the text so the words themselves sit on the centre line
-(function(){const hang=()=>{const h1=$('.hero h1'), fs=parseFloat(getComputedStyle(h1).fontSize);
-  $$('.hero h1 .ch').forEach(c=>{const t=c.textContent; if(!'“”«»'.includes(t))return; const em=c.offsetWidth/fs; c.style['“«'.includes(t)?'marginLeft':'marginRight']=(-em)+'em';});};
+(function(){const hang=()=>{
+  $$('.hero h1 .ch').forEach(c=>{const t=c.textContent; if(!'“”«»'.includes(t))return; const fs=parseFloat(getComputedStyle(c).fontSize); const em=c.offsetWidth/fs; c.style['“«'.includes(t)?'marginLeft':'marginRight']=(-em)+'em';});};
   hang(); document.fonts&&document.fonts.ready.then(hang);})();
 const FLY=false; window.name=window.name.replace('|gvfly','');
 const pre=document.createElement('div');pre.className='pre';pre.innerHTML='<span class="mk"></span><div><div class="num">0</div><div class="bar"><i></i></div></div>';
