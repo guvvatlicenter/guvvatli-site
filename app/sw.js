@@ -1,24 +1,13 @@
-const SHELL='gc-shell-v2', AUDIO='ga-audio-v1';
-const FILES=['./','index.html','math.json','olymp.json','manifest.webmanifest','icon-192.png','icon-512.png','icon-180.png','../audio/tracks.json'];
+const SHELL='gc-shell-v3', AUDIO='gc-audio-v1';
+const FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-180.png','d/keys.json','d/audio.bin','d/math.az.bin','d/math.en.bin','d/math.ru.bin','d/olymp.az.bin','d/olymp.en.bin','d/olymp.ru.bin'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==SHELL&&k!==AUDIO).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
-async function rangeFrom(cached,req){
-  const range=req.headers.get('range'); if(!range) return cached;
-  const buf=await cached.arrayBuffer(); const size=buf.byteLength;
-  const m=/bytes=(\d*)-(\d*)/.exec(range); let s=m&&m[1]?parseInt(m[1]):0; let e=m&&m[2]?parseInt(m[2]):size-1;
-  if(!m||!m[1]&&m[2]){s=size-parseInt(m[2]);e=size-1}
-  e=Math.min(e,size-1);
-  return new Response(buf.slice(s,e+1),{status:206,headers:{'Content-Type':'audio/mpeg','Content-Range':`bytes ${s}-${e}/${size}`,'Content-Length':String(e-s+1),'Accept-Ranges':'bytes'}});
-}
 self.addEventListener('fetch',e=>{
   const url=new URL(e.request.url);
   if(e.request.method!=='GET'||url.origin!==location.origin) return;
-  if(url.pathname.includes('/media/')){
-    e.respondWith(caches.open(AUDIO).then(c=>c.match(url.pathname)).then(hit=>hit?rangeFrom(hit,e.request):fetch(e.request)));
-    return;
-  }
-  if(url.pathname.endsWith('.json')||e.request.mode==='navigate'){
-    e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(SHELL).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('index.html'))));
+  if(url.pathname.includes('/app/a/')){ e.respondWith(caches.open(AUDIO).then(c=>c.match(url.pathname)).then(hit=>hit||fetch(e.request))); return; }
+  if(e.request.mode==='navigate'||url.pathname.includes('/app/d/')){
+    e.respondWith(fetch(e.request).then(r=>{if(r.ok){const cp=r.clone();caches.open(SHELL).then(c=>c.put(url.pathname===location.pathname?e.request:url.pathname,cp))}return r}).catch(()=>caches.match(url.pathname).then(r=>r||caches.match(e.request)).then(r=>r||caches.match('index.html'))));
     return;
   }
   e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));

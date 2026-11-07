@@ -161,119 +161,218 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 .sheet p{margin:8px 0;line-height:1.5;font-size:15px}
 .sheet .ok{margin-top:14px;width:100%;background:var(--acc);color:#fff;border-radius:14px;padding:13px;font-weight:700}
 .share{display:inline-block;vertical-align:-4px;width:20px;height:20px}
+
+.langs{display:flex;gap:6px}
+.langs button{font-family:Unbounded,sans-serif;font-weight:700;font-size:11px;border:1.5px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--muted)}
+.langs button.on{border-color:var(--acc);color:var(--acc)}
+.tile .lock{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.tile .lock.ok{color:var(--acc)}
+.pw input{width:100%;font:inherit;font-size:18px;letter-spacing:.08em;text-transform:uppercase;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none;margin-top:6px}
+.pw input:focus{border-color:var(--acc)}
+.pw .err{color:#C2412D;font-size:14px;min-height:20px;margin-top:8px}
+.pw .cancel{margin-top:8px;width:100%;padding:11px;color:var(--muted);font-weight:600}
+.logout{display:block;margin:18px auto 0;color:var(--muted);font-size:13px;text-decoration:underline}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><button class="install" id="installBtn" hidden>Quraşdır</button></div>
+  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><div style="display:flex;gap:8px;align-items:center"><button class="install" id="installBtn" hidden></button></div></div>
   <div id="hExtra"></div>
 </div></header>
 <main class="wrap" id="view"></main>
 
 <div class="player" id="player" hidden>
  <div class="in">
-  <div class="now"><span class="tn" id="nNum">&nbsp;</span><span class="nt" id="nTitle">Trek seçin</span></div>
+  <div class="now"><span class="tn" id="nNum">&nbsp;</span><span class="nt" id="nTitle"></span></div>
   <div class="bar"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" step="1"><span id="dur">0:00</span></div>
   <div class="ctl">
     <button class="pill" id="speed">1×</button>
-    <button class="b" id="back" aria-label="5 saniyə geri"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
-    <button class="b" id="prev" aria-label="Əvvəlki"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg></button>
-    <button class="b main" id="play" aria-label="Oxut"><svg viewBox="0 0 24 24" id="playIco"><path d="M8 5v14l11-7z"/></svg></button>
-    <button class="b" id="next" aria-label="Növbəti"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
-    <button class="b" id="fwd" aria-label="5 saniyə irəli"><svg viewBox="0 0 24 24"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
-    <button class="pill" id="loop">Təkrar</button>
+    <button class="b" id="back" aria-label="-5"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
+    <button class="b" id="prev" aria-label="prev"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg></button>
+    <button class="b main" id="play" aria-label="play"><svg viewBox="0 0 24 24" id="playIco"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="b" id="next" aria-label="next"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+    <button class="b" id="fwd" aria-label="+5"><svg viewBox="0 0 24 24"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
+    <button class="pill" id="loop"></button>
   </div>
  </div>
 </div>
 
 <div class="sheet" id="iosSheet" hidden><div class="box">
-  <h3>Telefona quraşdırın</h3>
-  <p>1. Aşağıdakı <b>Paylaş</b> düyməsinə basın <svg class="share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg></p>
-  <p>2. <b>Ana ekrana əlavə et</b> (Add to Home Screen) seçin.</p>
-  <p>3. <b>Əlavə et</b> basın. Guvvatli Center ikonu telefonunuzun ekranında görünəcək.</p>
-  <button class="ok" id="iosOk">Aydındır</button>
+  <h3 id="iosH"></h3><p id="ios1"></p><p id="ios2"></p><p id="ios3"></p>
+  <button class="ok" id="iosOk"></button>
 </div></div>
 
-<audio id="au" preload="metadata"></audio>
+<div class="sheet pw" id="pwSheet" hidden><div class="box">
+  <h3 id="pwH"></h3><p id="pwP" style="color:var(--muted)"></p>
+  <input id="pwIn" autocomplete="off" autocapitalize="characters" spellcheck="false">
+  <div class="err" id="pwErr"></div>
+  <button class="ok" id="pwOk"></button><button class="cancel" id="pwCancel"></button>
+</div></div>
+
+<audio id="au" preload="auto"></audio>
 <script>
+const I18N={
+az:{home_h:"İlk dərsdən danış, hər gün bir az irəli get",home_p:"Kitablarımızın audiosu, riyaziyyat və olimpiada açarları bir yerdə. İnternetsiz də işləyir.",
+ t_audio:"İngilis dili audio",d_audio:"General English A1 və A2. Student’s Book və Workbook, 432 trek",
+ t_math:"Riyaziyyat açarları",d_math:"1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə",
+ t_olymp:"Olimpiada açarları",d_olymp:"Lütfi Zadə, RFM, RFO, Kenquru, SASMO, TIMO, Copernicus, AMO, FISO. Hər olimpiada üçün açarlar və kitablarımızdan məsələlər",
+ locked:"Şifrə ilə",open:"Açıqdır",pw_h:"Şifrəni daxil edin",pw_p:"Bu bölmə şifrə ilə açılır. Şifrəni müəlliminizdən və ya Guvvatli Center-dən ala bilərsiniz.",pw_ok:"Aç",pw_cancel:"Ləğv et",pw_err:"Şifrə düzgün deyil",pw_wait:"Yoxlanılır…",logout:"Bu cihazda bölmələri bağla",
+ install:"Quraşdır",ios_h:"Telefona quraşdırın",ios1:"1. Aşağıdakı <b>Paylaş</b> düyməsinə basın",ios2:"2. <b>Ana ekrana əlavə et</b> (Add to Home Screen) seçin.",ios3:"3. <b>Əlavə et</b> basın. Guvvatli Center ikonu ekranda görünəcək.",ios_ok:"Aydındır",
+ audio_h:"İngilis dili <span>audio</span>",search_tr:"Trek nömrəsi, məsələn 2.04",trek:"trek",offline_ok:"oflayn hazırdır",off_can:"İnternetsiz dinləmək olar",off_save:"İnternetsiz dinləmək üçün yadda saxla",del:"Sil",dl:"Yüklə",loading:"Yüklənir…",none:"Heç nə tapılmadı",choose:"Trek seçin",loop:"Təkrar",
+ math_h:"Riyaziyyat <span>açarları</span>",search_m:"Axtar: kəsr, kvadrat, faiz…",keys:"açar",all_res:"Bütün siniflərdə {n} nəticə",grade:"{g} sinif",gkeys:"{g} sinif: {n} açar",key_h:"{g} sinif <span>açar</span>",
+ rule:"Qayda",why:"Niyə işləyir?",ex:"Nümunə",normal:"Adi yol",withkey:"Açarla",answer:"Cavab",prev:"‹ Əvvəlki",next:"Növbəti ›",
+ ol_h:"Olimpiada <span>açarları</span>",ol_p:"Olimpiadanı seç. Hər birində həmin olimpiadada işə yarayan açarlar və kitablarımızdan onun üslubunda məsələlər var.",problems:"məsələ",ol_keys:"Bu olimpiadanın açarları",show_all:"Bütün {n} açarı göstər",probs:"Məsələlər",hint:"İpucu",key_b:"Açar",more:"Daha çox ({n})",final:"final, sübut",
+ ord:g=>g+({1:'-ci',2:'-ci',3:'-cü',4:'-cü',5:'-ci',6:'-cı',7:'-ci',8:'-ci',9:'-cu'}[g]||'-cu')},
+en:{home_h:"Speak from the first lesson, go a little further every day",home_p:"Audio for our books, maths keys and olympiad keys in one place. Works offline too.",
+ t_audio:"English audio",d_audio:"General English A1 and A2. Student’s Book and Workbook, 432 tracks",
+ t_math:"Maths keys",d_math:"Grades 1 to 9. Methods from Chinese, Indian and Singapore schools, olympiad tricks, rules and formulas, each with an example",
+ t_olymp:"Olympiad keys",d_olymp:"Lotfi Zadeh, RFM, RFO, Kangaroo, SASMO, TIMO, Copernicus, AMO, FISO. Keys for every olympiad and problems from our books",
+ locked:"Password",open:"Unlocked",pw_h:"Enter the password",pw_p:"This section opens with a password. You can get it from your teacher or from Guvvatli Center.",pw_ok:"Open",pw_cancel:"Cancel",pw_err:"Wrong password",pw_wait:"Checking…",logout:"Lock the sections on this device",
+ install:"Install",ios_h:"Install on your phone",ios1:"1. Tap the <b>Share</b> button below",ios2:"2. Choose <b>Add to Home Screen</b>.",ios3:"3. Tap <b>Add</b>. The Guvvatli Center icon will appear on your screen.",ios_ok:"Got it",
+ audio_h:"English <span>audio</span>",search_tr:"Track number, e.g. 2.04",trek:"tracks",offline_ok:"available offline",off_can:"You can listen offline",off_save:"Save to listen offline",del:"Remove",dl:"Download",loading:"Loading…",none:"Nothing found",choose:"Choose a track",loop:"Repeat",
+ math_h:"Maths <span>keys</span>",search_m:"Search: fraction, square, percent…",keys:"keys",all_res:"{n} results in all grades",grade:"Grade {g}",gkeys:"Grade {g}: {n} keys",key_h:"Grade {g} <span>key</span>",
+ rule:"Rule",why:"Why does it work?",ex:"Example",normal:"Usual way",withkey:"With the key",answer:"Answer",prev:"‹ Previous",next:"Next ›",
+ ol_h:"Olympiad <span>keys</span>",ol_p:"Choose an olympiad. Each one has the keys that help in it and problems in its style from our books.",problems:"problems",ol_keys:"Keys for this olympiad",show_all:"Show all {n} keys",probs:"Problems",hint:"Hint",key_b:"Key",more:"More ({n})",final:"final, proof",
+ ord:g=>g},
+ru:{home_h:"Говори с первого урока, каждый день чуть дальше",home_p:"Аудио к нашим книгам, ключи по математике и олимпиадам в одном месте. Работает и без интернета.",
+ t_audio:"Аудио по английскому",d_audio:"General English A1 и A2. Student’s Book и Workbook, 432 трека",
+ t_math:"Ключи по математике",d_math:"С 1 по 9 класс. Методы китайской, индийской и сингапурской школ, олимпиадные приёмы, правила и формулы, каждый с примером",
+ t_olymp:"Олимпиадные ключи",d_olymp:"Лютфи Заде, РФМ, РФО, Кенгуру, SASMO, TIMO, Copernicus, AMO, FISO. Ключи к каждой олимпиаде и задачи из наших книг",
+ locked:"По паролю",open:"Открыто",pw_h:"Введите пароль",pw_p:"Этот раздел открывается по паролю. Пароль можно получить у учителя или в Guvvatli Center.",pw_ok:"Открыть",pw_cancel:"Отмена",pw_err:"Неверный пароль",pw_wait:"Проверяем…",logout:"Закрыть разделы на этом устройстве",
+ install:"Установить",ios_h:"Установите на телефон",ios1:"1. Нажмите кнопку <b>Поделиться</b> внизу",ios2:"2. Выберите <b>На экран «Домой»</b>.",ios3:"3. Нажмите <b>Добавить</b>. Значок Guvvatli Center появится на экране.",ios_ok:"Понятно",
+ audio_h:"Аудио по <span>английскому</span>",search_tr:"Номер трека, например 2.04",trek:"треков",offline_ok:"доступно офлайн",off_can:"Можно слушать без интернета",off_save:"Сохранить для прослушивания офлайн",del:"Удалить",dl:"Скачать",loading:"Загрузка…",none:"Ничего не найдено",choose:"Выберите трек",loop:"Повтор",
+ math_h:"Ключи по <span>математике</span>",search_m:"Поиск: дробь, квадрат, процент…",keys:"ключей",all_res:"{n} результатов во всех классах",grade:"{g} класс",gkeys:"{g} класс: {n} ключей",key_h:"{g} класс <span>ключ</span>",
+ rule:"Правило",why:"Почему это работает?",ex:"Пример",normal:"Обычный путь",withkey:"С ключом",answer:"Ответ",prev:"‹ Назад",next:"Далее ›",
+ ol_h:"Олимпиадные <span>ключи</span>",ol_p:"Выберите олимпиаду. В каждой ключи, которые в ней помогают, и задачи в её стиле из наших книг.",problems:"задач",ol_keys:"Ключи этой олимпиады",show_all:"Показать все {n} ключей",probs:"Задачи",hint:"Подсказка",key_b:"Ключ",more:"Ещё ({n})",final:"финал, доказательство",
+ ord:g=>g}};
 const UNITS={a1:["Hello","Things","Family and friends","My day","Work and study","Food and drink","Home and city","Free time","Yesterday","Travel"],
              a2:["Life now","Stories from the past","Shopping and money","Plans and arrangements","Health and the body","Travel experiences","Work and skills","Where we live","Always online","Special days"]};
-const AUDIO_BASE='../audio/';
-const store={get(k,d){try{const v=localStorage.getItem('gc_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('gc_'+k,JSON.stringify(v))}catch(e){}}};
+const store={get(k,d){try{const v=localStorage.getItem('gc_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('gc_'+k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem('gc_'+k)}catch(e){}}};
 const $=id=>document.getElementById(id), au=$('au'), view=$('view'), hExtra=$('hExtra');
-let TR=null, MATH=null;
+let LANG=store.get('lang',(navigator.language||'az').slice(0,2)); if(!I18N[LANG])LANG='az';
+const t=(k,v)=>{let s=I18N[LANG][k];if(s===undefined)s=I18N.az[k]||k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s};
+const ordz=g=>I18N[LANG].ord(g);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain=s=>String(s||'').replace(/<[^>]+>/g,' ').toLowerCase();
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const nice=x=>x.replace(/\bWhats\b/g,'What’s').replace(/\bIts\b/g,'It’s').replace(/\bDont\b/g,'Don’t').replace(/\bIm\b/g,'I’m').replace(/\bLets\b/g,'Let’s');
+
+/* ---------------- crypto ---------------- */
+const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const b64e=u=>btoa(String.fromCharCode(...new Uint8Array(u)));
+let KEYS=null; const DK={};
+async function loadKeys(){ if(KEYS) return KEYS; KEYS=await fetch('d/keys.json',{cache:'no-cache'}).then(r=>r.json()).catch(()=>caches.match('d/keys.json').then(r=>r&&r.json())); return KEYS }
+async function aesKey(raw){ return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']) }
+async function dec(key,buf){ const u=new Uint8Array(buf); return crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(0,12)},key,u.slice(12)) }
+async function tryPassword(sec,pw){
+  await loadKeys(); const enc=new TextEncoder().encode(pw.trim().toUpperCase());
+  const base=await crypto.subtle.importKey('raw',enc,'PBKDF2',false,['deriveKey']);
+  for(const w of (KEYS[sec]||[])){
+    try{ const kek=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64d(w.s),iterations:w.i,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+      const raw=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(w.v)},kek,b64d(w.w)); store.set('k_'+sec,b64e(raw)); DK[sec]=await aesKey(raw); return true }catch(e){}
+  }
+  return false;
+}
+async function getKey(sec){ if(DK[sec]) return DK[sec]; const s=store.get('k_'+sec,null); if(!s) return null; DK[sec]=await aesKey(b64d(s)); return DK[sec] }
+const isOpen=sec=>!!store.get('k_'+sec,null);
+async function gunzip(buf){ const ds=new DecompressionStream('gzip'); const st=new Blob([buf]).stream().pipeThrough(ds); return new Response(st).text() }
+async function fetchBin(url){ const r=await fetch(url,{cache:'no-cache'}).catch(()=>null); if(r&&r.ok) return r.arrayBuffer(); const c=await caches.match(url); if(c) return c.arrayBuffer(); throw new Error('net') }
+async function loadSec(sec,file){ const k=await getKey(sec); if(!k) return null; try{ return JSON.parse(await gunzip(await dec(k,await fetchBin(file)))) }catch(e){ store.del('k_'+sec); delete DK[sec]; return null } }
+function askPassword(sec){
+  return new Promise(res=>{
+    $('pwH').textContent=t('pw_h');$('pwP').textContent=t('pw_p');$('pwOk').textContent=t('pw_ok');$('pwCancel').textContent=t('pw_cancel');$('pwErr').textContent='';$('pwIn').value='';
+    $('pwSheet').hidden=false; setTimeout(()=>$('pwIn').focus(),50);
+    const done=v=>{$('pwSheet').hidden=true;$('pwOk').onclick=null;res(v)};
+    $('pwCancel').onclick=()=>done(false);
+    const go=async()=>{ $('pwErr').textContent=t('pw_wait'); const ok=await tryPassword(sec,$('pwIn').value); if(ok) done(true); else $('pwErr').textContent=t('pw_err') };
+    $('pwOk').onclick=go; $('pwIn').onkeydown=e=>{if(e.key==='Enter')go()};
+  });
+}
+async function ensure(sec){ if(await getKey(sec)) return true; return askPassword(sec) }
+
+/* ---------------- shell ---------------- */
+let TR=null, MATH=null, OL=null;
 let lv=store.get('lv','a1'), bk=store.get('bk','sb'), grade=store.get('grade',5), mq='';
 let queue=[], qi=-1, open=new Set(store.get('open',[])), mopen=new Set(store.get('mopen',[]));
 const speeds=[1,0.75,0.9,1.25]; let sp=store.get('sp',0);
-const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
-const nice=t=>t.replace(/\bWhats\b/g,'What’s').replace(/\bIts\b/g,'It’s').replace(/\bDont\b/g,'Don’t').replace(/\bIm\b/g,'I’m').replace(/\bLets\b/g,'Let’s');
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const ordz=g=>g+({1:'-ci',2:'-ci',3:'-cü',4:'-cü',5:'-ci',6:'-cı',7:'-ci',8:'-ci',9:'-cu'}[g]||'-cu');
-const plain=s=>String(s||'').replace(/<[^>]+>/g,' ').toLowerCase();
+function setTitle(html,back){ $('hTitle').innerHTML=(back?'<button class="backb" id="backBtn" aria-label="‹">‹</button>':'')+html; if(back)$('backBtn').onclick=()=>{ location.hash=back } }
+function theme(c){ document.body.className=c+(au.dataset.k?' hasplayer':''); document.documentElement.lang=LANG }
+function staticText(){ $('installBtn').textContent=t('install'); $('loop').textContent=t('loop'); $('iosH').textContent=t('ios_h'); $('ios1').innerHTML=t('ios1'); $('ios2').innerHTML=t('ios2'); $('ios3').innerHTML=t('ios3'); $('iosOk').textContent=t('ios_ok'); if(!au.dataset.k)$('nTitle').textContent=t('choose') }
 
-function setTitle(html,back){ $('hTitle').innerHTML=(back?'<button class="backb" id="backBtn" aria-label="Geri">‹</button>':'')+html; if(back)$('backBtn').onclick=()=>{ if(history.length>1&&store.get('navd',0)) history.back(); else location.hash=back } }
-function theme(c){ document.body.className=c+(au.dataset.p?' hasplayer':''); }
-
-/* ---------------- home ---------------- */
 function viewHome(){
-  theme(''); setTitle('Guvvatli <span>Center</span>'); hExtra.innerHTML='';
-  view.innerHTML=`<div class="hero"><b>İlk dərsdən danış, hər gün bir az irəli get</b><p>Kitablarımızın audiosu və riyaziyyat açarları bir yerdə. İnternetsiz də işləyir.</p></div>
+  theme(''); setTitle('Guvvatli <span>Center</span>'); staticText();
+  hExtra.innerHTML=`<div class="langs" style="margin-top:4px">${['az','en','ru'].map(l=>`<button data-l="${l}" class="${l===LANG?'on':''}">${l.toUpperCase()}</button>`).join('')}</div>`;
+  hExtra.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{LANG=b.dataset.l;store.set('lang',LANG);MATH=null;OL=null;viewHome()});
+  const lk=s=>`<span class="lock ${isOpen(s)?'ok':''}">${isOpen(s)?t('open'):t('locked')}</span>`;
+  view.innerHTML=`<div class="hero"><b>${t('home_h')}</b><p>${t('home_p')}</p></div>
   <div class="tiles">
-   <button class="tile" onclick="location.hash='audio'"><span class="covers"><img src="/books/en/gea1sb_0.jpg" alt=""><img src="/books/en/gea2sb_0.jpg" alt=""></span><span><b>İngilis dili audio</b><small>General English A1 və A2. Student’s Book və Workbook, 432 trek</small></span></button>
-   <button class="tile" onclick="location.hash='math'"><span class="covers"><img src="/books/az/g5tb_0.jpg" alt=""><img src="/books/az/g8tb_0.jpg" alt=""></span><span><b>Riyaziyyat açarları</b><small>1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə</small></span></button>
-   <button class="tile" onclick="location.hash='olymp'"><span class="covers"><img src="/books/az/g6tb_0.jpg" alt=""><img src="/books/az/g9tb_0.jpg" alt=""></span><span><b>Olimpiada açarları</b><small>Lütfi Zadə, RFM, RFO, Kenquru, SASMO, TIMO, Copernicus, AMO, FISO. Hər olimpiada üçün açarlar və kitablarımızdan məsələlər</small></span></button>
+   <button class="tile" data-go="audio"><span class="covers"><img src="/books/en/gea1sb_0.jpg" alt=""><img src="/books/en/gea2sb_0.jpg" alt=""></span><span><b>${t('t_audio')}</b><small>${t('d_audio')}</small></span>${lk('audio')}</button>
+   <button class="tile" data-go="math"><span class="covers"><img src="/books/az/g5tb_0.jpg" alt=""><img src="/books/az/g8tb_0.jpg" alt=""></span><span><b>${t('t_math')}</b><small>${t('d_math')}</small></span>${lk('math')}</button>
+   <button class="tile" data-go="olymp"><span class="covers"><img src="/books/az/g6tb_0.jpg" alt=""><img src="/books/az/g9tb_0.jpg" alt=""></span><span><b>${t('t_olymp')}</b><small>${t('d_olymp')}</small></span>${lk('olymp')}</button>
   </div>
+  ${(isOpen('audio')||isOpen('math')||isOpen('olymp'))?`<button class="logout" id="logout">${t('logout')}</button>`:''}
   <div class="motto">Guvvatli Center&nbsp;&nbsp;guvvatli.az</div>`;
+  view.querySelectorAll('.tile').forEach(b=>b.onclick=async()=>{ const s=b.dataset.go; if(await ensure(s)) location.hash=s; else viewHome() });
+  if($('logout'))$('logout').onclick=()=>{['audio','math','olymp'].forEach(s=>{store.del('k_'+s);delete DK[s]});TR=MATH=OL=null;au.pause();au.removeAttribute('src');delete au.dataset.k;$('player').hidden=true;viewHome()};
 }
+async function gate(sec){ if(await getKey(sec)) return true; const ok=await askPassword(sec); if(!ok){location.hash='';return false} return true }
 
 /* ---------------- audio ---------------- */
-function allTracks(){const out=[];const units=(TR&&TR[lv]&&TR[lv][bk])||{};Object.keys(units).sort((a,b)=>a-b).forEach(u=>units[u].forEach(t=>out.push({u:+u,n:t[0],t:nice(t[1]),p:AUDIO_BASE+'media/'+t[2]})));return out}
-async function cachedSet(){try{const c=await caches.open('ga-audio-v1');const ks=await c.keys();return new Set(ks.map(r=>new URL(r.url).pathname))}catch(e){return new Set()}}
-const absPath=p=>new URL(p,location.href).pathname;
-
-function viewAudio(){
-  theme(lv); setTitle('İngilis dili <span>audio</span>','home');
+function allTracks(){const out=[];const units=(TR&&TR[lv]&&TR[lv][bk])||{};Object.keys(units).sort((a,b)=>a-b).forEach(u=>units[u].forEach(x=>out.push({u:+u,n:x[0],t:nice(x[1]),k:x[2]})));return out}
+const binUrl=k=>'a/'+k+'.bin';
+async function cachedSet(){try{const c=await caches.open('gc-audio-v1');const ks=await c.keys();return new Set(ks.map(r=>new URL(r.url).pathname.split('/').pop().replace('.bin','')))}catch(e){return new Set()}}
+async function viewAudio(){
+  if(!await gate('audio')) return;
+  theme(lv); setTitle(t('audio_h'),'home'); staticText();
   hExtra.innerHTML=`<div class="levels"><button class="lv" data-lv="a1"><img alt=""><span><b>A1</b><small>Beginner</small></span></button><button class="lv" data-lv="a2"><img alt=""><span><b>A2</b><small>Elementary</small></span></button></div>
   <div class="seg" id="books"><button data-bk="sb">Student’s Book</button><button data-bk="wb">Workbook</button></div>
-  <div class="search"><input id="q" type="search" inputmode="decimal" placeholder="Trek nömrəsi, məsələn 2.04" autocomplete="off"></div>`;
+  <div class="search"><input id="q" type="search" inputmode="decimal" placeholder="${t('search_tr')}" autocomplete="off"></div>`;
   hExtra.querySelectorAll('.lv').forEach(b=>b.onclick=()=>{lv=b.dataset.lv;store.set('lv',lv);viewAudio()});
   hExtra.querySelectorAll('#books button').forEach(b=>b.onclick=()=>{bk=b.dataset.bk;store.set('bk',bk);viewAudio()});
   $('q').addEventListener('input',renderAudio);
+  if(!TR){view.innerHTML=`<div class="empty">${t('loading')}</div>`; TR=await loadSec('audio','d/audio.bin'); if(!TR){location.hash='';return} }
   renderAudio();
 }
 async function renderAudio(){
-  if(!TR){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  if(!TR) return;
   document.body.classList.remove('a1','a2');document.body.classList.add(lv);
   hExtra.querySelectorAll('.lv').forEach(b=>b.classList.toggle('on',b.dataset.lv===lv));
   hExtra.querySelectorAll('#books button').forEach(b=>b.classList.toggle('on',b.dataset.bk===bk));
-  const imgs=hExtra.querySelectorAll('.lv img'); imgs[0].src='/books/en/gea1'+bk+'_0.jpg'; imgs[1].src='/books/en/gea2'+bk+'_0.jpg';
+  const imgs=hExtra.querySelectorAll('.lv img'); if(imgs.length){imgs[0].src='/books/en/gea1'+bk+'_0.jpg'; imgs[1].src='/books/en/gea2'+bk+'_0.jpg';}
   const q=($('q')?$('q').value:'').trim().toLowerCase().replace(',','.');
-  const tracks=allTracks(); queue=tracks; qi=queue.findIndex(t=>t.p===au.dataset.p);
-  const saved=await cachedSet(); const cur=au.dataset.p||'';
-  const groups={}; tracks.forEach((t,i)=>{if(q&&!(t.n.toLowerCase().includes(q)||t.t.toLowerCase().includes(q)))return;(groups[t.u]=groups[t.u]||[]).push([t,i])});
+  const tracks=allTracks(); queue=tracks; qi=queue.findIndex(x=>x.k===au.dataset.k);
+  const saved=await cachedSet(); const cur=au.dataset.k||'';
+  const groups={}; tracks.forEach((x,i)=>{if(q&&!(x.n.toLowerCase().includes(q)||x.t.toLowerCase().includes(q)))return;(groups[x.u]=groups[x.u]||[]).push([x,i])});
   const keys=Object.keys(groups).sort((a,b)=>a-b); view.innerHTML='';
-  if(!keys.length){view.innerHTML='<div class="empty">Heç nə tapılmadı</div>';return}
+  if(!keys.length){view.innerHTML=`<div class="empty">${t('none')}</div>`;return}
   keys.forEach(u=>{
-    const items=groups[u]; const isOpen=q?true:open.has(lv+bk+u);
-    const el=document.createElement('section'); el.className='unit'+(isOpen?' open':'');
-    const nSaved=items.filter(([t])=>saved.has(absPath(t.p))).length;
-    el.innerHTML=`<button class="uh"><span class="un">${u}</span><span class="ut"><b>${UNITS[lv][u-1]||'Unit '+u}</b><small>${items.length} trek${nSaved===items.length?'&nbsp;&nbsp;oflayn hazırdır':''}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    const items=groups[u]; const o=q?true:open.has(lv+bk+u);
+    const el=document.createElement('section'); el.className='unit'+(o?' open':'');
+    const nSaved=items.filter(([x])=>saved.has(x.k)).length; const all=nSaved===items.length;
+    el.innerHTML=`<button class="uh"><span class="un">${u}</span><span class="ut"><b>${UNITS[lv][u-1]||'Unit '+u}</b><small>${items.length} ${t('trek')}${all?'&nbsp;&nbsp;'+t('offline_ok'):''}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
     const box=el.querySelector('.tracks');
-    items.forEach(([t,i])=>{const b=document.createElement('button');b.className='tr'+(cur===t.p?' playing':'');b.dataset.p=t.p;b.innerHTML=`<span class="tn">${t.n}</span><span class="tt">${esc(t.t)}</span>`;b.onclick=()=>playAt(i);box.appendChild(b)});
-    if('caches' in window){const o=document.createElement('div');o.className='off';const all=nSaved===items.length;o.innerHTML=all?`<span>İnternetsiz dinləmək olar</span><button>Sil</button>`:`<span>İnternetsiz dinləmək üçün yadda saxla</span><button>Yüklə</button>`;
-      const btn=o.querySelector('button');btn.onclick=async()=>{const c=await caches.open('ga-audio-v1');if(all){for(const [t] of items)await c.delete(absPath(t.p))}else{btn.textContent='Yüklənir…';let k=0;for(const [t] of items){try{const r=await fetch(t.p);if(r.ok)await c.put(absPath(t.p),r)}catch(e){}btn.textContent=(++k)+' / '+items.length}}renderAudio()};box.appendChild(o)}
+    items.forEach(([x,i])=>{const b=document.createElement('button');b.className='tr'+(cur===x.k?' playing':'');b.dataset.k=x.k;b.innerHTML=`<span class="tn">${x.n}</span><span class="tt">${esc(x.t)}</span>`;b.onclick=()=>playAt(i);box.appendChild(b)});
+    if('caches' in window){const of=document.createElement('div');of.className='off';of.innerHTML=all?`<span>${t('off_can')}</span><button>${t('del')}</button>`:`<span>${t('off_save')}</span><button>${t('dl')}</button>`;
+      const btn=of.querySelector('button');btn.onclick=async()=>{const c=await caches.open('gc-audio-v1');if(all){for(const [x] of items)await c.delete(binUrl(x.k))}else{btn.textContent=t('loading');let n=0;for(const [x] of items){try{if(!await c.match(binUrl(x.k))){const r=await fetch(binUrl(x.k));if(r.ok)await c.put(binUrl(x.k),r)}}catch(e){}btn.textContent=(++n)+' / '+items.length}}renderAudio()};box.appendChild(of)}
     el.querySelector('.uh').onclick=()=>{const k=lv+bk+u;open.has(k)?open.delete(k):open.add(k);store.set('open',[...open]);el.classList.toggle('open')};
     view.appendChild(el);
   });
 }
-function playAt(i,start){
-  qi=i; const t=queue[i]; if(!t)return;
-  au.src=t.p; au.dataset.p=t.p; au.playbackRate=speeds[sp];
-  $('nNum').textContent=t.n; $('nTitle').textContent=t.t; showPlayer();
+let curURL=null;
+async function loadTrack(x){
+  const k=await getKey('audio'); const buf=await fetchBin(binUrl(x.k)); const plainBuf=await dec(k,buf);
+  if(curURL) URL.revokeObjectURL(curURL); curURL=URL.createObjectURL(new Blob([plainBuf],{type:'audio/mpeg'}));
+  au.src=curURL; au.dataset.k=x.k; au.playbackRate=speeds[sp];
+}
+async function playAt(i,start){
+  qi=i; const x=queue[i]; if(!x)return;
+  $('nNum').textContent=x.n; $('nTitle').textContent=x.t; showPlayer();
+  document.querySelectorAll('.tr').forEach(b=>b.classList.toggle('playing',b.dataset.k===x.k));
+  try{ await loadTrack(x) }catch(e){ $('nTitle').textContent=t('none'); return }
+  if(start) au.currentTime=start;
   au.play().catch(()=>{});
-  store.set('last',{lv,bk,p:t.p,n:t.n,t:t.t});
-  document.querySelectorAll('.tr').forEach(b=>b.classList.toggle('playing',b.dataset.p===t.p));
-  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:t.n+'  '+t.t,artist:'General English '+lv.toUpperCase(),album:bk==='sb'?'Student’s Book':'Workbook',artwork:[{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}
+  store.set('last',{lv,bk,k:x.k,n:x.n,t:x.t});
+  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:x.n+'  '+x.t,artist:'General English '+lv.toUpperCase(),album:bk==='sb'?'Student’s Book':'Workbook',artwork:[{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}
 }
 function showPlayer(){ $('player').hidden=false; document.body.classList.add('hasplayer') }
 function setIco(){ $('playIco').innerHTML=au.paused?'<path d="M8 5v14l11-7z"/>':'<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>' }
@@ -283,7 +382,7 @@ au.addEventListener('timeupdate',()=>{ if(!au.duration)return; $('cur').textCont
 au.addEventListener('ended',()=>{ if(au.loop)return; if(qi>=0&&qi<queue.length-1)playAt(qi+1) });
 $('seek').addEventListener('input',()=>{seeking=true;if(au.duration)$('cur').textContent=fmt($('seek').value/1000*au.duration)});
 $('seek').addEventListener('change',()=>{if(au.duration)au.currentTime=$('seek').value/1000*au.duration;seeking=false});
-$('play').onclick=()=>{ if(!au.src){ if(queue.length)playAt(0); return } au.paused?au.play():au.pause() };
+$('play').onclick=async()=>{ if(!au.src){ if(pendingLast){const x=pendingLast;pendingLast=null;queue=allTracks();qi=queue.findIndex(y=>y.k===x.k);await playAt(qi>=0?qi:0,store.get('pos',0));return} if(queue.length)playAt(0); return } au.paused?au.play():au.pause() };
 $('prev').onclick=()=>{ if(au.currentTime>3){au.currentTime=0;return} if(qi>0)playAt(qi-1) };
 $('next').onclick=()=>{ if(qi>=0&&qi<queue.length-1)playAt(qi+1) };
 $('back').onclick=()=>{au.currentTime=Math.max(0,au.currentTime-5)};
@@ -294,95 +393,99 @@ $('loop').onclick=()=>{au.loop=!au.loop;$('loop').classList.toggle('on',au.loop)
 if('mediaSession' in navigator){const ms=navigator.mediaSession;ms.setActionHandler('play',()=>au.play());ms.setActionHandler('pause',()=>au.pause());ms.setActionHandler('previoustrack',()=>$('prev').onclick());ms.setActionHandler('nexttrack',()=>$('next').onclick());try{ms.setActionHandler('seekbackward',()=>$('back').onclick());ms.setActionHandler('seekforward',()=>$('fwd').onclick())}catch(e){}}
 
 /* ---------------- math ---------------- */
-function viewMath(){
-  theme('mth'); setTitle('Riyaziyyat <span>açarları</span>','home');
+async function needMath(){ if(MATH&&MATH._l===LANG) return true; view.innerHTML=`<div class="empty">${t('loading')}</div>`; const d=await loadSec('math','d/math.'+LANG+'.bin'); if(!d){location.hash='';return false} MATH=d; MATH._l=LANG; return true }
+async function viewMath(){
+  if(!await gate('math')) return;
+  theme('mth'); setTitle(t('math_h'),'home'); staticText();
   hExtra.innerHTML=`<div class="grades" id="grades">${[1,2,3,4,5,6,7,8,9].map(g=>`<button data-g="${g}">${g}</button>`).join('')}</div>
-  <div class="search"><input id="mq" type="search" placeholder="Axtar: kəsr, kvadrat, faiz…" autocomplete="off"></div>`;
+  <div class="search"><input id="mq" type="search" placeholder="${t('search_m')}" autocomplete="off"></div>`;
   hExtra.querySelectorAll('#grades button').forEach(b=>{b.classList.toggle('on',+b.dataset.g===grade);b.onclick=()=>{grade=+b.dataset.g;store.set('grade',grade);viewMath()}});
   const mi=$('mq'); mi.value=mq; mi.addEventListener('input',()=>{mq=mi.value;renderMath()});
   const on=hExtra.querySelector('#grades .on'); if(on)on.scrollIntoView({inline:'center',block:'nearest'});
-  renderMath();
+  if(!await needMath()) return; renderMath();
 }
 function renderMath(){
-  if(!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
   const q=mq.trim().toLowerCase();
   const items=MATH.items.map((it,i)=>[it,i]).filter(([it])=>q?(plain(it.n+' '+it.b+' '+it.o+' '+it.ct).includes(q)):it.g===grade);
   view.innerHTML='';
-  if(!items.length){view.innerHTML='<div class="empty">Heç nə tapılmadı</div>';return}
-  const c=document.createElement('div');c.className='count';c.textContent=q?`Bütün siniflərdə ${items.length} nəticə`:`${ordz(grade)} sinif: ${items.length} açar`;view.appendChild(c);
+  if(!items.length){view.innerHTML=`<div class="empty">${t('none')}</div>`;return}
+  const c=document.createElement('div');c.className='count';c.textContent=q?t('all_res',{n:items.length}):t('gkeys',{g:ordz(grade),n:items.length});view.appendChild(c);
   const groups={}; items.forEach(([it,i])=>{const k=it.g+'|'+it.ch;(groups[k]=groups[k]||[]).push([it,i])});
   Object.keys(groups).sort((a,b)=>{const[ga,ca]=a.split('|').map(Number),[gb,cb]=b.split('|').map(Number);return ga-gb||ca-cb}).forEach(k=>{
-    const [g,ch]=k.split('|').map(Number); const its=groups[k]; const isOpen=q?true:mopen.has(k);
-    const el=document.createElement('section'); el.className='unit'+(isOpen?' open':'');
-    el.innerHTML=`<button class="uh"><span class="un">${ch}</span><span class="ut"><b>${esc(its[0][0].ct||('Fəsil '+ch))}</b><small>${q?ordz(g)+' sinif, ':''}${its.length} açar</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    const [g,ch]=k.split('|').map(Number); const its=groups[k]; const o=q?true:mopen.has(k);
+    const el=document.createElement('section'); el.className='unit'+(o?' open':'');
+    el.innerHTML=`<button class="uh"><span class="un">${ch}</span><span class="ut"><b>${esc(its[0][0].ct||ch)}</b><small>${q?t('grade',{g:ordz(g)})+', ':''}${its.length} ${t('keys')}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
     const box=el.querySelector('.tracks');
-    its.forEach(([it,i])=>{const b=document.createElement('button');b.className='tr';b.innerHTML=`<span class="tt">${esc(it.n)}</span><span class="org">${esc(it.o)}</span>`;b.onclick=()=>{store.set('navd',1);location.hash='m/'+i};box.appendChild(b)});
+    its.forEach(([it,i])=>{const b=document.createElement('button');b.className='tr';b.innerHTML=`<span class="tt">${esc(it.n)}</span><span class="org">${esc(it.o)}</span>`;b.onclick=()=>{location.hash='m/'+i};box.appendChild(b)});
     el.querySelector('.uh').onclick=()=>{mopen.has(k)?mopen.delete(k):mopen.add(k);store.set('mopen',[...mopen]);el.classList.toggle('open')};
     view.appendChild(el);
   });
 }
-function viewMathItem(i){
-  theme('mth'); hExtra.innerHTML='';
-  if(!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+async function viewMathItem(i,back){
+  if(!await gate('math')) return;
+  theme('mth'); hExtra.innerHTML=''; staticText();
+  if(!await needMath()) return;
   const it=MATH.items[i]; if(!it){location.hash='math';return}
-  setTitle(ordz(it.g)+' sinif <span>açar</span>','math');
+  setTitle(t('key_h',{g:ordz(it.g)}),back||'math');
   let h=`<div class="det"><div class="meta"><span class="org">${esc(it.o)}</span><span>${esc(it.ct)}</span></div><h2>${esc(it.n)}</h2>
-  <div class="card"><h3>Qayda</h3>${it.b}${it.v?`<div class="vis">${it.v}</div>`:''}</div>`;
-  if(it.w) h+=`<div class="card"><h3>Niyə işləyir?</h3><p>${it.w}</p></div>`;
+  <div class="card"><h3>${t('rule')}</h3>${it.b}${it.v?`<div class="vis">${it.v}</div>`:''}</div>`;
+  if(it.w) h+=`<div class="card"><h3>${t('why')}</h3><p>${it.w}</p></div>`;
   if(it.e){const e=it.e;
-    h+=`<div class="card"><h3>Nümunə</h3><p class="q">${e.q}</p>`;
-    if(e.nm) h+=`<div class="two"><div class="way"><b>Adi yol</b>${e.nm.map(s=>`<p>${s}</p>`).join('')}</div><div class="way k"><b>Açarla</b>${e.s.map(s=>`<p>${s}</p>`).join('')}</div></div>`;
+    h+=`<div class="card"><h3>${t('ex')}</h3><p class="q">${e.q}</p>`;
+    if(e.nm) h+=`<div class="two"><div class="way"><b>${t('normal')}</b>${e.nm.map(s=>`<p>${s}</p>`).join('')}</div><div class="way k"><b>${t('withkey')}</b>${e.s.map(s=>`<p>${s}</p>`).join('')}</div></div>`;
     else h+=`<div class="steps">${e.s.map(s=>`<p>${s}</p>`).join('')}</div>`;
-    if(e.a) h+=`<div class="ans">Cavab: ${e.a}</div>`;
+    if(e.a) h+=`<div class="ans">${t('answer')}: ${e.a}</div>`;
     h+=`</div>`;}
-  const sib=MATH.items.map((x,j)=>[x,j]).filter(([x])=>x.g===it.g); const pos=sib.findIndex(([,j])=>j===i);
-  h+=`<div class="navrow">${pos>0?`<button onclick="location.hash='m/${sib[pos-1][1]}'">‹ Əvvəlki</button>`:'<span></span>'}${pos<sib.length-1?`<button onclick="location.hash='m/${sib[pos+1][1]}'">Növbəti ›</button>`:'<span></span>'}</div></div>`;
-  view.innerHTML=h; window.scrollTo(0,0);
+  if(!back){const sib=MATH.items.map((x,j)=>[x,j]).filter(([x])=>x.g===it.g); const pos=sib.findIndex(([,j])=>j===i);
+  h+=`<div class="navrow">${pos>0?`<button onclick="location.hash='m/${sib[pos-1][1]}'">${t('prev')}</button>`:'<span></span>'}${pos<sib.length-1?`<button onclick="location.hash='m/${sib[pos+1][1]}'">${t('next')}</button>`:'<span></span>'}</div>`}
+  view.innerHTML=h+'</div>'; window.scrollTo(0,0);
 }
 
 /* ---------------- olympiads ---------------- */
-let OL=null; const olShown={}; let olGrade={};
-function viewOlymp(){
-  theme('olp'); setTitle('Olimpiada <span>açarları</span>','home'); hExtra.innerHTML='';
-  if(!OL){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
-  view.innerHTML=`<p style="color:var(--muted);font-size:14px;line-height:1.5;margin:4px 2px 0">Olimpiadanı seç. Hər birində həmin olimpiadada işə yarayan açarlar və kitablarımızdan onun üslubunda məsələlər var.</p><div class="ogrid">${OL.map((o,i)=>`<button class="oc" onclick="store.set('navd',1);location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} açar&nbsp;&nbsp;${o.p.length} məsələ</span></button>`).join('')}</div>`;
+const olShown={}, olGrade={};
+async function needOl(){ if(OL&&OL._l===LANG) return true; view.innerHTML=`<div class="empty">${t('loading')}</div>`; const d=await loadSec('olymp','d/olymp.'+LANG+'.bin'); if(!d){location.hash='';return false} OL=d; OL._l=LANG; return true }
+async function viewOlymp(){
+  if(!await gate('olymp')) return;
+  theme('olp'); setTitle(t('ol_h'),'home'); hExtra.innerHTML=''; staticText();
+  if(!await needOl()) return;
+  view.innerHTML=`<p style="color:var(--muted);font-size:14px;line-height:1.5;margin:4px 2px 0">${t('ol_p')}</p><div class="ogrid">${OL.map(o=>`<button class="oc" onclick="location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} ${t('keys')}&nbsp;&nbsp;${o.p.length} ${t('problems')}</span></button>`).join('')}</div>`;
 }
-function viewOlympOne(id){
-  theme('olp'); hExtra.innerHTML='';
-  if(!OL||!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+async function viewOlympOne(id){
+  if(!await gate('olymp')) return;
+  theme('olp'); hExtra.innerHTML=''; staticText();
+  if(!await needOl()) return;
   const o=OL.find(x=>x.id===id); if(!o){location.hash='olymp';return}
   setTitle(esc(o.name),'olymp');
+  const canKeys=isOpen('math'); if(canKeys) await needMath();
   const grades=[...new Set(o.p.map(p=>p.g))].sort((a,b)=>a-b);
   if(!(id in olGrade)) olGrade[id]=grades[0];
   const g=olGrade[id];
-  const keys=o.keys.filter(i=>MATH.items[i]);
+  const kname=i=>MATH&&MATH.items[i]?MATH.items[i].n:'';
+  const keys=canKeys?o.keys.filter(i=>MATH.items[i]):[];
   const kshow=olShown[id+'k']?keys:keys.slice(0,14);
-  let h=`<div class="card" style="margin-top:6px"><h3>${esc(o.lv)}</h3><p>${esc(o.d)}</p></div>
-  <div class="osec">Bu olimpiadanın açarları</div><div class="kchips">${kshow.map(i=>`<button class="kchip" onclick="store.set('navd',1);location.hash='m/${i}'">${esc(MATH.items[i].n)}<i>${ordz(MATH.items[i].g)} sinif</i></button>`).join('')}</div>
-  ${keys.length>kshow.length?`<button class="more" id="kmore">Bütün ${keys.length} açarı göstər</button>`:''}
-  <div class="osec">Məsələlər</div>
+  view.innerHTML=`<div class="card" style="margin-top:6px"><h3>${esc(o.lv)}</h3><p>${esc(o.d)}</p></div>
+  ${keys.length?`<div class="osec">${t('ol_keys')}</div><div class="kchips">${kshow.map(i=>`<button class="kchip" onclick="location.hash='mk/${i}/${id}'">${esc(kname(i))}<i>${t('grade',{g:ordz(MATH.items[i].g)})}</i></button>`).join('')}</div>${keys.length>kshow.length?`<button class="more" id="kmore">${t('show_all',{n:keys.length})}</button>`:''}`:''}
+  <div class="osec">${t('probs')}</div>
   ${grades.length>1?`<div class="grades" style="margin-top:0">${grades.map(x=>`<button data-g="${x}" class="${x===g?'on':''}">${x}</button>`).join('')}</div>`:''}
   <div id="plist"></div>`;
-  view.innerHTML=h;
   if($('kmore'))$('kmore').onclick=()=>{olShown[id+'k']=1;viewOlympOne(id)};
   view.querySelectorAll('.grades button').forEach(b=>b.onclick=()=>{olGrade[id]=+b.dataset.g;olShown[id+'p']=0;viewOlympOne(id)});
-  const ps=o.p.filter(p=>p.g===g); const lim=olShown[id+'p']||20;
-  const box=$('plist');
-  ps.slice(0,lim).forEach((p,j)=>{
+  const ps=o.p.filter(p=>p.g===g); const lim=olShown[id+'p']||20; const box=$('plist');
+  ps.slice(0,lim).forEach(p=>{
     const d=document.createElement('div');d.className='pq';
-    const ok=p.o?p.o.indexOf(p.a):-1;
-    d.innerHTML=`<div class="src">${ordz(p.g)} sinif${p.f?', final, sübut':''}</div><div class="tx">${p.q}</div>
-    ${p.o?`<div class="opts">${p.o.map((x,k)=>`<span data-k="${k}">${'ABCD'[k]}) ${x}</span>`).join('')}</div>`:''}
-    <div class="pbtn">${p.h?'<button data-a="h">İpucu</button>':''}<button data-a="a">Cavab</button>${(p.k||[]).filter(i=>MATH.items[i]).map(i=>`<button class="k" data-m="${i}">Açar: ${esc(MATH.items[i].n)}</button>`).join('')}</div><div class="rv"></div>`;
+    const kb=canKeys?(p.k||[]).filter(i=>MATH.items[i]).map(i=>`<button class="k" data-m="${i}">${t('key_b')}: ${esc(kname(i))}</button>`).join(''):'';
+    d.innerHTML=`<div class="src">${t('grade',{g:ordz(p.g)})}${p.f?', '+t('final'):''}</div><div class="tx">${p.q}</div>
+    ${p.o?`<div class="opts">${p.o.map((x,k)=>`<span data-v="${esc(String(x))}">${'ABCDE'[k]}) ${x}</span>`).join('')}</div>`:''}
+    <div class="pbtn">${p.h?`<button data-a="h">${t('hint')}</button>`:''}<button data-a="a">${t('answer')}</button>${kb}</div><div class="rv"></div>`;
     d.querySelectorAll('.pbtn button').forEach(b=>b.onclick=()=>{
-      if(b.dataset.m){store.set('navd',1);location.hash='m/'+b.dataset.m;return}
+      if(b.dataset.m){location.hash='mk/'+b.dataset.m+'/'+id;return}
       const rv=d.querySelector('.rv');
-      if(b.dataset.a==='h') rv.innerHTML=`<div class="reveal"><b>İpucu.</b> ${p.h}</div>`;
-      else { rv.innerHTML=`<div class="reveal">${p.th?`<p>${p.th}</p>`:''}${p.s?p.s.map(x=>`<p>${x}</p>`).join(''):''}<b>Cavab:</b> ${p.a}</div>`; d.querySelectorAll('.opts span').forEach(sp=>{ if(sp.innerHTML.slice(3)===String(p.a)) sp.classList.add('ok') }); }
+      if(b.dataset.a==='h') rv.innerHTML=`<div class="reveal"><b>${t('hint')}.</b> ${p.h}</div>`;
+      else { rv.innerHTML=`<div class="reveal">${p.th?`<p>${p.th}</p>`:''}${p.s?p.s.map(x=>`<p>${x}</p>`).join(''):''}<b>${t('answer')}:</b> ${p.a}</div>`; d.querySelectorAll('.opts span').forEach(sp=>{ if(sp.dataset.v===String(p.a)) sp.classList.add('ok') }); }
     });
     box.appendChild(d);
   });
-  if(ps.length>lim){const m=document.createElement('button');m.className='more';m.textContent=`Daha çox (${ps.length-lim})`;m.onclick=()=>{olShown[id+'p']=lim+20;viewOlympOne(id)};box.appendChild(m)}
+  if(ps.length>lim){const m=document.createElement('button');m.className='more';m.textContent=t('more',{n:ps.length-lim});m.onclick=()=>{olShown[id+'p']=lim+20;viewOlympOne(id)};box.appendChild(m)}
 }
 
 /* ---------------- router ---------------- */
@@ -391,10 +494,11 @@ function route(){
   if(h==='audio') viewAudio();
   else if(h==='math') viewMath();
   else if(h.startsWith('m/')) viewMathItem(+h.slice(2));
+  else if(h.startsWith('mk/')){const [,i,o]=h.split('/');viewMathItem(+i,'o/'+o)}
   else if(h==='olymp') viewOlymp();
   else if(h.startsWith('o/')) viewOlympOne(h.slice(2));
   else viewHome();
-  if(au.dataset.p) showPlayer();
+  if(au.dataset.k||pendingLast) showPlayer();
 }
 window.addEventListener('hashchange',route);
 
@@ -406,19 +510,17 @@ const standalone=window.matchMedia('(display-mode: standalone)').matches||naviga
 if(isIOS&&!standalone)$('installBtn').hidden=false;
 $('installBtn').onclick=async()=>{ if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;$('installBtn').hidden=true} else if(isIOS){$('iosSheet').hidden=false} };
 $('iosOk').onclick=()=>{$('iosSheet').hidden=true};
-if(isIOS&&!standalone&&!store.get('iosSeen',false)){setTimeout(()=>{$('iosSheet').hidden=false;store.set('iosSeen',true)},1500)}
+if(isIOS&&!standalone&&!store.get('iosSeen',false)){setTimeout(()=>{staticText();$('iosSheet').hidden=false;store.set('iosSeen',true)},1500)}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 
-setSpeed(); route();
-const getJSON=u=>fetch(u,{cache:'no-cache'}).then(r=>r.json()).catch(()=>caches.match(u).then(r=>r&&r.json()));
-getJSON(AUDIO_BASE+'tracks.json').then(d=>{TR=d;
+let pendingLast=null;
+(async()=>{
+  setSpeed(); staticText(); loadKeys();
   const last=store.get('last',null);
-  if(last&&last.p&&!au.dataset.p){au.src=last.p;au.dataset.p=last.p;$('nNum').textContent=last.n||'';$('nTitle').textContent=last.t||'';const pos=store.get('pos',0);au.addEventListener('loadedmetadata',()=>{au.currentTime=pos},{once:true});showPlayer();
-    lv=last.lv||lv;bk=last.bk||bk; queue=allTracks(); qi=queue.findIndex(t=>t.p===last.p);}
-  if(location.hash==='#audio')renderAudio();
-});
-getJSON('math.json').then(d=>{MATH=d; const h=location.hash; if(h==='#math')renderMath(); else if(h.startsWith('#m/'))viewMathItem(+h.slice(3)); else if(h.startsWith('#o/')&&OL)route();});
-getJSON('olymp.json').then(d=>{OL=d; const h=location.hash; if(h==='#olymp'||h.startsWith('#o/'))route();});
+  if(last&&last.k&&isOpen('audio')){ pendingLast=last; lv=last.lv||lv; bk=last.bk||bk; $('nNum').textContent=last.n||''; $('nTitle').textContent=last.t||''; showPlayer();
+    loadSec('audio','d/audio.bin').then(d=>{ if(d){TR=d; queue=allTracks(); qi=queue.findIndex(y=>y.k===last.k);} }); }
+  route();
+})();
 </script>
 </body>
 </html>
