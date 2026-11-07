@@ -1,5 +1,5 @@
-const SHELL='gc-shell-v1', AUDIO='ga-audio-v1';
-const FILES=['./','index.html','math.json','manifest.webmanifest','icon-192.png','icon-512.png','icon-180.png','../audio/tracks.json'];
+const SHELL='gc-shell-v2', AUDIO='ga-audio-v1';
+const FILES=['./','index.html','math.json','olymp.json','manifest.webmanifest','icon-192.png','icon-512.png','icon-180.png','../audio/tracks.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==SHELL&&k!==AUDIO).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 async function rangeFrom(cached,req){

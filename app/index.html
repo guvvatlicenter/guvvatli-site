@@ -26,9 +26,10 @@
 body.a1{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; }
 body.a2{ --acc:#0F8B84; --dark:#08433F; --pale:#E2F4F2; }
 body.mth{ --acc:#3B4A9C; --dark:#232D66; --pale:#E8EBF8; }
+body.olp{ --acc:#B5531B; --dark:#6E2F0B; --pale:#FBEBDD; }
 @media (prefers-color-scheme:dark){
   :root{ --bg:#111417; --card:#1A1E22; --ink:#ECEEF0; --muted:#9AA1A7; --line:#2A2F34; --pale:#1F2A25; --key-soft:#123236; --accent-soft:#3A1F1A; }
-  body.a1{ --pale:#2A1B18; } body.a2{ --pale:#11302E; } body.mth{ --pale:#1C2140; }
+  body.a1{ --pale:#2A1B18; } body.a2{ --pale:#11302E; } body.mth{ --pale:#1C2140; } body.olp{ --pale:#33200F; }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overflow-x:hidden;margin:0;background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -115,6 +116,28 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 .navrow{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
 .navrow button{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;font-weight:600;font-size:14px}
 .motto{color:var(--muted);font-size:12px;text-align:center;margin:24px 0 6px}
+/* olympiad */
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.oc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;text-align:left;min-height:96px;display:flex;flex-direction:column;gap:4px}
+.oc b{font-family:Unbounded,sans-serif;font-size:15px;line-height:1.25}
+.oc small{color:var(--muted);font-size:12.5px}
+.oc .n{margin-top:auto;font-size:12px;font-weight:700;color:var(--acc)}
+.osec{font-family:Unbounded,sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--acc);margin:18px 2px 8px}
+.kchips{display:flex;flex-wrap:wrap;gap:8px}
+.kchip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13.5px;font-weight:600;text-align:left}
+.kchip i{font-style:normal;color:var(--muted);font-weight:500;margin-left:6px;font-size:12px}
+.pq{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px}
+.pq .src{font-size:12px;color:var(--muted);margin-bottom:6px}
+.pq .tx{font-size:15px;line-height:1.6}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.opts span{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:14px}
+.opts span.ok{background:var(--pale);font-weight:700}
+.pbtn{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pbtn button{border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600}
+.pbtn button.k{border-color:var(--acc);color:var(--acc)}
+.reveal{margin-top:10px;background:var(--pale);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.55}
+.reveal p{margin:0 0 6px}
+.more{width:100%;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;font-weight:600}
 /* player */
 .player{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.08);padding:10px max(16px,env(safe-area-inset-left)) calc(10px + var(--safe-b)) max(16px,env(safe-area-inset-right))}
 .player[hidden]{display:none}
@@ -198,6 +221,7 @@ function viewHome(){
   <div class="tiles">
    <button class="tile" onclick="location.hash='audio'"><span class="covers"><img src="/books/en/gea1sb_0.jpg" alt=""><img src="/books/en/gea2sb_0.jpg" alt=""></span><span><b>İngilis dili audio</b><small>General English A1 və A2. Student’s Book və Workbook, 432 trek</small></span></button>
    <button class="tile" onclick="location.hash='math'"><span class="covers"><img src="/books/az/g5tb_0.jpg" alt=""><img src="/books/az/g8tb_0.jpg" alt=""></span><span><b>Riyaziyyat açarları</b><small>1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə</small></span></button>
+   <button class="tile" onclick="location.hash='olymp'"><span class="covers"><img src="/books/az/g6tb_0.jpg" alt=""><img src="/books/az/g9tb_0.jpg" alt=""></span><span><b>Olimpiada açarları</b><small>Lütfi Zadə, RFM, RFO, Kenquru, SASMO, TIMO, Copernicus, AMO, FISO. Hər olimpiada üçün açarlar və kitablarımızdan məsələlər</small></span></button>
   </div>
   <div class="motto">Guvvatli Center&nbsp;&nbsp;guvvatli.az</div>`;
 }
@@ -316,12 +340,59 @@ function viewMathItem(i){
   view.innerHTML=h; window.scrollTo(0,0);
 }
 
+/* ---------------- olympiads ---------------- */
+let OL=null; const olShown={}; let olGrade={};
+function viewOlymp(){
+  theme('olp'); setTitle('Olimpiada <span>açarları</span>','home'); hExtra.innerHTML='';
+  if(!OL){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  view.innerHTML=`<p style="color:var(--muted);font-size:14px;line-height:1.5;margin:4px 2px 0">Olimpiadanı seç. Hər birində həmin olimpiadada işə yarayan açarlar və kitablarımızdan onun üslubunda məsələlər var.</p><div class="ogrid">${OL.map((o,i)=>`<button class="oc" onclick="store.set('navd',1);location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} açar&nbsp;&nbsp;${o.p.length} məsələ</span></button>`).join('')}</div>`;
+}
+function viewOlympOne(id){
+  theme('olp'); hExtra.innerHTML='';
+  if(!OL||!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  const o=OL.find(x=>x.id===id); if(!o){location.hash='olymp';return}
+  setTitle(esc(o.name),'olymp');
+  const grades=[...new Set(o.p.map(p=>p.g))].sort((a,b)=>a-b);
+  if(!(id in olGrade)) olGrade[id]=grades[0];
+  const g=olGrade[id];
+  const keys=o.keys.filter(i=>MATH.items[i]);
+  const kshow=olShown[id+'k']?keys:keys.slice(0,14);
+  let h=`<div class="card" style="margin-top:6px"><h3>${esc(o.lv)}</h3><p>${esc(o.d)}</p></div>
+  <div class="osec">Bu olimpiadanın açarları</div><div class="kchips">${kshow.map(i=>`<button class="kchip" onclick="store.set('navd',1);location.hash='m/${i}'">${esc(MATH.items[i].n)}<i>${ordz(MATH.items[i].g)} sinif</i></button>`).join('')}</div>
+  ${keys.length>kshow.length?`<button class="more" id="kmore">Bütün ${keys.length} açarı göstər</button>`:''}
+  <div class="osec">Məsələlər</div>
+  ${grades.length>1?`<div class="grades" style="margin-top:0">${grades.map(x=>`<button data-g="${x}" class="${x===g?'on':''}">${x}</button>`).join('')}</div>`:''}
+  <div id="plist"></div>`;
+  view.innerHTML=h;
+  if($('kmore'))$('kmore').onclick=()=>{olShown[id+'k']=1;viewOlympOne(id)};
+  view.querySelectorAll('.grades button').forEach(b=>b.onclick=()=>{olGrade[id]=+b.dataset.g;olShown[id+'p']=0;viewOlympOne(id)});
+  const ps=o.p.filter(p=>p.g===g); const lim=olShown[id+'p']||20;
+  const box=$('plist');
+  ps.slice(0,lim).forEach((p,j)=>{
+    const d=document.createElement('div');d.className='pq';
+    const ok=p.o?p.o.indexOf(p.a):-1;
+    d.innerHTML=`<div class="src">${ordz(p.g)} sinif${p.f?', final, sübut':''}</div><div class="tx">${p.q}</div>
+    ${p.o?`<div class="opts">${p.o.map((x,k)=>`<span data-k="${k}">${'ABCD'[k]}) ${x}</span>`).join('')}</div>`:''}
+    <div class="pbtn">${p.h?'<button data-a="h">İpucu</button>':''}<button data-a="a">Cavab</button>${(p.k||[]).filter(i=>MATH.items[i]).map(i=>`<button class="k" data-m="${i}">Açar: ${esc(MATH.items[i].n)}</button>`).join('')}</div><div class="rv"></div>`;
+    d.querySelectorAll('.pbtn button').forEach(b=>b.onclick=()=>{
+      if(b.dataset.m){store.set('navd',1);location.hash='m/'+b.dataset.m;return}
+      const rv=d.querySelector('.rv');
+      if(b.dataset.a==='h') rv.innerHTML=`<div class="reveal"><b>İpucu.</b> ${p.h}</div>`;
+      else { rv.innerHTML=`<div class="reveal">${p.th?`<p>${p.th}</p>`:''}${p.s?p.s.map(x=>`<p>${x}</p>`).join(''):''}<b>Cavab:</b> ${p.a}</div>`; d.querySelectorAll('.opts span').forEach(sp=>{ if(sp.innerHTML.slice(3)===String(p.a)) sp.classList.add('ok') }); }
+    });
+    box.appendChild(d);
+  });
+  if(ps.length>lim){const m=document.createElement('button');m.className='more';m.textContent=`Daha çox (${ps.length-lim})`;m.onclick=()=>{olShown[id+'p']=lim+20;viewOlympOne(id)};box.appendChild(m)}
+}
+
 /* ---------------- router ---------------- */
 function route(){
   const h=location.hash.replace('#','');
   if(h==='audio') viewAudio();
   else if(h==='math') viewMath();
   else if(h.startsWith('m/')) viewMathItem(+h.slice(2));
+  else if(h==='olymp') viewOlymp();
+  else if(h.startsWith('o/')) viewOlympOne(h.slice(2));
   else viewHome();
   if(au.dataset.p) showPlayer();
 }
@@ -346,7 +417,8 @@ getJSON(AUDIO_BASE+'tracks.json').then(d=>{TR=d;
     lv=last.lv||lv;bk=last.bk||bk; queue=allTracks(); qi=queue.findIndex(t=>t.p===last.p);}
   if(location.hash==='#audio')renderAudio();
 });
-getJSON('math.json').then(d=>{MATH=d; const h=location.hash; if(h==='#math')renderMath(); else if(h.startsWith('#m/'))viewMathItem(+h.slice(3));});
+getJSON('math.json').then(d=>{MATH=d; const h=location.hash; if(h==='#math')renderMath(); else if(h.startsWith('#m/'))viewMathItem(+h.slice(3)); else if(h.startsWith('#o/')&&OL)route();});
+getJSON('olymp.json').then(d=>{OL=d; const h=location.hash; if(h==='#olymp'||h.startsWith('#o/'))route();});
 </script>
 </body>
 </html>
