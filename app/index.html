@@ -39,7 +39,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .wrap{max-width:720px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right))}
 header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12px + var(--safe-t));padding-bottom:10px}
 .brand{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
-.brand h1{font-family:Unbounded,sans-serif;font-weight:800;font-size:19px;margin:0;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.brand h1{font-family:Unbounded,sans-serif;font-weight:800;font-size:18px;margin:0;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.brand h1 .tt1{min-width:0;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.brand h1 .tt1.long{font-size:15px}
+.backb{flex-shrink:0}
+.lsel{flex-shrink:0}
+.hero .install{margin-top:14px;background:#fff;color:var(--dark)}
 .brand h1 span{color:var(--acc)}
 .backb{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1}
 .install{font-family:Unbounded,sans-serif;font-weight:700;font-size:12px;background:var(--acc);color:#fff;border-radius:999px;padding:8px 14px}
@@ -183,7 +188,7 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 </head>
 <body>
 <header><div class="wrap">
-  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><div style="display:flex;gap:8px;align-items:center"><button class="install" id="installBtn" hidden></button><div class="lsel"><button class="lbtn" id="lbtn" aria-label="Language"></button><div class="lmenu" id="lmenu" hidden></div></div></div></div>
+  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><div style="display:flex;gap:8px;align-items:center"><div class="lsel"><button class="lbtn" id="lbtn" aria-label="Language"></button><div class="lmenu" id="lmenu" hidden></div></div></div></div>
   <div id="hExtra"></div>
 </div></header>
 <main class="wrap" id="view"></main>
@@ -248,9 +253,9 @@ ru:{home_h:"Говори с первого урока, каждый день ч�
  locked:"По паролю",open:"Открыто",pw_h:"Введите пароль",pw_p:"Этот раздел открывается по паролю. Пароль можно получить у учителя или в Guvvatli Center.",pw_ok:"Открыть",pw_cancel:"Отмена",pw_err:"Неверный пароль",pw_wait:"Проверяем…",logout:"Закрыть разделы на этом устройстве",
  install:"Установить",ios_h:"Установите на телефон",ios1:"1. Нажмите кнопку <b>Поделиться</b> внизу",ios2:"2. Выберите <b>На экран «Домой»</b>.",ios3:"3. Нажмите <b>Добавить</b>. Значок Guvvatli Center появится на экране.",ios_ok:"Понятно",
  audio_h:"Аудио по <span>английскому</span>",search_tr:"Номер трека, например 2.04",trek:"треков",offline_ok:"доступно офлайн",off_can:"Можно слушать без интернета",off_save:"Сохранить для прослушивания офлайн",del:"Удалить",dl:"Скачать",loading:"Загрузка…",none:"Ничего не найдено",choose:"Выберите трек",loop:"Повтор",
- math_h:"Ключи по <span>математике</span>",search_m:"Поиск: дробь, квадрат, процент…",keys:"ключей",all_res:"{n} результатов во всех классах",grade:"{g} класс",gkeys:"{g} класс: {n} ключей",key_h:"{g} класс <span>ключ</span>",
+ math_h:"Ключи по <span>математике</span>",search_m:"Поиск: дробь, квадрат, процент…",keys:"ключей",all_res:"Найдено во всех классах: {n}",grade:"{g} класс",gkeys:"{g} класс: {n} ключей",key_h:"{g} класс",
  rule:"Правило",why:"Почему это работает?",ex:"Пример",normal:"Обычный путь",withkey:"С ключом",answer:"Ответ",prev:"‹ Назад",next:"Далее ›",
- ol_h:"Олимпиадные <span>ключи</span>",ol_p:"Выберите олимпиаду. В каждой ключи, которые в ней помогают, и задачи в её стиле из наших книг.",problems:"задач",ol_keys:"Ключи этой олимпиады",show_all:"Показать все {n} ключей",probs:"Задачи",hint:"Подсказка",key_b:"Ключ",more:"Ещё ({n})",final:"финал, доказательство",
+ ol_h:"Олимпиадные <span>ключи</span>",ol_p:"Выберите олимпиаду. В каждой ключи, которые в ней помогают, и задачи в её стиле из наших книг.",problems:"задач",ol_keys:"Ключи этой олимпиады",show_all:"Показать все ключи ({n})",probs:"Задачи",hint:"Подсказка",key_b:"Ключ",more:"Ещё ({n})",final:"финал, доказательство",
  ord:g=>g}};
 const UNITS={a1:["Hello","Things","Family and friends","My day","Work and study","Food and drink","Home and city","Free time","Yesterday","Travel"],
              a2:["Life now","Stories from the past","Shopping and money","Plans and arrangements","Health and the body","Travel experiences","Work and skills","Where we live","Always online","Special days"]};
@@ -259,6 +264,9 @@ const $=id=>document.getElementById(id), au=$('au'), view=$('view'), hExtra=$('h
 let LANG=store.get('lang',(navigator.language||'az').slice(0,2)); if(!I18N[LANG])LANG='az';
 const t=(k,v)=>{let s=I18N[LANG][k];if(s===undefined)s=I18N.az[k]||k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s};
 const ordz=g=>I18N[LANG].ord(g);
+const RU={trek:['трек','трека','треков'],keys:['ключ','ключа','ключей'],problems:['задача','задачи','задач']};
+const EN={trek:['track','tracks'],keys:['key','keys'],problems:['problem','problems']};
+function pl(n,k){ if(LANG==='ru'&&RU[k]){const a=n%10,b=n%100;return RU[k][(a===1&&b!==11)?0:(a>=2&&a<=4&&(b<10||b>=20))?1:2]} if(LANG==='en'&&EN[k])return EN[k][n===1?0:1]; return t(k) }
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const plain=s=>String(s||'').replace(/<[^>]+>/g,' ').toLowerCase();
 const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
@@ -314,15 +322,15 @@ let TR=null, MATH=null, OL=null;
 let lv=store.get('lv','a1'), bk=store.get('bk','sb'), grade=store.get('grade',5), mq='';
 let queue=[], qi=-1, open=new Set(store.get('open',[])), mopen=new Set(store.get('mopen',[]));
 const speeds=[1,0.75,0.9,1.25]; let sp=store.get('sp',0);
-function setTitle(html,back){ $('hTitle').innerHTML=(back?'<button class="backb" id="backBtn" aria-label="‹">‹</button>':'')+html; if(back)$('backBtn').onclick=()=>{ location.hash=back } }
+function setTitle(html,back){ $('hTitle').innerHTML=(back?'<button class="backb" id="backBtn" aria-label="‹">‹</button>':'')+'<span class="tt1'+(html.replace(/<[^>]+>/g,'').length>16?' long':'')+'">'+html+'</span>'; if(back)$('backBtn').onclick=()=>{ location.hash=back } }
 function theme(c){ document.body.className=c+(au.dataset.k?' hasplayer':''); document.documentElement.lang=LANG }
-function staticText(){ $('installBtn').textContent=t('install'); $('loop').textContent=t('loop'); $('iosH').textContent=t('ios_h'); $('ios1').innerHTML=t('ios1'); $('ios2').innerHTML=t('ios2'); $('ios3').innerHTML=t('ios3'); $('iosOk').textContent=t('ios_ok'); if(!au.dataset.k)$('nTitle').textContent=t('choose') }
+function staticText(){ if($('installBtn'))$('installBtn').textContent=t('install'); $('loop').textContent=t('loop'); $('iosH').textContent=t('ios_h'); $('ios1').innerHTML=t('ios1'); $('ios2').innerHTML=t('ios2'); $('ios3').innerHTML=t('ios3'); $('iosOk').textContent=t('ios_ok'); if(!au.dataset.k)$('nTitle').textContent=t('choose') }
 
 function viewHome(){
   theme(''); setTitle('Guvvatli <span>Center</span>'); staticText();
   hExtra.innerHTML='';
   const lk=s=>`<span class="lock ${isOpen(s)?'ok':''}">${isOpen(s)?t('open'):t('locked')}</span>`;
-  view.innerHTML=`<div class="hero"><b>${t('home_h')}</b><p>${t('home_p')}</p></div>
+  view.innerHTML=`<div class="hero"><b>${t('home_h')}</b><p>${t('home_p')}</p><button class="install" id="installBtn" ${canInstall()?'':'hidden'}>${t('install')}</button></div>
   <div class="tiles">
    <button class="tile" data-go="audio"><span class="covers"><img src="/books/en/gea1sb_0.jpg" alt=""><img src="/books/en/gea2sb_0.jpg" alt=""></span><span><b>${t('t_audio')}</b><small>${t('d_audio')}</small></span>${lk('audio')}</button>
    <button class="tile" data-go="math"><span class="covers"><img src="/books/az/g5tb_0.jpg" alt=""><img src="/books/az/g8tb_0.jpg" alt=""></span><span><b>${t('t_math')}</b><small>${t('d_math')}</small></span>${lk('math')}</button>
@@ -367,7 +375,7 @@ async function renderAudio(){
     const items=groups[u]; const o=q?true:open.has(lv+bk+u);
     const el=document.createElement('section'); el.className='unit'+(o?' open':'');
     const nSaved=items.filter(([x])=>saved.has(x.k)).length; const all=nSaved===items.length;
-    el.innerHTML=`<button class="uh"><span class="un">${u}</span><span class="ut"><b>${UNITS[lv][u-1]||'Unit '+u}</b><small>${items.length} ${t('trek')}${all?'&nbsp;&nbsp;'+t('offline_ok'):''}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    el.innerHTML=`<button class="uh"><span class="un">${u}</span><span class="ut"><b>${UNITS[lv][u-1]||'Unit '+u}</b><small>${items.length} ${pl(items.length,'trek')}${all?'&nbsp;&nbsp;'+t('offline_ok'):''}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
     const box=el.querySelector('.tracks');
     items.forEach(([x,i])=>{const b=document.createElement('button');b.className='tr'+(cur===x.k?' playing':'');b.dataset.k=x.k;b.innerHTML=`<span class="tn">${x.n}</span><span class="tt">${esc(x.t)}</span>`;b.onclick=()=>playAt(i);box.appendChild(b)});
     if('caches' in window){const of=document.createElement('div');of.className='off';of.innerHTML=all?`<span>${t('off_can')}</span><button>${t('del')}</button>`:`<span>${t('off_save')}</span><button>${t('dl')}</button>`;
@@ -427,12 +435,12 @@ function renderMath(){
   const items=MATH.items.map((it,i)=>[it,i]).filter(([it])=>q?(plain(it.n+' '+it.b+' '+it.o+' '+it.ct).includes(q)):it.g===grade);
   view.innerHTML='';
   if(!items.length){view.innerHTML=`<div class="empty">${t('none')}</div>`;return}
-  const c=document.createElement('div');c.className='count';c.textContent=q?t('all_res',{n:items.length}):t('gkeys',{g:ordz(grade),n:items.length});view.appendChild(c);
+  const c=document.createElement('div');c.className='count';c.textContent=q?t('all_res',{n:items.length}):t('grade',{g:ordz(grade)})+': '+items.length+' '+pl(items.length,'keys');view.appendChild(c);
   const groups={}; items.forEach(([it,i])=>{const k=it.g+'|'+it.ch;(groups[k]=groups[k]||[]).push([it,i])});
   Object.keys(groups).sort((a,b)=>{const[ga,ca]=a.split('|').map(Number),[gb,cb]=b.split('|').map(Number);return ga-gb||ca-cb}).forEach(k=>{
     const [g,ch]=k.split('|').map(Number); const its=groups[k]; const o=q?true:mopen.has(k);
     const el=document.createElement('section'); el.className='unit'+(o?' open':'');
-    el.innerHTML=`<button class="uh"><span class="un">${ch}</span><span class="ut"><b>${esc(its[0][0].ct||ch)}</b><small>${q?t('grade',{g:ordz(g)})+', ':''}${its.length} ${t('keys')}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    el.innerHTML=`<button class="uh"><span class="un">${ch}</span><span class="ut"><b>${esc(its[0][0].ct||ch)}</b><small>${q?t('grade',{g:ordz(g)})+', ':''}${its.length} ${pl(its.length,'keys')}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
     const box=el.querySelector('.tracks');
     its.forEach(([it,i])=>{const b=document.createElement('button');b.className='tr';b.innerHTML=`<span class="tt">${esc(it.n)}</span><span class="org">${esc(it.o)}</span>`;b.onclick=()=>{location.hash='m/'+i};box.appendChild(b)});
     el.querySelector('.uh').onclick=()=>{mopen.has(k)?mopen.delete(k):mopen.add(k);store.set('mopen',[...mopen]);el.classList.toggle('open')};
@@ -466,7 +474,7 @@ async function viewOlymp(){
   if(!await gate('olymp')) return;
   theme('olp'); setTitle(t('ol_h'),'home'); hExtra.innerHTML=''; staticText();
   if(!await needOl()) return;
-  view.innerHTML=`<p style="color:var(--muted);font-size:14px;line-height:1.5;margin:4px 2px 0">${t('ol_p')}</p><div class="ogrid">${OL.map(o=>`<button class="oc" onclick="location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} ${t('keys')}&nbsp;&nbsp;${o.p.length} ${t('problems')}</span></button>`).join('')}</div>`;
+  view.innerHTML=`<p style="color:var(--muted);font-size:14px;line-height:1.5;margin:4px 2px 0">${t('ol_p')}</p><div class="ogrid">${OL.map(o=>`<button class="oc" onclick="location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} ${pl(o.keys.length,'keys')}&nbsp;&nbsp;${o.p.length} ${pl(o.p.length,'problems')}</span></button>`).join('')}</div>`;
 }
 async function viewOlympOne(id){
   if(!await gate('olymp')) return;
@@ -522,11 +530,11 @@ window.addEventListener('hashchange',route);
 
 /* ---------------- install ---------------- */
 let deferred=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('installBtn').hidden=false});
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
-if(isIOS&&!standalone)$('installBtn').hidden=false;
-$('installBtn').onclick=async()=>{ if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;$('installBtn').hidden=true} else if(isIOS){$('iosSheet').hidden=false} };
+function canInstall(){ return !standalone && (!!deferred || isIOS) }
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;if($('installBtn'))$('installBtn').hidden=false});
+document.addEventListener('click',async e=>{ if(e.target.id!=='installBtn') return; if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;e.target.hidden=true} else if(isIOS){staticText();$('iosSheet').hidden=false} });
 $('iosOk').onclick=()=>{$('iosSheet').hidden=true};
 if(isIOS&&!standalone&&!store.get('iosSeen',false)){setTimeout(()=>{staticText();$('iosSheet').hidden=false;store.set('iosSeen',true)},1500)}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
