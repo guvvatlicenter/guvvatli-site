@@ -163,6 +163,13 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 .share{display:inline-block;vertical-align:-4px;width:20px;height:20px}
 
 .langs{display:flex;gap:6px}
+.lsel{position:relative}
+.lbtn{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 9px 5px 6px;font-family:Unbounded,sans-serif;font-weight:700;font-size:11px}
+.flag{width:24px;height:16px;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.08);flex-shrink:0}
+.lmenu{position:absolute;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:6px;z-index:30;min-width:170px}
+.lmenu[hidden]{display:none}
+.lmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:10px;font-size:14px;font-weight:600;text-align:left}
+.lmenu button.on{background:var(--pale)}
 .langs button{font-family:Unbounded,sans-serif;font-weight:700;font-size:11px;border:1.5px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--muted)}
 .langs button.on{border-color:var(--acc);color:var(--acc)}
 .tile .lock{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
@@ -176,7 +183,7 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 </head>
 <body>
 <header><div class="wrap">
-  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><div style="display:flex;gap:8px;align-items:center"><button class="install" id="installBtn" hidden></button></div></div>
+  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><div style="display:flex;gap:8px;align-items:center"><button class="install" id="installBtn" hidden></button><div class="lsel"><button class="lbtn" id="lbtn" aria-label="Language"></button><div class="lmenu" id="lmenu" hidden></div></div></div></div>
   <div id="hExtra"></div>
 </div></header>
 <main class="wrap" id="view"></main>
@@ -290,6 +297,18 @@ function askPassword(sec){
 }
 async function ensure(sec){ if(await getKey(sec)) return true; return askPassword(sec) }
 
+const FLAGS={
+az:'<svg class="flag" viewBox="0 0 24 16"><rect width="24" height="16" fill="#00B5E2"/><rect y="5.33" width="24" height="5.34" fill="#EF3340"/><rect y="10.67" width="24" height="5.33" fill="#509E2F"/><circle cx="11" cy="8" r="2.3" fill="#fff"/><circle cx="11.7" cy="8" r="1.85" fill="#EF3340"/><path d="M14.3 6.9l.3.75.8.05-.62.5.2.78-.68-.43-.68.43.2-.78-.62-.5.8-.05z" fill="#fff"/></svg>',
+en:'<svg class="flag" viewBox="0 0 60 40"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="7"/></svg>',
+ru:'<svg class="flag" viewBox="0 0 24 16"><rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="5.34" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/></svg>'};
+const LNAME={az:'Azərbaycanca',en:'English',ru:'Русский'};
+function langUI(){
+  $('lbtn').innerHTML=FLAGS[LANG]+LANG.toUpperCase();
+  $('lmenu').innerHTML=['az','en','ru'].map(l=>`<button data-l="${l}" class="${l===LANG?'on':''}">${FLAGS[l]}${LNAME[l]}</button>`).join('');
+  $('lmenu').querySelectorAll('button').forEach(b=>b.onclick=()=>{LANG=b.dataset.l;store.set('lang',LANG);MATH=null;OL=null;$('lmenu').hidden=true;langUI();route()});
+}
+$('lbtn').onclick=e=>{e.stopPropagation();$('lmenu').hidden=!$('lmenu').hidden};
+document.addEventListener('click',e=>{if(!e.target.closest('.lsel'))$('lmenu').hidden=true});
 /* ---------------- shell ---------------- */
 let TR=null, MATH=null, OL=null;
 let lv=store.get('lv','a1'), bk=store.get('bk','sb'), grade=store.get('grade',5), mq='';
@@ -301,8 +320,7 @@ function staticText(){ $('installBtn').textContent=t('install'); $('loop').textC
 
 function viewHome(){
   theme(''); setTitle('Guvvatli <span>Center</span>'); staticText();
-  hExtra.innerHTML=`<div class="langs" style="margin-top:4px">${['az','en','ru'].map(l=>`<button data-l="${l}" class="${l===LANG?'on':''}">${l.toUpperCase()}</button>`).join('')}</div>`;
-  hExtra.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{LANG=b.dataset.l;store.set('lang',LANG);MATH=null;OL=null;viewHome()});
+  hExtra.innerHTML='';
   const lk=s=>`<span class="lock ${isOpen(s)?'ok':''}">${isOpen(s)?t('open'):t('locked')}</span>`;
   view.innerHTML=`<div class="hero"><b>${t('home_h')}</b><p>${t('home_p')}</p></div>
   <div class="tiles">
@@ -515,7 +533,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 
 let pendingLast=null;
 (async()=>{
-  setSpeed(); staticText(); loadKeys();
+  setSpeed(); staticText(); langUI(); loadKeys();
   const last=store.get('last',null);
   if(last&&last.k&&isOpen('audio')){ pendingLast=last; lv=last.lv||lv; bk=last.bk||bk; $('nNum').textContent=last.n||''; $('nTitle').textContent=last.t||''; showPlayer();
     loadSec('audio','d/audio.bin').then(d=>{ if(d){TR=d; queue=allTracks(); qi=queue.findIndex(y=>y.k===last.k);} }); }
