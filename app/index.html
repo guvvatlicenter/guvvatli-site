@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guvvatli Center</title>
+<meta name="theme-color" content="#10161A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Guvvatli Center">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F4F1; --card:#FFFFFF; --ink:#1B1F23; --muted:#6B7177; --line:#E7E3DE;
+  --acc:#0B5A3A; --dark:#073D27; --pale:#E3F1EA;
+  --head:Unbounded,sans-serif; --sans:Onest,sans-serif;
+  --key:#127C86; --key-deep:#0A4A50; --key-soft:#E4F3F4; --accent:#E4573D; --accent-deep:#9A2E1C; --accent-soft:#FDEBE6;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+body.a1{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; }
+body.a2{ --acc:#0F8B84; --dark:#08433F; --pale:#E2F4F2; }
+body.mth{ --acc:#3B4A9C; --dark:#232D66; --pale:#E8EBF8; }
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#111417; --card:#1A1E22; --ink:#ECEEF0; --muted:#9AA1A7; --line:#2A2F34; --pale:#1F2A25; --key-soft:#123236; --accent-soft:#3A1F1A; }
+  body.a1{ --pale:#2A1B18; } body.a2{ --pale:#11302E; } body.mth{ --pale:#1C2140; }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden;margin:0;background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{padding-bottom:calc(30px + var(--safe-b))}
+body.hasplayer{padding-bottom:calc(160px + var(--safe-b))}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+.wrap{max-width:720px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right))}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12px + var(--safe-t));padding-bottom:10px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
+.brand h1{font-family:Unbounded,sans-serif;font-weight:800;font-size:19px;margin:0;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.brand h1 span{color:var(--acc)}
+.backb{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1}
+.install{font-family:Unbounded,sans-serif;font-weight:700;font-size:12px;background:var(--acc);color:#fff;border-radius:999px;padding:8px 14px}
+.hero{background:var(--dark);color:#fff;border-radius:22px;padding:22px 20px;margin-top:6px}
+.hero b{font-family:Unbounded,sans-serif;font-size:20px;line-height:1.2;display:block}
+.hero p{margin:8px 0 0;opacity:.85;font-size:14.5px;line-height:1.5}
+.tiles{display:grid;gap:12px;margin-top:14px}
+.tile{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;text-align:left}
+.tile .covers{display:flex;flex-shrink:0}
+.tile .covers img{width:46px;height:62px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.2);background:var(--line)}
+.tile .covers img+img{margin-left:-18px}
+.tile b{font-family:Unbounded,sans-serif;font-size:16px;display:block}
+.tile small{color:var(--muted);font-size:13px;line-height:1.45;display:block;margin-top:3px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:12px}
+.seg button{border-radius:10px;padding:9px 0;font-weight:600;font-size:14px;color:var(--muted)}
+.seg button.on{background:var(--acc);color:#fff}
+.levels{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.lv{display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid transparent;border-radius:16px;padding:8px;text-align:left}
+.lv img{width:44px;height:58px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.18);background:var(--line)}
+.lv b{display:block;font-family:Unbounded,sans-serif;font-size:20px;line-height:1}
+.lv small{color:var(--muted);font-size:12px}
+.lv.on{border-color:var(--acc)}
+.grades{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:2px;scrollbar-width:none}
+.grades::-webkit-scrollbar{display:none}
+.grades button{flex:0 0 auto;min-width:46px;height:46px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-family:Unbounded,sans-serif;font-weight:700;font-size:16px}
+.grades button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.search{margin-top:10px}
+.search input{width:100%;font:inherit;font-size:16px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);outline:none}
+.search input:focus{border-color:var(--acc)}
+.unit{background:var(--card);border-radius:16px;margin-top:10px;overflow:hidden;border:1px solid var(--line)}
+.uh{display:flex;align-items:center;gap:12px;width:100%;padding:14px;text-align:left}
+.un{font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;color:var(--acc);min-width:34px}
+.ut{flex:1;min-width:0}
+.ut b{display:block;font-size:15px}
+.ut small{color:var(--muted);font-size:12.5px}
+.chev{transition:transform .2s;color:var(--muted);font-size:18px}
+.unit.open .chev{transform:rotate(90deg)}
+.tracks{display:none;border-top:1px solid var(--line)}
+.unit.open .tracks{display:block}
+.tr{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.tr:last-child{border-bottom:0}
+.tn{font-family:Unbounded,sans-serif;font-weight:700;font-size:12px;background:var(--pale);color:var(--dark);border-radius:8px;padding:5px 7px;min-width:52px;text-align:center}
+.tt{flex:1;font-size:14.5px;line-height:1.35}
+.tr.playing{background:var(--pale)}
+.tr.playing .tt{font-weight:700}
+.org{font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--dark);background:var(--pale);border-radius:999px;padding:4px 9px;white-space:nowrap;max-width:44%;overflow:hidden;text-overflow:ellipsis}
+.off{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);font-size:13px;color:var(--muted)}
+.off button{font-weight:600;color:var(--acc);font-size:13px}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+.count{color:var(--muted);font-size:13px;margin:12px 2px 0}
+/* detail */
+.det h2{font-family:Unbounded,sans-serif;font-size:21px;line-height:1.25;margin:10px 0 8px}
+.det .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card h3{font-family:Unbounded,sans-serif;font-size:13px;letter-spacing:.04em;color:var(--acc);margin:0 0 8px;text-transform:uppercase}
+.card p{margin:0 0 10px;line-height:1.62;font-size:15.5px}
+.card p:last-child{margin-bottom:0}
+.vis{overflow-x:auto;margin-top:6px;text-align:center}
+.vis svg{max-width:100%;height:auto;width:auto!important}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps p{margin:0;padding-left:14px;border-left:3px solid var(--pale)}
+.q{font-weight:700;font-size:15.5px;line-height:1.55;margin:0 0 10px}
+.ans{margin-top:12px;background:var(--pale);border-radius:12px;padding:10px 12px;font-weight:700}
+.two{display:grid;gap:10px}
+.way{border-radius:14px;padding:12px;background:var(--bg)}
+.way.k{background:var(--pale)}
+.way b{display:block;font-family:Unbounded,sans-serif;font-size:12px;margin-bottom:6px;color:var(--dark)}
+.way p{margin:0 0 6px;font-size:14.5px;line-height:1.55}
+.math{font-family:Unbounded,sans-serif;font-weight:600;font-size:.88em;white-space:normal;overflow-wrap:anywhere}
+.card{overflow-wrap:anywhere}
+.fr{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;line-height:1.05;margin:0 2px;font-size:.9em}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 2px 1px}
+.fr>span:last-child{padding:1px 2px 0}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.navrow button{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;font-weight:600;font-size:14px}
+.motto{color:var(--muted);font-size:12px;text-align:center;margin:24px 0 6px}
+/* player */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.08);padding:10px max(16px,env(safe-area-inset-left)) calc(10px + var(--safe-b)) max(16px,env(safe-area-inset-right))}
+.player[hidden]{display:none}
+.player .in{max-width:720px;margin:0 auto}
+.now{display:flex;align-items:center;gap:10px;min-height:24px}
+.now .tn{min-width:auto}
+.now .nt{flex:1;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar input{flex:1;accent-color:var(--acc)}
+.ctl{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.ctl .b{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ctl .b svg{width:24px;height:24px;fill:var(--ink)}
+.ctl .main{width:56px;height:56px;background:var(--acc)}
+.ctl .main svg{fill:#fff;width:28px;height:28px}
+.pill{font-family:Unbounded,sans-serif;font-weight:700;font-size:12px;border:1.5px solid var(--line);border-radius:999px;padding:7px 10px;min-width:54px}
+.pill.on{border-color:var(--acc);color:var(--acc)}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:flex;align-items:flex-end}
+.sheet[hidden]{display:none}
+.sheet .box{background:var(--card);width:100%;border-radius:20px 20px 0 0;padding:22px 20px calc(24px + var(--safe-b));max-width:720px;margin:0 auto}
+.sheet h3{font-family:Unbounded,sans-serif;font-size:17px;margin:0 0 10px}
+.sheet p{margin:8px 0;line-height:1.5;font-size:15px}
+.sheet .ok{margin-top:14px;width:100%;background:var(--acc);color:#fff;border-radius:14px;padding:13px;font-weight:700}
+.share{display:inline-block;vertical-align:-4px;width:20px;height:20px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><h1 id="hTitle">Guvvatli <span>Center</span></h1><button class="install" id="installBtn" hidden>Quraşdır</button></div>
+  <div id="hExtra"></div>
+</div></header>
+<main class="wrap" id="view"></main>
+
+<div class="player" id="player" hidden>
+ <div class="in">
+  <div class="now"><span class="tn" id="nNum">&nbsp;</span><span class="nt" id="nTitle">Trek seçin</span></div>
+  <div class="bar"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" step="1"><span id="dur">0:00</span></div>
+  <div class="ctl">
+    <button class="pill" id="speed">1×</button>
+    <button class="b" id="back" aria-label="5 saniyə geri"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
+    <button class="b" id="prev" aria-label="Əvvəlki"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg></button>
+    <button class="b main" id="play" aria-label="Oxut"><svg viewBox="0 0 24 24" id="playIco"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="b" id="next" aria-label="Növbəti"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+    <button class="b" id="fwd" aria-label="5 saniyə irəli"><svg viewBox="0 0 24 24"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z"/><text x="12" y="16.5" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="700">5</text></svg></button>
+    <button class="pill" id="loop">Təkrar</button>
+  </div>
+ </div>
+</div>
+
+<div class="sheet" id="iosSheet" hidden><div class="box">
+  <h3>Telefona quraşdırın</h3>
+  <p>1. Aşağıdakı <b>Paylaş</b> düyməsinə basın <svg class="share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg></p>
+  <p>2. <b>Ana ekrana əlavə et</b> (Add to Home Screen) seçin.</p>
+  <p>3. <b>Əlavə et</b> basın. Guvvatli Center ikonu telefonunuzun ekranında görünəcək.</p>
+  <button class="ok" id="iosOk">Aydındır</button>
+</div></div>
+
+<audio id="au" preload="metadata"></audio>
+<script>
+const UNITS={a1:["Hello","Things","Family and friends","My day","Work and study","Food and drink","Home and city","Free time","Yesterday","Travel"],
+             a2:["Life now","Stories from the past","Shopping and money","Plans and arrangements","Health and the body","Travel experiences","Work and skills","Where we live","Always online","Special days"]};
+const AUDIO_BASE='../audio/';
+const store={get(k,d){try{const v=localStorage.getItem('gc_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('gc_'+k,JSON.stringify(v))}catch(e){}}};
+const $=id=>document.getElementById(id), au=$('au'), view=$('view'), hExtra=$('hExtra');
+let TR=null, MATH=null;
+let lv=store.get('lv','a1'), bk=store.get('bk','sb'), grade=store.get('grade',5), mq='';
+let queue=[], qi=-1, open=new Set(store.get('open',[])), mopen=new Set(store.get('mopen',[]));
+const speeds=[1,0.75,0.9,1.25]; let sp=store.get('sp',0);
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const nice=t=>t.replace(/\bWhats\b/g,'What’s').replace(/\bIts\b/g,'It’s').replace(/\bDont\b/g,'Don’t').replace(/\bIm\b/g,'I’m').replace(/\bLets\b/g,'Let’s');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ordz=g=>g+({1:'-ci',2:'-ci',3:'-cü',4:'-cü',5:'-ci',6:'-cı',7:'-ci',8:'-ci',9:'-cu'}[g]||'-cu');
+const plain=s=>String(s||'').replace(/<[^>]+>/g,' ').toLowerCase();
+
+function setTitle(html,back){ $('hTitle').innerHTML=(back?'<button class="backb" id="backBtn" aria-label="Geri">‹</button>':'')+html; if(back)$('backBtn').onclick=()=>{ if(history.length>1&&store.get('navd',0)) history.back(); else location.hash=back } }
+function theme(c){ document.body.className=c+(au.dataset.p?' hasplayer':''); }
+
+/* ---------------- home ---------------- */
+function viewHome(){
+  theme(''); setTitle('Guvvatli <span>Center</span>'); hExtra.innerHTML='';
+  view.innerHTML=`<div class="hero"><b>İlk dərsdən danış, hər gün bir az irəli get</b><p>Kitablarımızın audiosu və riyaziyyat açarları bir yerdə. İnternetsiz də işləyir.</p></div>
+  <div class="tiles">
+   <button class="tile" onclick="location.hash='audio'"><span class="covers"><img src="/books/en/gea1sb_0.jpg" alt=""><img src="/books/en/gea2sb_0.jpg" alt=""></span><span><b>İngilis dili audio</b><small>General English A1 və A2. Student’s Book və Workbook, 432 trek</small></span></button>
+   <button class="tile" onclick="location.hash='math'"><span class="covers"><img src="/books/az/g5tb_0.jpg" alt=""><img src="/books/az/g8tb_0.jpg" alt=""></span><span><b>Riyaziyyat açarları</b><small>1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə</small></span></button>
+  </div>
+  <div class="motto">Guvvatli Center&nbsp;&nbsp;guvvatli.az</div>`;
+}
+
+/* ---------------- audio ---------------- */
+function allTracks(){const out=[];const units=(TR&&TR[lv]&&TR[lv][bk])||{};Object.keys(units).sort((a,b)=>a-b).forEach(u=>units[u].forEach(t=>out.push({u:+u,n:t[0],t:nice(t[1]),p:AUDIO_BASE+'media/'+t[2]})));return out}
+async function cachedSet(){try{const c=await caches.open('ga-audio-v1');const ks=await c.keys();return new Set(ks.map(r=>new URL(r.url).pathname))}catch(e){return new Set()}}
+const absPath=p=>new URL(p,location.href).pathname;
+
+function viewAudio(){
+  theme(lv); setTitle('İngilis dili <span>audio</span>','home');
+  hExtra.innerHTML=`<div class="levels"><button class="lv" data-lv="a1"><img alt=""><span><b>A1</b><small>Beginner</small></span></button><button class="lv" data-lv="a2"><img alt=""><span><b>A2</b><small>Elementary</small></span></button></div>
+  <div class="seg" id="books"><button data-bk="sb">Student’s Book</button><button data-bk="wb">Workbook</button></div>
+  <div class="search"><input id="q" type="search" inputmode="decimal" placeholder="Trek nömrəsi, məsələn 2.04" autocomplete="off"></div>`;
+  hExtra.querySelectorAll('.lv').forEach(b=>b.onclick=()=>{lv=b.dataset.lv;store.set('lv',lv);viewAudio()});
+  hExtra.querySelectorAll('#books button').forEach(b=>b.onclick=()=>{bk=b.dataset.bk;store.set('bk',bk);viewAudio()});
+  $('q').addEventListener('input',renderAudio);
+  renderAudio();
+}
+async function renderAudio(){
+  if(!TR){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  document.body.classList.remove('a1','a2');document.body.classList.add(lv);
+  hExtra.querySelectorAll('.lv').forEach(b=>b.classList.toggle('on',b.dataset.lv===lv));
+  hExtra.querySelectorAll('#books button').forEach(b=>b.classList.toggle('on',b.dataset.bk===bk));
+  const imgs=hExtra.querySelectorAll('.lv img'); imgs[0].src='/books/en/gea1'+bk+'_0.jpg'; imgs[1].src='/books/en/gea2'+bk+'_0.jpg';
+  const q=($('q')?$('q').value:'').trim().toLowerCase().replace(',','.');
+  const tracks=allTracks(); queue=tracks; qi=queue.findIndex(t=>t.p===au.dataset.p);
+  const saved=await cachedSet(); const cur=au.dataset.p||'';
+  const groups={}; tracks.forEach((t,i)=>{if(q&&!(t.n.toLowerCase().includes(q)||t.t.toLowerCase().includes(q)))return;(groups[t.u]=groups[t.u]||[]).push([t,i])});
+  const keys=Object.keys(groups).sort((a,b)=>a-b); view.innerHTML='';
+  if(!keys.length){view.innerHTML='<div class="empty">Heç nə tapılmadı</div>';return}
+  keys.forEach(u=>{
+    const items=groups[u]; const isOpen=q?true:open.has(lv+bk+u);
+    const el=document.createElement('section'); el.className='unit'+(isOpen?' open':'');
+    const nSaved=items.filter(([t])=>saved.has(absPath(t.p))).length;
+    el.innerHTML=`<button class="uh"><span class="un">${u}</span><span class="ut"><b>${UNITS[lv][u-1]||'Unit '+u}</b><small>${items.length} trek${nSaved===items.length?'&nbsp;&nbsp;oflayn hazırdır':''}</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    const box=el.querySelector('.tracks');
+    items.forEach(([t,i])=>{const b=document.createElement('button');b.className='tr'+(cur===t.p?' playing':'');b.dataset.p=t.p;b.innerHTML=`<span class="tn">${t.n}</span><span class="tt">${esc(t.t)}</span>`;b.onclick=()=>playAt(i);box.appendChild(b)});
+    if('caches' in window){const o=document.createElement('div');o.className='off';const all=nSaved===items.length;o.innerHTML=all?`<span>İnternetsiz dinləmək olar</span><button>Sil</button>`:`<span>İnternetsiz dinləmək üçün yadda saxla</span><button>Yüklə</button>`;
+      const btn=o.querySelector('button');btn.onclick=async()=>{const c=await caches.open('ga-audio-v1');if(all){for(const [t] of items)await c.delete(absPath(t.p))}else{btn.textContent='Yüklənir…';let k=0;for(const [t] of items){try{const r=await fetch(t.p);if(r.ok)await c.put(absPath(t.p),r)}catch(e){}btn.textContent=(++k)+' / '+items.length}}renderAudio()};box.appendChild(o)}
+    el.querySelector('.uh').onclick=()=>{const k=lv+bk+u;open.has(k)?open.delete(k):open.add(k);store.set('open',[...open]);el.classList.toggle('open')};
+    view.appendChild(el);
+  });
+}
+function playAt(i,start){
+  qi=i; const t=queue[i]; if(!t)return;
+  au.src=t.p; au.dataset.p=t.p; au.playbackRate=speeds[sp];
+  $('nNum').textContent=t.n; $('nTitle').textContent=t.t; showPlayer();
+  au.play().catch(()=>{});
+  store.set('last',{lv,bk,p:t.p,n:t.n,t:t.t});
+  document.querySelectorAll('.tr').forEach(b=>b.classList.toggle('playing',b.dataset.p===t.p));
+  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:t.n+'  '+t.t,artist:'General English '+lv.toUpperCase(),album:bk==='sb'?'Student’s Book':'Workbook',artwork:[{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}
+}
+function showPlayer(){ $('player').hidden=false; document.body.classList.add('hasplayer') }
+function setIco(){ $('playIco').innerHTML=au.paused?'<path d="M8 5v14l11-7z"/>':'<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>' }
+au.addEventListener('play',setIco); au.addEventListener('pause',setIco);
+let seeking=false;
+au.addEventListener('timeupdate',()=>{ if(!au.duration)return; $('cur').textContent=fmt(au.currentTime); $('dur').textContent=fmt(au.duration); if(!seeking)$('seek').value=Math.round(au.currentTime/au.duration*1000); if(Math.floor(au.currentTime)%5===0)store.set('pos',au.currentTime)});
+au.addEventListener('ended',()=>{ if(au.loop)return; if(qi>=0&&qi<queue.length-1)playAt(qi+1) });
+$('seek').addEventListener('input',()=>{seeking=true;if(au.duration)$('cur').textContent=fmt($('seek').value/1000*au.duration)});
+$('seek').addEventListener('change',()=>{if(au.duration)au.currentTime=$('seek').value/1000*au.duration;seeking=false});
+$('play').onclick=()=>{ if(!au.src){ if(queue.length)playAt(0); return } au.paused?au.play():au.pause() };
+$('prev').onclick=()=>{ if(au.currentTime>3){au.currentTime=0;return} if(qi>0)playAt(qi-1) };
+$('next').onclick=()=>{ if(qi>=0&&qi<queue.length-1)playAt(qi+1) };
+$('back').onclick=()=>{au.currentTime=Math.max(0,au.currentTime-5)};
+$('fwd').onclick=()=>{au.currentTime=Math.min(au.duration||0,au.currentTime+5)};
+function setSpeed(){ $('speed').textContent=speeds[sp]+'×'; $('speed').classList.toggle('on',speeds[sp]!==1); au.playbackRate=speeds[sp]; store.set('sp',sp) }
+$('speed').onclick=()=>{sp=(sp+1)%speeds.length;setSpeed()};
+$('loop').onclick=()=>{au.loop=!au.loop;$('loop').classList.toggle('on',au.loop)};
+if('mediaSession' in navigator){const ms=navigator.mediaSession;ms.setActionHandler('play',()=>au.play());ms.setActionHandler('pause',()=>au.pause());ms.setActionHandler('previoustrack',()=>$('prev').onclick());ms.setActionHandler('nexttrack',()=>$('next').onclick());try{ms.setActionHandler('seekbackward',()=>$('back').onclick());ms.setActionHandler('seekforward',()=>$('fwd').onclick())}catch(e){}}
+
+/* ---------------- math ---------------- */
+function viewMath(){
+  theme('mth'); setTitle('Riyaziyyat <span>açarları</span>','home');
+  hExtra.innerHTML=`<div class="grades" id="grades">${[1,2,3,4,5,6,7,8,9].map(g=>`<button data-g="${g}">${g}</button>`).join('')}</div>
+  <div class="search"><input id="mq" type="search" placeholder="Axtar: kəsr, kvadrat, faiz…" autocomplete="off"></div>`;
+  hExtra.querySelectorAll('#grades button').forEach(b=>{b.classList.toggle('on',+b.dataset.g===grade);b.onclick=()=>{grade=+b.dataset.g;store.set('grade',grade);viewMath()}});
+  const mi=$('mq'); mi.value=mq; mi.addEventListener('input',()=>{mq=mi.value;renderMath()});
+  const on=hExtra.querySelector('#grades .on'); if(on)on.scrollIntoView({inline:'center',block:'nearest'});
+  renderMath();
+}
+function renderMath(){
+  if(!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  const q=mq.trim().toLowerCase();
+  const items=MATH.items.map((it,i)=>[it,i]).filter(([it])=>q?(plain(it.n+' '+it.b+' '+it.o+' '+it.ct).includes(q)):it.g===grade);
+  view.innerHTML='';
+  if(!items.length){view.innerHTML='<div class="empty">Heç nə tapılmadı</div>';return}
+  const c=document.createElement('div');c.className='count';c.textContent=q?`Bütün siniflərdə ${items.length} nəticə`:`${ordz(grade)} sinif: ${items.length} açar`;view.appendChild(c);
+  const groups={}; items.forEach(([it,i])=>{const k=it.g+'|'+it.ch;(groups[k]=groups[k]||[]).push([it,i])});
+  Object.keys(groups).sort((a,b)=>{const[ga,ca]=a.split('|').map(Number),[gb,cb]=b.split('|').map(Number);return ga-gb||ca-cb}).forEach(k=>{
+    const [g,ch]=k.split('|').map(Number); const its=groups[k]; const isOpen=q?true:mopen.has(k);
+    const el=document.createElement('section'); el.className='unit'+(isOpen?' open':'');
+    el.innerHTML=`<button class="uh"><span class="un">${ch}</span><span class="ut"><b>${esc(its[0][0].ct||('Fəsil '+ch))}</b><small>${q?ordz(g)+' sinif, ':''}${its.length} açar</small></span><span class="chev">›</span></button><div class="tracks"></div>`;
+    const box=el.querySelector('.tracks');
+    its.forEach(([it,i])=>{const b=document.createElement('button');b.className='tr';b.innerHTML=`<span class="tt">${esc(it.n)}</span><span class="org">${esc(it.o)}</span>`;b.onclick=()=>{store.set('navd',1);location.hash='m/'+i};box.appendChild(b)});
+    el.querySelector('.uh').onclick=()=>{mopen.has(k)?mopen.delete(k):mopen.add(k);store.set('mopen',[...mopen]);el.classList.toggle('open')};
+    view.appendChild(el);
+  });
+}
+function viewMathItem(i){
+  theme('mth'); hExtra.innerHTML='';
+  if(!MATH){view.innerHTML='<div class="empty">Yüklənir…</div>';return}
+  const it=MATH.items[i]; if(!it){location.hash='math';return}
+  setTitle(ordz(it.g)+' sinif <span>açar</span>','math');
+  let h=`<div class="det"><div class="meta"><span class="org">${esc(it.o)}</span><span>${esc(it.ct)}</span></div><h2>${esc(it.n)}</h2>
+  <div class="card"><h3>Qayda</h3>${it.b}${it.v?`<div class="vis">${it.v}</div>`:''}</div>`;
+  if(it.w) h+=`<div class="card"><h3>Niyə işləyir?</h3><p>${it.w}</p></div>`;
+  if(it.e){const e=it.e;
+    h+=`<div class="card"><h3>Nümunə</h3><p class="q">${e.q}</p>`;
+    if(e.nm) h+=`<div class="two"><div class="way"><b>Adi yol</b>${e.nm.map(s=>`<p>${s}</p>`).join('')}</div><div class="way k"><b>Açarla</b>${e.s.map(s=>`<p>${s}</p>`).join('')}</div></div>`;
+    else h+=`<div class="steps">${e.s.map(s=>`<p>${s}</p>`).join('')}</div>`;
+    if(e.a) h+=`<div class="ans">Cavab: ${e.a}</div>`;
+    h+=`</div>`;}
+  const sib=MATH.items.map((x,j)=>[x,j]).filter(([x])=>x.g===it.g); const pos=sib.findIndex(([,j])=>j===i);
+  h+=`<div class="navrow">${pos>0?`<button onclick="location.hash='m/${sib[pos-1][1]}'">‹ Əvvəlki</button>`:'<span></span>'}${pos<sib.length-1?`<button onclick="location.hash='m/${sib[pos+1][1]}'">Növbəti ›</button>`:'<span></span>'}</div></div>`;
+  view.innerHTML=h; window.scrollTo(0,0);
+}
+
+/* ---------------- router ---------------- */
+function route(){
+  const h=location.hash.replace('#','');
+  if(h==='audio') viewAudio();
+  else if(h==='math') viewMath();
+  else if(h.startsWith('m/')) viewMathItem(+h.slice(2));
+  else viewHome();
+  if(au.dataset.p) showPlayer();
+}
+window.addEventListener('hashchange',route);
+
+/* ---------------- install ---------------- */
+let deferred=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('installBtn').hidden=false});
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+if(isIOS&&!standalone)$('installBtn').hidden=false;
+$('installBtn').onclick=async()=>{ if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;$('installBtn').hidden=true} else if(isIOS){$('iosSheet').hidden=false} };
+$('iosOk').onclick=()=>{$('iosSheet').hidden=true};
+if(isIOS&&!standalone&&!store.get('iosSeen',false)){setTimeout(()=>{$('iosSheet').hidden=false;store.set('iosSeen',true)},1500)}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+
+setSpeed(); route();
+const getJSON=u=>fetch(u,{cache:'no-cache'}).then(r=>r.json()).catch(()=>caches.match(u).then(r=>r&&r.json()));
+getJSON(AUDIO_BASE+'tracks.json').then(d=>{TR=d;
+  const last=store.get('last',null);
+  if(last&&last.p&&!au.dataset.p){au.src=last.p;au.dataset.p=last.p;$('nNum').textContent=last.n||'';$('nTitle').textContent=last.t||'';const pos=store.get('pos',0);au.addEventListener('loadedmetadata',()=>{au.currentTime=pos},{once:true});showPlayer();
+    lv=last.lv||lv;bk=last.bk||bk; queue=allTracks(); qi=queue.findIndex(t=>t.p===last.p);}
+  if(location.hash==='#audio')renderAudio();
+});
+getJSON('math.json').then(d=>{MATH=d; const h=location.hash; if(h==='#math')renderMath(); else if(h.startsWith('#m/'))viewMathItem(+h.slice(3));});
+</script>
+</body>
+</html>
