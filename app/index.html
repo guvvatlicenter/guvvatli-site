@@ -9,6 +9,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Guvvatli Center">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="katex/katex.min.css">
+<script defer src="katex/katex.min.js"></script>
+<script defer src="katex/auto-render.min.js"></script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="/favicon.svg">
@@ -142,6 +145,8 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 .pbtn button.k{border-color:var(--acc);color:var(--acc)}
 .reveal{margin-top:10px;background:var(--pale);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.55}
 .reveal p{margin:0 0 6px}
+.katex{font-size:1.06em}
+.opts span .katex{font-size:1em}
 .fig{background:#fff;border-radius:12px;padding:8px;margin-top:10px;text-align:center}
 .fig svg{max-width:100%;height:auto;max-height:260px}
 .opts span svg{max-width:100%;height:auto;max-height:90px;background:#fff;border-radius:8px}
@@ -534,6 +539,11 @@ async function viewOlympOne(id){
   });
   if(ps.length>lim){const m=document.createElement('button');m.className='more';m.textContent=t('more',{n:ps.length-lim});m.onclick=()=>{olShown[id+'p']=lim+20;viewOlympOne(id)};box.appendChild(m)}
 }
+
+/* ---------------- math typesetting ---------------- */
+let kmT=null;
+function km(){ clearTimeout(kmT); kmT=setTimeout(()=>{ if(window.renderMathInElement){ try{ renderMathInElement(view,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredClasses:['katex']}) }catch(e){} } else km(); },30) }
+new MutationObserver(m=>{ if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains('katex'))&&!n.closest?.('.katex')))) km() }).observe(view,{childList:true,subtree:true});
 
 /* ---------------- router ---------------- */
 function route(){
