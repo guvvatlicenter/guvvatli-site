@@ -33,10 +33,11 @@ body.a1{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; --page:#FCE3DC; }
 body.a2{ --acc:#0F8B84; --dark:#08433F; --pale:#E2F4F2; --page:#DDF1EF; }
 body.langs{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; --page:#FCE3DC; }
 body.mth,body.riy{ --acc:#3B4A9C; --dark:#232D66; --pale:#E8EBF8; --page:#E3E7F7; }
+body.ai{ --acc:#127A4F; --dark:#073D28; --pale:#E4F9B6; --page:#E4F9B6; }
 body.olp{ --acc:#B5531B; --dark:#6E2F0B; --pale:#FBEBDD; --page:#FBEBD0; }
 @media (prefers-color-scheme:dark){
   :root{ --bg:#0F1315; --card:#1A1F22; --ink:#ECEEF0; --muted:#9AA6A1; --line:#2A3034; --pale:#1F2A25; --page:#18210F; --lime-soft:#1E2A12; --coral-soft:#33201B; --teal-soft:#122C2A; --indigo-soft:#1C2140; --amber-soft:#33260F; }
-  body.a1,body.langs{ --pale:#2A1B18; --page:#26150F; } body.a2{ --pale:#11302E; --page:#0F2524; } body.mth,body.riy{ --pale:#1C2140; --page:#161A33; } body.olp{ --pale:#33200F; --page:#2A1A0B; }
+  body.a1,body.langs{ --pale:#2A1B18; --page:#26150F; } body.a2{ --pale:#11302E; --page:#0F2524; } body.mth,body.riy{ --pale:#1C2140; --page:#161A33; } body.olp{ --pale:#33200F; --page:#2A1A0B; } body.ai{ --pale:#1E2A12; --page:#18210F; }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overflow-x:hidden;margin:0;background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -223,7 +224,8 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:12;width:min(440px,calc(100% - 32px));height:var(--nav-h);background:#10161A;border-radius:28px;display:flex;align-items:center;justify-content:space-around;padding:0 8px;box-shadow:0 12px 30px rgba(16,22,26,.28)}
 .nav button{width:52px;height:52px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#C9D1CD}
 .nav button svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.nav button span{font-size:9.5px;font-weight:600;letter-spacing:.01em}
+.nav button span{font-size:9.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.nav button:not(.on){width:auto;min-width:52px;padding:0 4px}
 .nav button.on{background:var(--lime);color:#10161A}
 .nav button.on span{display:none}
 /* player */
@@ -275,7 +277,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
   <button data-nav="home" aria-label="home"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg><span data-t="nav_home"></span></button>
   <button data-nav="langs" aria-label="languages"><svg viewBox="0 0 24 24"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3.5V15H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3.5-3H12"/></svg><span data-t="nav_langs"></span></button>
   <button data-nav="riy" aria-label="maths"><svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg><span data-t="nav_math"></span></button>
-  <button data-nav="olymp" aria-label="olympiad"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M8.5 11 6 3h4l2 5 2-5h4l-2.5 8"/><path d="m12 13 .9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 15.1l2-.3z"/></svg><span data-t="nav_olymp"></span></button>
+  <button data-nav="ai" aria-label="AI"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5M3 12v3M21 12v3"/></svg><span data-t="nav_ai"></span></button>
 </nav>
 
 <div class="player" id="player" hidden>
@@ -313,7 +315,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 <audio id="au" preload="auto"></audio>
 <script>
 const I18N={
-az:{other_d:"Yeni dillər tezliklə əlavə olunacaq",and_h:"Telefona quraşdırın",and1:"1. Chrome-da sağ üst küncdəki <b>⋮</b> menyusunu açın.",and2:"2. <b>Tətbiqi quraşdır</b> və ya <b>Ana ekrana əlavə et</b> seçin.",and3:"3. <b>Quraşdır</b> basın. Guvvatli Center ikonu ekranda görünəcək.",nav_home:"Ana səhifə",nav_langs:"Dillər",nav_math:"Riyaziyyat",nav_olymp:"Olimpiada",sections:"Bölmələr",sec_n:"3 bölmə",r_langs:"Dillər",r_langs_d:"İngilis dili audio: General English A1 və A2",r_math:"Riyaziyyat açarları",r_math_d:"1 ilə 9-cu sinif: qaydalar, düsturlar və fəndlər",r_olymp:"Olimpiada",r_olymp_d:"Lütfi Zadə, RFM, RFO və beynəlxalq olimpiadalar",cont:"Davam et",langs_h:"Dillər",langs_p:"Kitablarımızın audio materialları. İngilis dili hazırdır, yeni dillər tezliklə əlavə olunacaq.",lang_en:"İngilis dili",lang_en_d:"A1 və A2 audio, 432 trek",other_langs:"Digər dillər",lang_ru:"Rus dili",lang_de:"Alman dili",lang_tr:"Türk dili",soon:"Tezliklə",ready:"Hazırdır",en_h:"İngilis <span>dili</span>",en_p:"Səviyyəni seçin. A1 və A2-nin audiosu hazırdır, B1 və B2-nin audiosu tezliklə əlavə olunacaq.",audio_rdy:"Audio hazırdır",audio_soon:"Audio tezliklə",riy_h:"Riyaziyyat",riy_p:"Kitablarımızdakı açarlar, qaydalar və olimpiada hazırlığı bir yerdə.",ol_short:"Olimpiada açarları",off_links:"Rəsmi nümunələr",real:"Real formatda sınaq testləri",real_p:"Sualları Guvvatli Center rəsmi olimpiadanın formatı, mövzuları və sual tipləri əsasında hazırlayıb.",book_probs:"Kitablarımızdan məsələlər",pts:"bal",sol:"Həll",home_h:"“<span>Qüvvət</span> elmdədir, başqa cür heç kəs, heç kəsə üstünlük eyləyə bilməz!”",home_p:"Kitablarımızın audiosu, riyaziyyat və olimpiada açarları bir yerdə. İnternetsiz də işləyir.",
+az:{nav_ai:"Süni intellekt",ai_h:"Süni <span>intellekt</span>",ai_p:"Bu bölmə hazırlanır və tezliklə tətbiqə əlavə olunacaq.",ai_d:"Tezliklə əlavə olunacaq",riy_d:"Açarlar, qaydalar və olimpiada hazırlığı",other_d:"Yeni dillər tezliklə əlavə olunacaq",and_h:"Telefona quraşdırın",and1:"1. Chrome-da sağ üst küncdəki <b>⋮</b> menyusunu açın.",and2:"2. <b>Tətbiqi quraşdır</b> və ya <b>Ana ekrana əlavə et</b> seçin.",and3:"3. <b>Quraşdır</b> basın. Guvvatli Center ikonu ekranda görünəcək.",nav_home:"Ana səhifə",nav_langs:"Dillər",nav_math:"Riyaziyyat",nav_olymp:"Olimpiada",sections:"Bölmələr",sec_n:"3 bölmə",r_langs:"Dillər",r_langs_d:"İngilis dili audio: General English A1 və A2",r_math:"Riyaziyyat açarları",r_math_d:"1 ilə 9-cu sinif: qaydalar, düsturlar və fəndlər",r_olymp:"Olimpiada",r_olymp_d:"Lütfi Zadə, RFM, RFO və beynəlxalq olimpiadalar",cont:"Davam et",langs_h:"Dillər",langs_p:"Kitablarımızın audio materialları. İngilis dili hazırdır, yeni dillər tezliklə əlavə olunacaq.",lang_en:"İngilis dili",lang_en_d:"A1 və A2 audio, 432 trek",other_langs:"Digər dillər",lang_ru:"Rus dili",lang_de:"Alman dili",lang_tr:"Türk dili",soon:"Tezliklə",ready:"Hazırdır",en_h:"İngilis <span>dili</span>",en_p:"Səviyyəni seçin. A1 və A2-nin audiosu hazırdır, B1 və B2-nin audiosu tezliklə əlavə olunacaq.",audio_rdy:"Audio hazırdır",audio_soon:"Audio tezliklə",riy_h:"Riyaziyyat",riy_p:"Kitablarımızdakı açarlar, qaydalar və olimpiada hazırlığı bir yerdə.",ol_short:"Olimpiada açarları",off_links:"Rəsmi nümunələr",real:"Real formatda sınaq testləri",real_p:"Sualları Guvvatli Center rəsmi olimpiadanın formatı, mövzuları və sual tipləri əsasında hazırlayıb.",book_probs:"Kitablarımızdan məsələlər",pts:"bal",sol:"Həll",home_h:"“<span>Qüvvət</span> elmdədir, başqa cür heç kəs, heç kəsə üstünlük eyləyə bilməz!”",home_p:"Kitablarımızın audiosu, riyaziyyat və olimpiada açarları bir yerdə. İnternetsiz də işləyir.",
  t_audio:"İngilis dili audio",d_audio:"General English A1 və A2. Student’s Book və Workbook, 432 trek",
  t_math:"Riyaziyyat açarları",d_math:"1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə",
  t_olymp:"Olimpiada açarları",d_olymp:"Lütfi Zadə, RFM, RFO, Kenquru, SASMO, TIMO, Copernicus, AMO, FISO. Hər olimpiada üçün açarlar və kitablarımızdan məsələlər",
@@ -324,7 +326,7 @@ az:{other_d:"Yeni dillər tezliklə əlavə olunacaq",and_h:"Telefona quraşdır
  rule:"Qayda",why:"Niyə işləyir?",ex:"Nümunə",normal:"Adi yol",withkey:"Açarla",answer:"Cavab",prev:"‹ Əvvəlki",next:"Növbəti ›",
  ol_h:"Olimpiada <span>açarları</span>",ol_p:"Olimpiadanı seç. Hər birində həmin olimpiadada işə yarayan açarlar və kitablarımızdan onun üslubunda məsələlər var.",problems:"məsələ",ol_keys:"Bu olimpiadanın açarları",show_all:"Bütün {n} açarı göstər",probs:"Məsələlər",hint:"İpucu",key_b:"Açar",more:"Daha çox ({n})",final:"final, sübut",
  ord:g=>g+({1:'-ci',2:'-ci',3:'-cü',4:'-cü',5:'-ci',6:'-cı',7:'-ci',8:'-ci',9:'-cu'}[g]||'-cu')},
-en:{other_d:"New languages are coming soon",and_h:"Install on your phone",and1:"1. In Chrome, open the <b>⋮</b> menu in the top right corner.",and2:"2. Choose <b>Install app</b> or <b>Add to Home screen</b>.",and3:"3. Tap <b>Install</b>. The Guvvatli Center icon will appear on your screen.",nav_home:"Home",nav_langs:"Languages",nav_math:"Maths",nav_olymp:"Olympiad",sections:"Sections",sec_n:"3 sections",r_langs:"Languages",r_langs_d:"English audio: General English A1 and A2",r_math:"Maths keys",r_math_d:"Grades 1 to 9: rules, formulas and tricks",r_olymp:"Olympiad",r_olymp_d:"Lotfi Zadeh, RFM, RFO and international olympiads",cont:"Continue",langs_h:"Languages",langs_p:"Audio for our books. English is ready, other languages are coming soon.",lang_en:"English",lang_en_d:"A1 and A2 audio, 432 tracks",other_langs:"Other languages",lang_ru:"Russian",lang_de:"German",lang_tr:"Turkish",soon:"Coming soon",ready:"Ready",en_h:"<span>English</span>",en_p:"Choose a level. Audio for A1 and A2 is ready, audio for B1 and B2 is coming soon.",audio_rdy:"Audio ready",audio_soon:"Audio soon",riy_h:"Maths",riy_p:"Keys, rules and olympiad preparation from our books in one place.",ol_short:"Olympiad keys",off_links:"Official samples",real:"Practice tests in the real format",real_p:"Guvvatli Center wrote these questions following the official olympiad format, topics and question types.",book_probs:"Problems from our books",pts:"pts",sol:"Solution",home_h:"“<span>Power</span> lies in knowledge; in no other way can anyone rise above another!”",home_p:"Audio for our books, maths keys and olympiad keys in one place. Works offline too.",
+en:{nav_ai:"AI",ai_h:"Artificial <span>intelligence</span>",ai_p:"This section is in preparation and will be added to the app soon.",ai_d:"Coming soon",riy_d:"Keys, rules and olympiad preparation",other_d:"New languages are coming soon",and_h:"Install on your phone",and1:"1. In Chrome, open the <b>⋮</b> menu in the top right corner.",and2:"2. Choose <b>Install app</b> or <b>Add to Home screen</b>.",and3:"3. Tap <b>Install</b>. The Guvvatli Center icon will appear on your screen.",nav_home:"Home",nav_langs:"Languages",nav_math:"Maths",nav_olymp:"Olympiad",sections:"Sections",sec_n:"3 sections",r_langs:"Languages",r_langs_d:"English audio: General English A1 and A2",r_math:"Maths keys",r_math_d:"Grades 1 to 9: rules, formulas and tricks",r_olymp:"Olympiad",r_olymp_d:"Lotfi Zadeh, RFM, RFO and international olympiads",cont:"Continue",langs_h:"Languages",langs_p:"Audio for our books. English is ready, other languages are coming soon.",lang_en:"English",lang_en_d:"A1 and A2 audio, 432 tracks",other_langs:"Other languages",lang_ru:"Russian",lang_de:"German",lang_tr:"Turkish",soon:"Coming soon",ready:"Ready",en_h:"<span>English</span>",en_p:"Choose a level. Audio for A1 and A2 is ready, audio for B1 and B2 is coming soon.",audio_rdy:"Audio ready",audio_soon:"Audio soon",riy_h:"Maths",riy_p:"Keys, rules and olympiad preparation from our books in one place.",ol_short:"Olympiad keys",off_links:"Official samples",real:"Practice tests in the real format",real_p:"Guvvatli Center wrote these questions following the official olympiad format, topics and question types.",book_probs:"Problems from our books",pts:"pts",sol:"Solution",home_h:"“<span>Power</span> lies in knowledge; in no other way can anyone rise above another!”",home_p:"Audio for our books, maths keys and olympiad keys in one place. Works offline too.",
  t_audio:"English audio",d_audio:"General English A1 and A2. Student’s Book and Workbook, 432 tracks",
  t_math:"Maths keys",d_math:"Grades 1 to 9. Methods from Chinese, Indian and Singapore schools, olympiad tricks, rules and formulas, each with an example",
  t_olymp:"Olympiad keys",d_olymp:"Lotfi Zadeh, RFM, RFO, Kangaroo, SASMO, TIMO, Copernicus, AMO, FISO. Keys for every olympiad and problems from our books",
@@ -335,7 +337,7 @@ en:{other_d:"New languages are coming soon",and_h:"Install on your phone",and1:"
  rule:"Rule",why:"Why does it work?",ex:"Example",normal:"Usual way",withkey:"With the key",answer:"Answer",prev:"‹ Previous",next:"Next ›",
  ol_h:"Olympiad <span>keys</span>",ol_p:"Choose an olympiad. Each one has the keys that help in it and problems in its style from our books.",problems:"problems",ol_keys:"Keys for this olympiad",show_all:"Show all {n} keys",probs:"Problems",hint:"Hint",key_b:"Key",more:"More ({n})",final:"final, proof",
  ord:g=>g},
-ru:{other_d:"Новые языки скоро появятся",and_h:"Установите на телефон",and1:"1. В Chrome откройте меню <b>⋮</b> в правом верхнем углу.",and2:"2. Выберите <b>Установить приложение</b> или <b>Добавить на главный экран</b>.",and3:"3. Нажмите <b>Установить</b>. Значок Guvvatli Center появится на экране.",nav_home:"Главная",nav_langs:"Языки",nav_math:"Математика",nav_olymp:"Олимпиада",sections:"Разделы",sec_n:"3 раздела",r_langs:"Языки",r_langs_d:"Аудио по английскому: General English A1 и A2",r_math:"Ключи по математике",r_math_d:"С 1 по 9 класс: правила, формулы и приёмы",r_olymp:"Олимпиада",r_olymp_d:"Лютфи Заде, РФМ, РФО и международные олимпиады",cont:"Продолжить",langs_h:"Языки",langs_p:"Аудио к нашим книгам. Английский готов, другие языки скоро появятся.",lang_en:"Английский язык",lang_en_d:"Аудио A1 и A2, 432 трека",other_langs:"Другие языки",lang_ru:"Русский язык",lang_de:"Немецкий язык",lang_tr:"Турецкий язык",soon:"Скоро",ready:"Готово",en_h:"Английский <span>язык</span>",en_p:"Выберите уровень. Аудио A1 и A2 готово, аудио B1 и B2 скоро появится.",audio_rdy:"Аудио готово",audio_soon:"Аудио скоро",riy_h:"Математика",riy_p:"Ключи, правила и подготовка к олимпиадам из наших книг в одном месте.",ol_short:"Олимпиадные ключи",off_links:"Официальные образцы",real:"Пробные тесты в реальном формате",real_p:"Вопросы составлены Guvvatli Center по формату, темам и типам заданий официальной олимпиады.",book_probs:"Задачи из наших книг",pts:"балл.",sol:"Решение",home_h:"«<span>Сила</span> в знании, иначе никто никого превзойти не сможет!»",home_p:"Аудио к нашим книгам, ключи по математике и олимпиадам в одном месте. Работает и без интернета.",
+ru:{nav_ai:"ИИ",ai_h:"Искусственный <span>интеллект</span>",ai_p:"Этот раздел готовится и скоро появится в приложении.",ai_d:"Скоро появится",riy_d:"Ключи, правила и подготовка к олимпиадам",other_d:"Новые языки скоро появятся",and_h:"Установите на телефон",and1:"1. В Chrome откройте меню <b>⋮</b> в правом верхнем углу.",and2:"2. Выберите <b>Установить приложение</b> или <b>Добавить на главный экран</b>.",and3:"3. Нажмите <b>Установить</b>. Значок Guvvatli Center появится на экране.",nav_home:"Главная",nav_langs:"Языки",nav_math:"Математика",nav_olymp:"Олимпиада",sections:"Разделы",sec_n:"3 раздела",r_langs:"Языки",r_langs_d:"Аудио по английскому: General English A1 и A2",r_math:"Ключи по математике",r_math_d:"С 1 по 9 класс: правила, формулы и приёмы",r_olymp:"Олимпиада",r_olymp_d:"Лютфи Заде, РФМ, РФО и международные олимпиады",cont:"Продолжить",langs_h:"Языки",langs_p:"Аудио к нашим книгам. Английский готов, другие языки скоро появятся.",lang_en:"Английский язык",lang_en_d:"Аудио A1 и A2, 432 трека",other_langs:"Другие языки",lang_ru:"Русский язык",lang_de:"Немецкий язык",lang_tr:"Турецкий язык",soon:"Скоро",ready:"Готово",en_h:"Английский <span>язык</span>",en_p:"Выберите уровень. Аудио A1 и A2 готово, аудио B1 и B2 скоро появится.",audio_rdy:"Аудио готово",audio_soon:"Аудио скоро",riy_h:"Математика",riy_p:"Ключи, правила и подготовка к олимпиадам из наших книг в одном месте.",ol_short:"Олимпиадные ключи",off_links:"Официальные образцы",real:"Пробные тесты в реальном формате",real_p:"Вопросы составлены Guvvatli Center по формату, темам и типам заданий официальной олимпиады.",book_probs:"Задачи из наших книг",pts:"балл.",sol:"Решение",home_h:"«<span>Сила</span> в знании, иначе никто никого превзойти не сможет!»",home_p:"Аудио к нашим книгам, ключи по математике и олимпиадам в одном месте. Работает и без интернета.",
  t_audio:"Аудио по английскому",d_audio:"General English A1 и A2. Student’s Book и Workbook, 432 трека",
  t_math:"Ключи по математике",d_math:"С 1 по 9 класс. Методы китайской, индийской и сингапурской школ, олимпиадные приёмы, правила и формулы, каждый с примером",
  t_olymp:"Олимпиадные ключи",d_olymp:"Лютфи Заде, РФМ, РФО, Кенгуру, SASMO, TIMO, Copernicus, AMO, FISO. Ключи к каждой олимпиаде и задачи из наших книг",
@@ -415,6 +417,7 @@ const IC={back:'<svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 18-6-6
  chat:'<svg viewBox="0 0 24 24"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3.5V15H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3.5-3H12"/></svg>',
  sig:'<svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg>',
  medal:'<svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M8.5 11 6 3h4l2 5 2-5h4l-2.5 8"/></svg>',
+ ai:'<svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5M3 12v3M21 12v3"/></svg>',
  key:'<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M14 9l2 2"/></svg>',
  head:'<svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>',
  globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
@@ -445,9 +448,9 @@ function viewHome(){
     <button class="chip ic dk" onclick="location.hash='langs'" aria-label="${t('nav_langs')}">${IC.chat}</button>
     <button class="chip" onclick="location.hash='langs'">${IC.globe}${t('nav_langs')}</button>
     <button class="chip" onclick="location.hash='riy'">${IC.sig}${t('nav_math')}</button>
-    <button class="chip" onclick="location.hash='olymp'">${IC.medal}${t('nav_olymp')}</button></div>
+    <button class="chip" onclick="location.hash='ai'">${IC.ai}${t('nav_ai')}</button></div>
   ${stack(t('sections'),t('sec_n'),'#B7D98B',
-     row({go:'langs',ic:IC.chat,t:t('r_langs'),d:t('r_langs_d')})+row({go:'riy',ic:IC.sig,t:t('r_math'),d:t('r_math_d')})+row({go:'olymp',sec:'olymp',ic:IC.medal,t:t('r_olymp'),d:t('r_olymp_d'),tag:lockTag('olymp')}),
+     row({go:'langs',ic:IC.chat,t:t('r_langs'),d:t('r_langs_d')})+row({go:'riy',ic:IC.sig,t:t('nav_math'),d:t('riy_d')})+row({go:'ai',ic:IC.ai,t:t('nav_ai'),d:t('ai_d'),tag:`<span class="tag">${t('soon')}</span>`}),
      '#F6C6D6','#C9D8F5')}
   ${last&&last.k&&isOpen('audio')?`<button class="card2" id="contBtn"><span class="pl"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span><b>${t('cont')}: ${esc(last.n||'')}</b><small>General English ${String(last.lv||'').toUpperCase()}&nbsp;&nbsp;${esc(last.t||'')}</small></span></button>`:''}
   ${(isOpen('audio')||isOpen('math')||isOpen('olymp'))?`<button class="logout" id="logout">${t('logout')}</button>`:''}
@@ -472,6 +475,11 @@ async function viewEnglish(){
   head(t('en_h'),t('en_p'));
   view.innerHTML=`<div class="tgrid">${LVS.map(([k,n,d,c,ok])=>`<button class="lvc${ok?'':' soon'}" style="background:${c}" ${ok?`data-lv="${k}"`:''}><b>${n}</b><small>${d}</small><span class="st">${ok?t('audio_rdy'):t('audio_soon')}</span><img src="/books/en/ge${k}sb_0.jpg" alt=""></button>`).join('')}</div>`;
   view.querySelectorAll('.lvc[data-lv]').forEach(b=>b.onclick=()=>{ lv=b.dataset.lv; store.set('lv',lv); location.hash='audio' });
+}
+function viewAI(){
+  theme('ai','ai'); setTitle(t('nav_ai'),'home'); staticText(); hExtra.innerHTML='';
+  head(t('ai_h'),t('ai_p'));
+  view.innerHTML=stack(t('nav_ai'),'','#C6F26B',row({soon:1,ic:IC.ai,t:t('nav_ai'),d:t('ai_d'),tag:`<span class="tag">${t('soon')}</span>`}),'#C9D8F5','#F6C6D6');
 }
 function viewRiy(){
   theme('riy','riy'); setTitle(t('nav_math'),'home'); staticText(); hExtra.innerHTML='';
@@ -628,13 +636,13 @@ function renderReal(o,id){ const box=$('rlist'); if(!box) return; const st=o.r[o
 async function needOl(){ if(OL&&OL._l===LANG) return true; view.innerHTML=`<div class="empty">${t('loading')}</div>`; const d=await loadSec('olymp','d/olymp.'+LANG+'.bin'); if(!d){location.hash='';return false} OL=d; OL._l=LANG; return true }
 async function viewOlymp(){
   if(!await gate('olymp')) return;
-  theme('olp','olymp'); setTitle(t('ol_short'),'riy'); hExtra.innerHTML=''; staticText(); head(t('ol_h'),t('ol_p'));
+  theme('olp','riy'); setTitle(t('ol_short'),'riy'); hExtra.innerHTML=''; staticText(); head(t('ol_h'),t('ol_p'));
   if(!await needOl()) return;
   view.innerHTML=`<div class="ogrid">${OL.map(o=>`<button class="oc" onclick="location.hash='o/${o.id}'"><b>${esc(o.name)}</b><small>${esc(o.lv)}</small><span class="n">${o.keys.length} ${pl(o.keys.length,'keys')}&nbsp;&nbsp;${o.p.length} ${pl(o.p.length,'problems')}</span></button>`).join('')}</div>`;
 }
 async function viewOlympOne(id){
   if(!await gate('olymp')) return;
-  theme('olp','olymp'); hExtra.innerHTML=''; staticText();
+  theme('olp','riy'); hExtra.innerHTML=''; staticText();
   if(!await needOl()) return;
   const o=OL.find(x=>x.id===id); if(!o){location.hash='olymp';return}
   setTitle(esc(o.name),'olymp'); head(esc(o.name));
@@ -686,6 +694,7 @@ function route(){
   if(h==='langs') viewLangs();
   else if(h==='en') viewEnglish();
   else if(h==='riy') viewRiy();
+  else if(h==='ai') viewAI();
   else if(h==='audio') viewAudio();
   else if(h==='math') viewMath();
   else if(h.startsWith('m/')) viewMathItem(+h.slice(2));
