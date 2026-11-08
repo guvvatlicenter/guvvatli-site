@@ -138,18 +138,19 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:calc(12p
 .pq .src{font-size:12px;color:var(--muted);margin-bottom:6px}
 .pq .tx{font-size:15px;line-height:1.6}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
-.opts span{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:14px}
-.opts span.ok{background:var(--pale);font-weight:700}
+.opts>span{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:14px}
+.opts>span.ok{background:var(--pale);font-weight:700}
 .pbtn{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .pbtn button{border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600}
 .pbtn button.k{border-color:var(--acc);color:var(--acc)}
 .reveal{margin-top:10px;background:var(--pale);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.55}
 .reveal p{margin:0 0 6px}
 .katex{font-size:1.06em}
-.opts span .katex{font-size:1em}
+.tx,.reveal,.card p,.steps p,.way p{line-height:1.75}
+.opts>span .katex{font-size:1em}
 .fig{background:#fff;border-radius:12px;padding:8px;margin-top:10px;text-align:center}
 .fig svg{max-width:100%;height:auto;max-height:260px}
-.opts span svg{max-width:100%;height:auto;max-height:90px;background:#fff;border-radius:8px}
+.opts>span svg{max-width:100%;height:auto;max-height:90px;background:#fff;border-radius:8px}
 .links{display:flex;flex-direction:column;gap:8px}
 .links a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600}
 .links a small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px;word-break:break-all}
@@ -485,7 +486,8 @@ async function viewMathItem(i,back){
 
 /* ---------------- olympiads ---------------- */
 const olShown={}, olGrade={}, olSet={};
-function renderReal(o,id){ const box=$('rlist'); if(!box) return; const st=o.r[olSet[id]||0]; box.innerHTML=st.format?`<div class="card" style="margin-top:10px"><p>${esc(st.format)}</p></div>`:'';
+function setLabel(r,j){ const g=r[j].g; let l; if(typeof g==='number'||/^\d+$/.test(String(g))) l=t('grade',{g:ordz(+g)}); else l=String(g).replace('-','–')+' '+({az:'siniflər',en:'grades',ru:'классы'}[LANG]); const same=r.filter(x=>String(x.g)===String(g)).length>1; if(same) l+=' ('+(r.filter((x,k)=>k<=j&&String(x.g)===String(g)).length)+')'; return esc(l) }
+function renderReal(o,id){ const box=$('rlist'); if(!box) return; const st=o.r[olSet[id]||0]; box.innerHTML=`<div class="card" style="margin-top:10px"><h3>${esc(st.title||'')}</h3>${st.format?`<p>${st.format}</p>`:''}</div>`;
   st.questions.forEach(q=>{ const d=document.createElement('div'); d.className='pq';
     d.innerHTML=`<div class="src"><span class="qn">${q.n}</span>${q.pts?'&nbsp;&nbsp;'+q.pts+' '+t('pts'):''}</div><div class="tx">${q.q}</div>${q.fig?`<div class="fig">${q.fig}</div>`:''}${q.opts?`<div class="opts">${q.opts.map((x,k)=>`<span data-k="${k}">${'ABCDE'[k]}) ${x}</span>`).join('')}</div>`:''}<div class="pbtn"><button data-a="a">${t('answer')}</button></div><div class="rv"></div>`;
     d.querySelector('[data-a=a]').onclick=()=>{ d.querySelector('.rv').innerHTML=`<div class="reveal"><b>${t('answer')}:</b> ${q.ans_text||''}${q.sol?`<p style="margin-top:6px"><b>${t('sol')}.</b> ${q.sol}</p>`:''}</div>`; if(q.ans!==null&&q.ans!==undefined){const sp=d.querySelector(`.opts span[data-k="${q.ans}"]`); if(sp) sp.classList.add('ok')} };
@@ -513,7 +515,7 @@ async function viewOlympOne(id){
   const kshow=olShown[id+'k']?keys:keys.slice(0,14);
   view.innerHTML=`<div class="card" style="margin-top:6px"><h3>${esc(o.lv)}</h3><p>${esc(o.d)}</p></div>
   ${(o.links&&o.links.length)?`<div class="osec">${t('off_links')}</div><div class="links">${o.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${esc(l.t)}<small>${esc(l.u.replace(/^https?:\/\//,''))}</small></a>`).join('')}</div>`:''}
-  ${(o.r&&o.r.length)?`<div class="osec">${t('real')}</div><p style="color:var(--muted);font-size:13px;margin:0 2px 8px">${t('real_p')}</p><div class="sets">${o.r.map((st,j)=>`<button data-s="${j}" class="${j===(olSet[id]||0)?'on':''}">${esc(st.title)}</button>`).join('')}</div><div id="rlist"></div>`:''}
+  ${(o.r&&o.r.length)?`<div class="osec">${t('real')}</div><p style="color:var(--muted);font-size:13px;margin:0 2px 8px">${t('real_p')}</p><div class="sets">${o.r.map((st,j)=>`<button data-s="${j}" class="${j===(olSet[id]||0)?'on':''}">${setLabel(o.r,j)}</button>`).join('')}</div><div id="rlist"></div>`:''}
   ${keys.length?`<div class="osec">${t('ol_keys')}</div><div class="kchips">${kshow.map(i=>`<button class="kchip" onclick="location.hash='mk/${i}/${id}'">${esc(kname(i))}<i>${t('grade',{g:ordz(MATH.items[i].g)})}</i></button>`).join('')}</div>${keys.length>kshow.length?`<button class="more" id="kmore">${t('show_all',{n:keys.length})}</button>`:''}`:''}
   <div class="osec">${t('book_probs')}</div>
   ${grades.length>1?`<div class="grades" style="margin-top:0">${grades.map(x=>`<button data-g="${x}" class="${x===g?'on':''}">${x}</button>`).join('')}</div>`:''}
@@ -533,7 +535,7 @@ async function viewOlympOne(id){
       if(b.dataset.m){location.hash='mk/'+b.dataset.m+'/'+id;return}
       const rv=d.querySelector('.rv');
       if(b.dataset.a==='h') rv.innerHTML=`<div class="reveal"><b>${t('hint')}.</b> ${p.h}</div>`;
-      else { rv.innerHTML=`<div class="reveal">${p.th?`<p>${p.th}</p>`:''}${p.s?p.s.map(x=>`<p>${x}</p>`).join(''):''}<b>${t('answer')}:</b> ${p.a}</div>`; d.querySelectorAll('.opts span').forEach(sp=>{ if(sp.dataset.v===String(p.a)) sp.classList.add('ok') }); }
+      else { rv.innerHTML=`<div class="reveal">${p.th?`<p>${p.th}</p>`:''}${p.s?p.s.map(x=>`<p>${x}</p>`).join(''):''}<b>${t('answer')}:</b> ${p.a}</div>`; d.querySelectorAll('.opts>span').forEach(sp=>{ if(sp.dataset.v===String(p.a)) sp.classList.add('ok') }); }
     });
     box.appendChild(d);
   });
@@ -542,7 +544,7 @@ async function viewOlympOne(id){
 
 /* ---------------- math typesetting ---------------- */
 let kmT=null;
-function km(){ clearTimeout(kmT); kmT=setTimeout(()=>{ if(window.renderMathInElement){ try{ renderMathInElement(view,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredClasses:['katex']}) }catch(e){} } else km(); },30) }
+function km(){ clearTimeout(kmT); kmT=setTimeout(()=>{ if(window.renderMathInElement){ try{ renderMathInElement(view,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredClasses:['katex'],macros:{'\\frac':'\\dfrac'}}) }catch(e){} } else km(); },30) }
 new MutationObserver(m=>{ if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains('katex'))&&!n.closest?.('.katex')))) km() }).observe(view,{childList:true,subtree:true});
 
 /* ---------------- router ---------------- */
