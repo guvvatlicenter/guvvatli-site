@@ -399,7 +399,7 @@ p{margin:0}
 .wallhint{margin:44px 0 0;text-align:center;color:var(--muted-dark);font-size:14px}
 .room{animation:roomin .7s var(--ease) both}
 @keyframes roomin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-.roomtop{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-60px 0 40px;flex-wrap:wrap}
+.roomtop{position:relative;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-60px 0 40px;flex-wrap:wrap}
 .roomtop .back{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:11px 18px 11px 34px;cursor:pointer;font:inherit;font-size:14px;color:inherit;position:relative;transition:background .3s}
 .roomtop .back::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-50%) rotate(45deg)}
 .roomtop .back:hover{background:rgba(255,255,255,.16)}
