@@ -319,6 +319,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .wdone button{margin-top:16px;background:var(--ink);color:var(--bg);border-radius:18px;padding:13px 20px;font-weight:700}
 .row .ri .aa{font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
 .nw{white-space:nowrap}
+.row .ri svg.fcic{width:36px;height:36px;stroke:none;fill:none}
 .card2 .pl.aa{font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:#fff}
 </style>
 </head>
@@ -755,6 +756,7 @@ new MutationObserver(m=>{ if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&
 
 
 
+const IC_FC='<svg class="fcic" viewBox="5 4 30 33"><rect x="8" y="7" width="19" height="25" rx="4" transform="rotate(-14 17.5 19.5)" style="fill:var(--acc);opacity:.3"/><rect x="10" y="7" width="19" height="25" rx="4" transform="rotate(-5 19.5 19.5)" style="fill:var(--acc);opacity:.6"/><g transform="rotate(7 22 21)"><rect x="12.5" y="8.5" width="19" height="25" rx="4" style="fill:#fff;stroke:var(--acc);stroke-width:1.8"/><rect x="16" y="14" width="12" height="3.2" rx="1.6" style="fill:var(--acc)"/><rect x="17.5" y="19.5" width="9" height="2" rx="1" style="fill:var(--acc);opacity:.45"/><path d="M25.5 27.2a3.2 3.2 0 1 1-1-2.3" style="fill:none;stroke:var(--acc);stroke-width:1.5;stroke-linecap:round"/><path d="M24.2 23.6l.5 1.6-1.6.4" style="fill:none;stroke:var(--acc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"/></g></svg>';
 async function viewLevel(){
   if(!await gate('audio')) return;
   if(!['a1','a2','b1','b2'].includes(lv)) lv='a1';
@@ -762,7 +764,7 @@ async function viewLevel(){
   head(`General English <span>${lv.toUpperCase()}</span>`,t('lv_p'));
   const fc={a1:'#F4A896',a2:'#8FD3CC',b1:'#AEBEF2',b2:'#D3B5EE'}[lv];
   const rows=(lv==='b1'||lv==='b2'?row({soon:1,img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_soon_d'),tag:`<span class="tag">${t('soon')}</span>`}):row({go:'audio',img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_audio_d')}))
-    +row({go:'words',ic:'<b class="aa">Aa</b>',t:t('wc_t'),d:t('wc_d').replace('{n}',WN[lv])});
+    +row({go:'words',ic:IC_FC,t:t('wc_t'),d:t('wc_d').replace('{n}',WN[lv])});
   view.innerHTML=stack('General English '+lv.toUpperCase(),{a1:'Beginner',a2:'Elementary',b1:'Intermediate',b2:'Upper Intermediate'}[lv],fc,rows,{a1:'#FCE3DC',a2:'#DDF1EF',b1:'#E3E8FB',b2:'#EFE4FA'}[lv],'#F9D9A8');
   wireRows();
 }
