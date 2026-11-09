@@ -371,6 +371,41 @@ p{margin:0}
 .shelf .shgap{flex:0 0 clamp(48px,7vw,96px)}
 @media (max-width:860px){.lib .hd{grid-template-columns:1fr}.shelf{justify-content:flex-start}}
 
+
+/* wall cabinets */
+.wall{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,7vw,110px);padding-top:10px}
+.cab{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:14px;-webkit-tap-highlight-color:transparent;transition:opacity .5s var(--ease),transform .9s var(--ease)}
+.cab:focus-visible .box{outline:3px solid var(--lime);outline-offset:6px}
+.cab .plate{font-family:var(--display);font-weight:800;font-size:clamp(13px,1.2vw,16px);letter-spacing:.18em;text-transform:uppercase;color:#3B2410;background:linear-gradient(180deg,#F6DFA3 0%,#D9AF5E 55%,#B98A3A 100%);padding:9px 20px 8px;border-radius:6px;box-shadow:0 2px 0 #7C5521,0 8px 16px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6)}
+.cab .box{position:relative;display:block;width:clamp(140px,26vw,320px);aspect-ratio:27/32;border-radius:8px;padding:14px;background:linear-gradient(180deg,#A0612F 0%,#7E4520 45%,#5A2D12 100%);box-shadow:0 30px 40px -18px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.12);perspective:900px}
+.cab .inner{position:absolute;inset:14px;border-radius:3px;background:linear-gradient(180deg,#2A1607,#3A1F0A);display:flex;flex-direction:column;box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
+.cab .row{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:0 10px;border-bottom:8px solid #6B3818;overflow:hidden}
+.cab .row:last-child{border-bottom-width:0}
+.cab .row i{display:block;width:9px;border-radius:2px 2px 1px 1px;box-shadow:inset -2px 0 3px rgba(0,0,0,.25)}
+.cab .door{position:absolute;top:14px;bottom:14px;width:calc(50% - 14px);border-radius:3px;border:clamp(6px,.7vw,9px) solid #8A4F24;border-top-color:#9A5A2A;border-bottom-color:#6E3A17;box-shadow:0 0 0 1px rgba(0,0,0,.3),0 6px 14px rgba(0,0,0,.25);transition:transform .9s cubic-bezier(.6,0,.2,1)}
+.cab .door.l{left:14px;transform-origin:left center}
+.cab .door.r{right:14px;transform-origin:right center}
+.cab .pane{display:block;width:100%;height:100%;border-radius:2px;background:linear-gradient(125deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.06) 30%,rgba(255,255,255,0) 46%,rgba(255,255,255,.12) 60%,rgba(255,255,255,.03) 100%),rgba(190,220,230,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.cab .knob{position:absolute;top:50%;width:7px;height:7px;margin-top:-3px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF2C2,#C9973F 60%,#7C5521)}
+.cab .door.l .knob{right:-8px}.cab .door.r .knob{left:-8px}
+.cab:hover .door.l{transform:rotateY(-14deg)}.cab:hover .door.r{transform:rotateY(14deg)}
+.cab.open .door.l{transform:rotateY(-108deg)}.cab.open .door.r{transform:rotateY(108deg)}
+.cab .cnt{color:var(--muted-dark);font-size:14px}
+@media (max-width:600px){.cab .inner,.cab .door{top:10px;bottom:10px}.cab .box{padding:10px}.cab .inner{inset:10px}.cab .door.l{left:10px}.cab .door.r{right:10px}.cab .door{width:calc(50% - 10px)}.cab .row i{width:6px}.cab .plate{padding:7px 12px 6px;letter-spacing:.12em}}
+.wall.go .cab:not(.open){opacity:0;transform:scale(.92)}
+.wall.go .cab.open{transform:scale(1.18)}
+.wall.out{opacity:0;transform:scale(1.25);transition:opacity .45s ease,transform .6s var(--ease)}
+.wall{transition:opacity .45s ease,transform .6s var(--ease)}
+.wallhint{margin:44px 0 0;text-align:center;color:var(--muted-dark);font-size:14px}
+.room{animation:roomin .7s var(--ease) both}
+@keyframes roomin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.roomtop{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-60px 0 40px;flex-wrap:wrap}
+.roomtop .back{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:11px 18px 11px 34px;cursor:pointer;font:inherit;font-size:14px;color:inherit;position:relative;transition:background .3s}
+.roomtop .back::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-50%) rotate(45deg)}
+.roomtop .back:hover{background:rgba(255,255,255,.16)}
+.roomtop .roomt{font-family:var(--display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#E9D7BE;font-size:clamp(14px,1.2vw,17px)}
+@media (prefers-reduced-motion:reduce){.cab .door,.room,.wall{transition:none;animation:none}}
+
 /* ========== FLIP MODAL ========== */
 .modal{position:fixed;inset:0;z-index:80;background:rgba(10,14,16,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:calc(20px + env(safe-area-inset-top,0px)) var(--gut-r) calc(20px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
 .modal .mt{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;max-width:1600px;flex:0 0 auto}
@@ -929,20 +964,46 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
     <div class="hd">
       <h2 class="rv">Kitabxana</h2>
     </div>
-    <div class="stage">
-      <div class="spot" aria-hidden="true"></div>
-      <div class="shelfwrap"><div class="shelf" id="shelf"></div></div>
-      <div class="plank" aria-hidden="true"></div>
+    <div class="wall" id="wall">
+      <button type="button" class="cab" data-room="math" aria-label="Riyaziyyat rəfini aç">
+        <span class="plate">Riyaziyyat</span>
+        <span class="box"><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span></span>
+        <span class="cnt"></span>
+      </button>
+      <button type="button" class="cab" data-room="lang" aria-label="Dillər rəfini aç">
+        <span class="plate">Dillər</span>
+        <span class="box"><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span></span>
+        <span class="cnt"></span>
+      </button>
     </div>
-    <p class="libsub">Riyaziyyat rəfi</p>
-    <div class="shelfnote"><span>Hər kitab üç dildə: Azərbaycan, ingilis, rus</span><span>Dərslik geniş, iş kitabı ensiz cilddədir</span></div>
-    <div class="stage stage2">
-      <div class="spot" aria-hidden="true"></div>
-      <div class="shelfwrap"><div class="shelf" id="shelfEn"></div></div>
-      <div class="plank" aria-hidden="true"></div>
+    <p class="wallhint">Rəfə toxunun, qapıları açılsın</p>
+    <div class="room" id="room-math" hidden>
+      <div class="roomtop"><button type="button" class="back">Bütün rəflər</button><span class="roomt">Riyaziyyat</span></div>
+      <div class="stage">
+        <div class="spot" aria-hidden="true"></div>
+        <div class="shelfwrap"><div class="shelf" id="shelf"></div></div>
+        <div class="plank" aria-hidden="true"></div>
+      </div>
+      <p class="libsub">Riyaziyyat rəfi</p>
+      <div class="shelfnote"><span>Hər kitab üç dildə: Azərbaycan, ingilis, rus</span><span>Dərslik geniş, iş kitabı ensiz cilddədir</span></div>
     </div>
-    <p class="libsub">İngilis dili rəfi</p>
-    <div class="shelfnote"><span>English Kids: 6 səviyyə, 6-12 yaş</span><span>General English A1, A2, B1 və B2: dərslik və iş kitabı, nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun</span></div>
+    <div class="room" id="room-lang" hidden>
+      <div class="roomtop"><button type="button" class="back">Bütün rəflər</button><span class="roomt">Dillər</span></div>
+      <div class="stage">
+        <div class="spot" aria-hidden="true"></div>
+        <div class="shelfwrap"><div class="shelf" id="shelfEn"></div></div>
+        <div class="plank" aria-hidden="true"></div>
+      </div>
+      <p class="libsub">İngilis dili rəfi</p>
+      <div class="shelfnote"><span>English Kids: 6 səviyyə, 6-12 yaş</span><span>General English A1, A2, B1 və B2: dərslik və iş kitabı, nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun</span></div>
+      <div class="stage stage2">
+        <div class="spot" aria-hidden="true"></div>
+        <div class="shelfwrap"><div class="shelf" id="shelfZh"></div></div>
+        <div class="plank" aria-hidden="true"></div>
+      </div>
+      <p class="libsub">Çin dili rəfi</p>
+      <div class="shelfnote"><span>Çin dili A1: dərslik və iş dəftəri, izah dili Azərbaycan dili</span><span>Nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun</span></div>
+    </div>
   </div>
 </section>
 
@@ -1061,6 +1122,7 @@ Object.assign(I18N.en,{"Cavab": "Response", "24 saat ərzində": "Within 24 hour
 Object.assign(I18N.en,{"Sektor":"Sector"});Object.assign(I18N.ru,{"Sektor":"Сектор"});
 Object.assign(I18N.en,{"Süni İntellekt":"Artificial Intelligence"});Object.assign(I18N.ru,{"Süni İntellekt":"Искусственный интеллект"});
 Object.assign(I18N.en,{"Valideynlərimizin bizə yazdıqları, olduğu kimi.": "What our parents wrote to us, word for word.", "Mən də əvvəl onlayn dərsə bir az tərəddüdlə yanaşırdım. Fikirləşirdim uşaq ekrandan nə qədər öyrənəcək. Amma indi görürəm ki, boşuna narahat olmuşam. Dərsdən sonra da oturub olimpiada sualları işləyir.": "At first I was a bit hesitant about online lessons. I wondered how much a child could learn from a screen. Now I see I worried for nothing. Even after class he sits down and works on olympiad problems.", "Arzu xanım": "Mrs. Arzu", "Əli, 6-cı sinif": "Ali, 6th grade", "Düzü bir neçə yerə getmişdik, uşaq heç birində çox həvəsli deyildi. Burada isə özü istəyərək dərsə girir. Müəllimin uşaqlarla münasibəti də çox xoşuma gəlir. İnşallah olimpiadada da yaxşı nəticələrimiz olar 🤲": "Honestly, we had tried several places and he was never very keen. Here he joins the lessons because he wants to. I also really like how the teacher treats the children. Hopefully we will get good results at the olympiad too 🤲", "Çimnaz xanım": "Mrs. Chimnaz", "Səfər, 5-ci sinif": "Safar, 5th grade", "Dünən qızımın ingiliscə danışdığını eşidəndə çox sevindim. Əvvəl səhv edərəm deyə heç ağzını açmırdı. İndi səhv də etsə danışır, çəkinmir. Müəlliməsinə çox təşəkkür edirəm, uşağa özgüvən verib.": "Yesterday I was so happy to hear my daughter speaking English. Before, she would not say a word for fear of making a mistake. Now she speaks even if she makes mistakes, without hesitation. Many thanks to her teacher for giving her confidence.", "Ellada xanım": "Mrs. Ellada", "Ayla, 7-ci sinif": "Ayla, 7th grade", "İlk dəfə eşidəndə dedim bu yaşda uşaq süni intellekti necə öyrənəcək axı 😅 Amma gördüm ki, çox maraqlı formada keçirlər. Qızım hər dərsdən sonra yeni bir şey göstərir. Hətta mən də bəzi şeyləri ondan öyrənirəm 😂": "When I first heard about it, I thought how can a child this age learn artificial intelligence 😅 But I saw the lessons are really engaging. After every lesson my daughter shows me something new. I even learn a few things from her 😂", "İlkin bəy": "Mr. Ilkin", "Dilarə, 3-cü sinif": "Dilara, 3rd grade", "Vallah əvvəllər oğlumu oturdub riyaziyyat elətdirə bilmirdim. İndi özü gəlib mənə sual göstərir ki, mama bax bunu necə həll eləmişəm. Çox sevinirəm. Müəllimimizə də ayrıca təşəkkür edirəm ❤️": "Honestly, I used to be unable to get my son to sit down and do math. Now he comes to me himself and says, mum, look how I solved this. I am so happy. A special thank you to our teacher ❤️", "Pərvanə xanım": "Mrs. Parvana", "Kənan, 5-ci sinif": "Kanan, 5th grade"});Object.assign(I18N.ru,{"Valideynlərimizin bizə yazdıqları, olduğu kimi.": "Что нам написали родители, слово в слово.", "Mən də əvvəl onlayn dərsə bir az tərəddüdlə yanaşırdım. Fikirləşirdim uşaq ekrandan nə qədər öyrənəcək. Amma indi görürəm ki, boşuna narahat olmuşam. Dərsdən sonra da oturub olimpiada sualları işləyir.": "Сначала я немного сомневалась в онлайн уроках. Думала, сколько ребёнок сможет усвоить с экрана. Но теперь вижу, что волновалась зря. Даже после урока он садится и решает олимпиадные задачи.", "Arzu xanım": "Арзу ханым", "Əli, 6-cı sinif": "Али, 6 класс", "Düzü bir neçə yerə getmişdik, uşaq heç birində çox həvəsli deyildi. Burada isə özü istəyərək dərsə girir. Müəllimin uşaqlarla münasibəti də çox xoşuma gəlir. İnşallah olimpiadada da yaxşı nəticələrimiz olar 🤲": "Честно говоря, мы ходили в несколько мест, и нигде ребёнок не проявлял особого интереса. А здесь он сам с желанием заходит на урок. Мне очень нравится, как учитель общается с детьми. Даст Бог, и на олимпиаде будут хорошие результаты 🤲", "Çimnaz xanım": "Чимназ ханым", "Səfər, 5-ci sinif": "Сафар, 5 класс", "Dünən qızımın ingiliscə danışdığını eşidəndə çox sevindim. Əvvəl səhv edərəm deyə heç ağzını açmırdı. İndi səhv də etsə danışır, çəkinmir. Müəlliməsinə çox təşəkkür edirəm, uşağa özgüvən verib.": "Вчера я очень обрадовалась, услышав, как моя дочь говорит по английски. Раньше она боялась ошибиться и молчала. Теперь говорит, даже если ошибается, и не стесняется. Огромное спасибо её учительнице, она дала ребёнку уверенность.", "Ellada xanım": "Эллада ханым", "Ayla, 7-ci sinif": "Айла, 7 класс", "İlk dəfə eşidəndə dedim bu yaşda uşaq süni intellekti necə öyrənəcək axı 😅 Amma gördüm ki, çox maraqlı formada keçirlər. Qızım hər dərsdən sonra yeni bir şey göstərir. Hətta mən də bəzi şeyləri ondan öyrənirəm 😂": "Когда я впервые услышал, подумал: как ребёнок в таком возрасте будет изучать искусственный интеллект 😅 Но увидел, что уроки проходят очень интересно. После каждого урока дочь показывает что то новое. Я даже сам кое чему у неё учусь 😂", "İlkin bəy": "Ильгин бей", "Dilarə, 3-cü sinif": "Дилара, 3 класс", "Vallah əvvəllər oğlumu oturdub riyaziyyat elətdirə bilmirdim. İndi özü gəlib mənə sual göstərir ki, mama bax bunu necə həll eləmişəm. Çox sevinirəm. Müəllimimizə də ayrıca təşəkkür edirəm ❤️": "Честно, раньше я не могла усадить сына за математику. А теперь он сам подходит и говорит: мама, смотри, как я это решил. Я очень рада. Отдельное спасибо нашему учителю ❤️", "Pərvanə xanım": "Парвана ханым", "Kənan, 5-ci sinif": "Канан, 5 класс"});
+Object.assign(I18N.en,{"Riyaziyyat": "Mathematics", "Dillər": "Languages", "Bütün rəflər": "All shelves", "Rəfə toxunun, qapıları açılsın": "Tap a shelf to open its doors", "Riyaziyyat rəfi": "Mathematics shelf", "Çin dili rəfi": "Chinese shelf", "Çin dili A1: dərslik və iş dəftəri, izah dili Azərbaycan dili": "Chinese A1: Student&#8217;s Book and Workbook, explained in Azerbaijani", "Nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun": "Tap a book to see sample pages", "Riyaziyyat rəfini aç": "Open the mathematics shelf", "Dillər rəfini aç": "Open the languages shelf"});Object.assign(I18N.ru,{"Riyaziyyat": "Математика", "Dillər": "Языки", "Bütün rəflər": "Все полки", "Rəfə toxunun, qapıları açılsın": "Нажмите на полку, чтобы открыть дверцы", "Riyaziyyat rəfi": "Полка математики", "Çin dili rəfi": "Полка китайского языка", "Çin dili A1: dərslik və iş dəftəri, izah dili Azərbaycan dili": "Китайский A1: учебник и рабочая тетрадь с объяснениями на азербайджанском", "Nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun": "Нажмите на книгу, чтобы посмотреть страницы", "Riyaziyyat rəfini aç": "Открыть полку математики", "Dillər rəfini aç": "Открыть полку языков"});
 const D=I18N[L]||{};
 const pick=o=>o[L]||o.az;
 const UI=pick({
@@ -1157,6 +1219,41 @@ GE.forEach((bk,k)=>{const i=BOOKS.length;BOOKS.push(bk);const wb=bk.t==='wb';con
   el.style.zIndex=40-k; el.classList.add('rs');
   el.addEventListener('click',()=>openBook(i));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openBook(i);}});
   shelfEn.appendChild(el);});}
+// chinese shelf
+const shelfZh=$('#shelfZh');
+const ZH=[{"name": "Çin dili A1, Dərslik", "t": "tb", "g": "A1", "c": "#C8102E", "tc": "#FFF4DE", "ar": 1.367, "p": ["books/en/zha1sb_0.jpg"], "pg": [["ch/zha1sb_0.jpg", 0], ["ch/zha1sb_0.jpg", 1], ["ch/zha1sb_0.jpg", 2], ["ch/zha1sb_0.jpg", 3], ["ch/zha1sb_1.jpg", 0], ["ch/zha1sb_1.jpg", 1], ["ch/zha1sb_1.jpg", 2], ["ch/zha1sb_1.jpg", 3], ["ch/zha1sb_2.jpg", 0], ["ch/zha1sb_2.jpg", 1], ["ch/zha1sb_2.jpg", 2], ["ch/zha1sb_2.jpg", 3], ["ch/zha1sb_3.jpg", 0], ["ch/zha1sb_3.jpg", 1], ["ch/zha1sb_3.jpg", 2], ["ch/zha1sb_3.jpg", 3], ["ch/zha1sb_4.jpg", 0], ["ch/zha1sb_4.jpg", 1], ["ch/zha1sb_4.jpg", 2], ["ch/zha1sb_4.jpg", 3], ["ch/zha1sb_5.jpg", 0], ["ch/zha1sb_5.jpg", 1]]}, {"name": "Çin dili A1, İş dəftəri", "t": "wb", "g": "A1", "c": "#FFFFFF", "tc": "#C8102E", "ar": 1.367, "p": ["books/en/zha1wb_0.jpg"], "pg": [["ch/zha1wb_0.jpg", 0], ["ch/zha1wb_0.jpg", 1], ["ch/zha1wb_0.jpg", 2], ["ch/zha1wb_0.jpg", 3], ["ch/zha1wb_1.jpg", 0], ["ch/zha1wb_1.jpg", 1], ["ch/zha1wb_1.jpg", 2], ["ch/zha1wb_1.jpg", 3], ["ch/zha1wb_2.jpg", 0], ["ch/zha1wb_2.jpg", 1], ["ch/zha1wb_2.jpg", 2], ["ch/zha1wb_2.jpg", 3], ["ch/zha1wb_3.jpg", 0], ["ch/zha1wb_3.jpg", 1], ["ch/zha1wb_3.jpg", 2], ["ch/zha1wb_3.jpg", 3]]}];
+if(shelfZh){ZH.forEach((bk,k)=>{const i=BOOKS.length;BOOKS.push(bk);const wb=bk.t==='wb';const el=document.createElement('div');
+  el.className='book ge'+(wb?' wb':'');el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',`${bk.name}. ${UI.leaf}`);
+  el.style.setProperty('--c',bk.c);el.style.setProperty('--tc',bk.tc);el.style.setProperty('--img',`url("${bk.p[0]}")`);
+  el.innerHTML=`<div class="bk3"><div class="tp"></div><div class="sp"><span class="n">${bk.g}</span><span class="vt">${wb?'İş dəftəri':'Çin dili'}</span><span class="mk"></span></div><div class="cv"></div></div>`;
+  el.style.zIndex=10-k;if(wb)el.classList.add('rs');
+  el.addEventListener('click',()=>openBook(i));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openBook(i);}});
+  shelfZh.appendChild(el);});}
+
+// wall cabinets: two glass doors open together, then the shelf inside opens
+const wall=$('#wall');
+if(wall){
+  const roomBooks={math:['#shelf'],lang:['#shelfEn','#shelfZh']};
+  const KBOOK={az:'kitab',en:'books',ru:'книг'}[L]||'kitab';
+  const spineCols=room=>roomBooks[room].flatMap(sel=>$$(sel+' .book').map(b=>[b.style.getPropertyValue('--c'),b.classList.contains('wb')]));
+  $$('.cab',wall).forEach(cab=>{const room=cab.dataset.room;const cols=spineCols(room);
+    $('.cnt',cab).textContent=cols.length+' '+KBOOK;
+    const rows=$$('.row',cab);const half=Math.ceil(cols.length/2);
+    cols.forEach(([c,wb],k)=>{const i=document.createElement('i');i.style.background=c||'#ccc';i.style.height=(wb?62:72)+(k%3)*4+'%';if(wb)i.style.width='7px';rows[k<half?0:1].appendChild(i);});
+    cab.addEventListener('click',()=>openRoom(room,cab));});
+  const sec=$('#kitabxana'),hint=$('.wallhint');
+  const toTop=()=>{const y=sec.getBoundingClientRect().top+window.scrollY;lenis?lenis.scrollTo(y,{duration:1}):window.scrollTo({top:y,behavior:'smooth'});};
+  function drop(sel){if(window.gsap)gsap.from(sel+' .book',{y:-520,rotateZ:()=>(Math.random()-.5)*30,opacity:0,duration:1.4,ease:'bounce.out',stagger:{each:.07,from:'random'}});}
+  function openRoom(room,cab){if(wall.classList.contains('go'))return;
+    cab.classList.add('open');wall.classList.add('go');
+    setTimeout(()=>{wall.classList.add('out');},850);
+    setTimeout(()=>{wall.hidden=true;hint.hidden=true;wall.classList.remove('go','out');
+      const r=$('#room-'+room);r.hidden=false;toTop();roomBooks[room].forEach(drop);
+      window.ScrollTrigger&&ScrollTrigger.refresh();$('.back',r).focus({preventScroll:true});},1250);}
+  $$('.room .back').forEach(b=>b.addEventListener('click',()=>{const r=b.closest('.room');r.hidden=true;
+    wall.hidden=false;hint.hidden=false;toTop();const cab=$('.cab.open',wall);
+    setTimeout(()=>{cab&&cab.classList.remove('open');cab&&cab.focus({preventScroll:true});window.ScrollTrigger&&ScrollTrigger.refresh();},350);}));
+}
 
 /* ---------- flipbook modal ---------- */
 let pf=null, lenis=null, lastFocus=null;
@@ -1634,8 +1731,6 @@ G.timeline({scrollTrigger:{trigger:'.sch',start:'top top',end:'+=110%',scrub:.8,
   .from('.ty',{y:120,opacity:0,stagger:.12,duration:.4,ease:'power2.out'},.4);
 
 // ---------- library: books drop in ----------
-G.from('#shelf .book',{y:-520,rotateZ:()=>(Math.random()-.5)*30,opacity:0,duration:1.4,ease:'bounce.out',stagger:{each:.07,from:'random'},scrollTrigger:{trigger:'#shelf',start:'top 80%',once:true}});
-G.from('#shelfEn .book',{y:-520,rotateZ:()=>(Math.random()-.5)*30,opacity:0,duration:1.4,ease:'bounce.out',stagger:{each:.07,from:'random'},scrollTrigger:{trigger:'#shelfEn',start:'top 80%',once:true}});
 
 // ---------- voices cards ----------
 G.from('.vc',{x:200,opacity:0,rotate:4,stagger:.1,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.vtrack',start:'top 85%',once:true}});
