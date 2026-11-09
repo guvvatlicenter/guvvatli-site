@@ -307,6 +307,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .ff.fr .ww.hz{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-weight:700;letter-spacing:.04em}
 .ff.fb .bw .bp{display:block;font-family:Onest,system-ui,sans-serif;font-weight:600;font-size:15px;color:var(--muted);margin-top:4px}
 .ff.fb .hzt{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;font-size:19px;font-weight:600}
+.ff.fb .hzt mark{background:none;color:var(--acc);font-weight:800}
 .ff.fb .pyt{font-size:14px;color:var(--muted);margin-top:2px}
 .ff.fb .wt.sm{font-size:14px;margin-top:4px}
 .ff.fb .tr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -785,7 +786,7 @@ async function viewZh(){
   wireRows();
 }
 /* ---------------- word cards ---------------- */
-const WN={a1:592,a2:614,b1:548,b2:553,zh:ZHN}, WDS={}; let wlv='a1', WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
+const WN={a1:592,a2:614,b1:548,b2:553,zh:497}, WDS={}; let wlv='a1', WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
 const wknown=new Set(store.get('wk',[]));
 const nb=h=>h.replace(/(^|[\s(>])([^\s<>()]*[-‑][^\s<>()]*)/g,'$1<span class="nw">$2</span>');
 const wid=x=>(wlv==='a1'?'':wlv+'|')+x[0]+'|'+x[2];
@@ -851,7 +852,7 @@ function renderWords(){
 function zsay(txt){ try{ const u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; const v=speechSynthesis.getVoices().find(v=>/zh[-_]CN/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang)); if(v)u.voice=v; u.rate=.8; speechSynthesis.cancel(); speechSynthesis.speak(u) }catch(e){} }
 function renderZhCard(x,known,set,kn,opts){
   const [u,g,hz,py,pos,def,syn,exz,exp,exa,az,ru]=x;
-  const exH=esc(exz).split(esc(hz)).join(`<mark>${esc(hz)}</mark>`);
+  let exH=esc(exz); hz.split(/\s*\/\s*|…/).map(z=>z.trim()).filter(Boolean).forEach(z=>{exH=exH.split(esc(z)).join(`<mark>${esc(z)}</mark>`)});
   view.innerHTML=`<div class="wtop"><span>${wi+1} / ${wdeck.length}</span><span>${kn} / ${set.length} ${t('wc_known')}</span></div>
   <div class="wbar"><i style="width:${set.length?kn/set.length*100:0}%"></i></div>
   <div class="fc" id="fc"><div class="fci">
