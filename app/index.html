@@ -317,6 +317,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .wdone b{display:block;font-family:Unbounded,sans-serif;font-size:20px;margin-bottom:8px}
 .wdone button{margin-top:16px;background:var(--ink);color:var(--bg);border-radius:18px;padding:13px 20px;font-weight:700}
 .row .ri .aa{font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.nw{white-space:nowrap}
 .card2 .pl.aa{font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:#fff}
 </style>
 </head>
@@ -766,6 +767,7 @@ async function viewLevel(){
 /* ---------------- word cards ---------------- */
 const WN={a1:592,a2:614,b1:548}, WDS={}; let WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
 const wknown=new Set(store.get('wk',[]));
+const nb=h=>h.replace(/(^|[\s(>])([^\s<>()]*[-‑][^\s<>()]*)/g,'$1<span class="nw">$2</span>');
 const wid=x=>(lv==='a1'?'':lv+'|')+x[0]+'|'+x[2];
 function wsave(){store.set('wk',[...wknown])}
 function wbuild(){
@@ -801,13 +803,13 @@ function renderWords(){
     <div class="wbar"><i style="width:${set.length?kn/set.length*100:0}%"></i></div>
     <div class="fc" id="fc"><div class="fci">
       <div class="ff fr"><div class="wg"><span>Unit ${u}</span><span>${esc(g)}</span></div>
-        <div class="ww">${esc(w)}</div><div class="wi">${esc(ipa)}</div><span class="wp">${esc(pos)}${known?'&nbsp;&nbsp;✓':''}</span>
+        <div class="ww">${nb(esc(w))}</div><div class="wi">${esc(ipa)}</div><span class="wp">${esc(pos)}${known?'&nbsp;&nbsp;✓':''}</span>
         <div class="wh">${t('wc_tap')}</div></div>
-      <div class="ff fb"><div class="bw">${esc(w)}</div>
-        <div><div class="wl">${t('wc_def')}</div><div class="wt">${esc(def)}</div></div>
-        ${syn&&syn.length?`<div><div class="wl">${t('wc_syn')}</div><div class="sy">${syn.map(z=>`<span>${esc(z)}</span>`).join('')}</div></div>`:''}
-        <div><div class="wl">${t('wc_ex')}</div><div class="wt">${exH}</div></div>
-        <div class="tr2"><div><div class="wl">${t('wc_az')}</div><div class="wt">${esc(az)}</div></div><div><div class="wl">${t('wc_ru')}</div><div class="wt">${esc(ru)}</div></div></div>
+      <div class="ff fb"><div class="bw">${nb(esc(w))}</div>
+        <div><div class="wl">${t('wc_def')}</div><div class="wt">${nb(esc(def))}</div></div>
+        ${syn&&syn.length?`<div><div class="wl">${t('wc_syn')}</div><div class="sy">${syn.map(z=>`<span class="nw">${esc(z)}</span>`).join('')}</div></div>`:''}
+        <div><div class="wl">${t('wc_ex')}</div><div class="wt">${nb(exH)}</div></div>
+        <div class="tr2"><div><div class="wl">${t('wc_az')}</div><div class="wt">${nb(esc(az))}</div></div><div><div class="wl">${t('wc_ru')}</div><div class="wt">${nb(esc(ru))}</div></div></div>
       </div></div></div>
     <div class="wbtn"><button class="wsq" id="wPrev" aria-label="‹">‹</button><button class="wd" id="wDont">${t('wc_dont')}</button><button class="wk" id="wKnow">${t('wc_know')}</button></div>${opts}`;
     const fit=(el,max,min,mh)=>{ if(!el) return; let f=max; el.style.fontSize=f+'px'; while(f>min&&(el.scrollWidth>el.clientWidth+1||(mh&&el.offsetHeight>mh))){ f-=1; el.style.fontSize=f+'px' } };
