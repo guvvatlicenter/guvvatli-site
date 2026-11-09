@@ -373,25 +373,33 @@ p{margin:0}
 
 
 /* wall cabinets */
-.wall{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,7vw,110px);padding-top:10px}
-.cab{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:14px;-webkit-tap-highlight-color:transparent;transition:opacity .5s var(--ease),transform .9s var(--ease)}
-.cab:focus-visible .box{outline:3px solid var(--lime);outline-offset:6px}
-.cab .plate{font-family:var(--display);font-weight:800;font-size:clamp(13px,1.2vw,16px);letter-spacing:.18em;text-transform:uppercase;color:#3B2410;background:linear-gradient(180deg,#F6DFA3 0%,#D9AF5E 55%,#B98A3A 100%);padding:9px 20px 8px;border-radius:6px;box-shadow:0 2px 0 #7C5521,0 8px 16px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6)}
-.cab .box{position:relative;display:block;width:clamp(140px,26vw,320px);aspect-ratio:27/32;border-radius:8px;padding:14px;background:linear-gradient(180deg,#A0612F 0%,#7E4520 45%,#5A2D12 100%);box-shadow:0 30px 40px -18px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.12);perspective:900px}
-.cab .inner{position:absolute;inset:14px;border-radius:3px;background:linear-gradient(180deg,#2A1607,#3A1F0A);display:flex;flex-direction:column;box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
-.cab .row{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:0 10px;border-bottom:8px solid #6B3818;overflow:hidden}
+.wall{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(28px,8vw,130px);padding-top:10px}
+.cab{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;-webkit-tap-highlight-color:transparent;transition:opacity .5s var(--ease),transform .9s var(--ease);width:clamp(150px,27vw,330px)}
+.cab:focus-visible .box{outline:2px solid #E2C27D;outline-offset:10px}
+.plaque{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;margin-bottom:12px;filter:drop-shadow(0 10px 12px rgba(0,0,0,.45))}
+.pq-plate{display:block;position:relative;padding:clamp(7px,.8vw,11px) clamp(14px,1.8vw,26px);border-radius:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 1px,rgba(0,0,0,0) 1px 3px),linear-gradient(180deg,#F5E3AE 0%,#D9B46C 34%,#B8904A 58%,#D8B672 82%,#EBD08F 100%);box-shadow:inset 0 1px 0 rgba(255,250,225,.85),inset 0 -1px 0 rgba(90,60,20,.55),0 0 0 1px #6E4F1F,0 0 0 4px #1E1009,0 0 0 5px #4A2C14;transform:perspective(420px) rotateX(16deg);transform-origin:bottom center}
+.pq-plate::before,.pq-plate::after{content:"";position:absolute;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF6D8,#9C7434 70%)}
+.pq-plate::before{left:6px}.pq-plate::after{right:6px}
+.pq-t{display:block;font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:700;font-size:clamp(12px,1.45vw,21px);line-height:1;letter-spacing:.26em;padding-left:.26em;text-transform:uppercase;color:#4A3214;text-shadow:0 1px 0 rgba(255,246,214,.75),0 -1px 0 rgba(60,38,12,.35);white-space:nowrap}
+.pq-base{display:block;width:calc(100% + 26px);height:clamp(7px,.8vw,10px);margin-top:4px;border-radius:2px 2px 1px 1px;background:linear-gradient(180deg,#3E2412 0%,#1C0E05 100%);box-shadow:inset 0 1px 0 rgba(255,225,180,.18)}
+.cab .box{position:relative;display:block;width:100%;aspect-ratio:27/32;border-radius:3px;padding:12px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,rgba(0,0,0,.05) 2px 7px,rgba(255,255,255,.015) 7px 11px),linear-gradient(180deg,#5E3519 0%,#47270F 50%,#331A08 100%);box-shadow:0 40px 60px -24px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,220,170,.14),inset 0 0 0 1px rgba(0,0,0,.45)}
+.cab .crown{position:absolute;left:-9px;right:-9px;top:-11px;height:12px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,#7C4A27 0%,#56301A 55%,#3A1F0C 100%);box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,220,170,.28)}
+.cab .plinth{position:absolute;left:-5px;right:-5px;bottom:-9px;height:9px;border-radius:0 0 2px 2px;background:linear-gradient(180deg,#3B200D,#1E0F06)}
+.cab .inner{position:absolute;inset:12px;border-radius:2px;background:radial-gradient(120% 50% at 50% 0%,rgba(255,196,120,.16),rgba(0,0,0,0) 60%),linear-gradient(180deg,#22120A,#170B04);display:flex;flex-direction:column;box-shadow:inset 0 12px 22px rgba(0,0,0,.6)}
+.cab .row{position:relative;flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;gap:1px;padding:0 8%;overflow:hidden;background:radial-gradient(70% 45% at 50% 0%,rgba(255,205,140,.20),rgba(0,0,0,0) 70%);border-bottom:clamp(4px,.5vw,6px) solid #4E2B12;box-shadow:inset 0 -1px 0 rgba(255,210,150,.12)}
 .cab .row:last-child{border-bottom-width:0}
-.cab .row i{display:block;width:9px;border-radius:2px 2px 1px 1px;box-shadow:inset -2px 0 3px rgba(0,0,0,.25)}
-.cab .door{position:absolute;top:14px;bottom:14px;width:calc(50% - 14px);border-radius:3px;border:clamp(6px,.7vw,9px) solid #8A4F24;border-top-color:#9A5A2A;border-bottom-color:#6E3A17;box-shadow:0 0 0 1px rgba(0,0,0,.3),0 6px 14px rgba(0,0,0,.25);transition:transform .9s cubic-bezier(.6,0,.2,1)}
-.cab .door.l{left:14px;transform-origin:left center}
-.cab .door.r{right:14px;transform-origin:right center}
-.cab .pane{display:block;width:100%;height:100%;border-radius:2px;background:linear-gradient(125deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.06) 30%,rgba(255,255,255,0) 46%,rgba(255,255,255,.12) 60%,rgba(255,255,255,.03) 100%),rgba(190,220,230,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
-.cab .knob{position:absolute;top:50%;width:7px;height:7px;margin-top:-3px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF2C2,#C9973F 60%,#7C5521)}
-.cab .door.l .knob{right:-8px}.cab .door.r .knob{left:-8px}
-.cab:hover .door.l{transform:rotateY(-14deg)}.cab:hover .door.r{transform:rotateY(14deg)}
+.cab .mini{position:relative;display:block;flex:0 0 auto;pointer-events:none}
+.cab .door{position:absolute;top:12px;bottom:12px;width:calc(50% - 12px);border-radius:2px;border:clamp(4px,.45vw,6px) solid #3E220E;box-shadow:inset 0 0 0 1px rgba(214,170,90,.5),0 0 0 1px rgba(0,0,0,.5),0 6px 14px rgba(0,0,0,.3);transition:transform 1s cubic-bezier(.6,0,.2,1)}
+.cab .door.l{left:12px;transform-origin:left center}
+.cab .door.r{right:12px;transform-origin:right center}
+.cab .pane{display:block;width:100%;height:100%;background:linear-gradient(115deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.03) 24%,rgba(255,255,255,0) 40%,rgba(255,255,255,.06) 56%,rgba(255,255,255,0) 72%);-webkit-backdrop-filter:blur(1.6px) brightness(.9);backdrop-filter:blur(1.6px) brightness(.9)}
+.cab .knob{position:absolute;top:50%;width:3px;height:clamp(16px,2.2vw,30px);transform:translateY(-50%);border-radius:2px;background:linear-gradient(90deg,#7E5A22,#F4DC9C 50%,#93692B);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.cab .door.l .knob{right:4px}.cab .door.r .knob{left:4px}
+.cab:hover .door.l{transform:rotateY(-12deg)}.cab:hover .door.r{transform:rotateY(12deg)}
+.cab .box{perspective:1000px}
 .cab.open .door.l{transform:rotateY(-108deg)}.cab.open .door.r{transform:rotateY(108deg)}
-.cab .cnt{color:var(--muted-dark);font-size:14px}
-@media (max-width:600px){.cab .inner,.cab .door{top:10px;bottom:10px}.cab .box{padding:10px}.cab .inner{inset:10px}.cab .door.l{left:10px}.cab .door.r{right:10px}.cab .door{width:calc(50% - 10px)}.cab .row i{width:6px}.cab .plate{padding:7px 12px 6px;letter-spacing:.12em}}
+.cab .cnt{display:flex;flex-direction:column;align-items:center;gap:4px;text-wrap:balance;margin-top:30px;text-align:center;font-size:clamp(12px,1vw,14px);line-height:1.45;color:var(--muted-dark)}
+.cab .cnt b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(15px,1.35vw,19px);letter-spacing:.04em;color:#E9D7BE}
 .wall.go .cab:not(.open){opacity:0;transform:scale(.92)}
 .wall.go .cab.open{transform:scale(1.18)}
 .wall.out{opacity:0;transform:scale(1.25);transition:opacity .45s ease,transform .6s var(--ease)}
@@ -404,6 +412,7 @@ p{margin:0}
 .roomtop .back::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-50%) rotate(45deg)}
 .roomtop .back:hover{background:rgba(255,255,255,.16)}
 .roomtop .roomt{font-family:var(--display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#E9D7BE;font-size:clamp(14px,1.2vw,17px)}
+@media (max-width:600px){.cab .box{padding:8px}.cab .inner{inset:8px}.cab .door{top:8px;bottom:8px;width:calc(50% - 8px)}.cab .door.l{left:8px}.cab .door.r{right:8px}.cab .crown{left:-6px;right:-6px;top:-8px;height:9px}.pq-t{letter-spacing:.16em;padding-left:.16em}.cab .cnt{margin-top:22px}}
 @media (prefers-reduced-motion:reduce){.cab .door,.room,.wall{transition:none;animation:none}}
 
 /* ========== FLIP MODAL ========== */
@@ -966,14 +975,14 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
     </div>
     <div class="wall" id="wall">
       <button type="button" class="cab" data-room="math" aria-label="Riyaziyyat rəfini aç">
-        <span class="plate">Riyaziyyat</span>
-        <span class="box"><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span></span>
-        <span class="cnt"></span>
+        <span class="plaque"><span class="pq-plate"><span class="pq-t">Riyaziyyat</span></span><span class="pq-base"></span></span>
+        <span class="box"><span class="crown"></span><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span><span class="plinth"></span></span>
+        <span class="cnt"><b>Dərslik və iş kitabı</b><span>1-ci sinifdən 9-cu sinfə qədər</span><span>Azərbaycan, ingilis və rus dillərində</span></span>
       </button>
       <button type="button" class="cab" data-room="lang" aria-label="Dillər rəfini aç">
-        <span class="plate">Dillər</span>
-        <span class="box"><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span></span>
-        <span class="cnt"></span>
+        <span class="plaque"><span class="pq-plate"><span class="pq-t">Dillər</span></span><span class="pq-base"></span></span>
+        <span class="box"><span class="crown"></span><span class="inner"><span class="row"></span><span class="row"></span></span><span class="door l"><span class="pane"></span><span class="knob"></span></span><span class="door r"><span class="pane"></span><span class="knob"></span></span><span class="plinth"></span></span>
+        <span class="cnt"><b>Dil kitabları</b><span>English Kids, 6 səviyyə</span><span>General English A1, A2, B1, B2</span><span>Çin dili A1</span></span>
       </button>
     </div>
     <p class="wallhint">Rəfə toxunun, qapıları açılsın</p>
@@ -1123,6 +1132,7 @@ Object.assign(I18N.en,{"Sektor":"Sector"});Object.assign(I18N.ru,{"Sektor":"Се
 Object.assign(I18N.en,{"Süni İntellekt":"Artificial Intelligence"});Object.assign(I18N.ru,{"Süni İntellekt":"Искусственный интеллект"});
 Object.assign(I18N.en,{"Valideynlərimizin bizə yazdıqları, olduğu kimi.": "What our parents wrote to us, word for word.", "Mən də əvvəl onlayn dərsə bir az tərəddüdlə yanaşırdım. Fikirləşirdim uşaq ekrandan nə qədər öyrənəcək. Amma indi görürəm ki, boşuna narahat olmuşam. Dərsdən sonra da oturub olimpiada sualları işləyir.": "At first I was a bit hesitant about online lessons. I wondered how much a child could learn from a screen. Now I see I worried for nothing. Even after class he sits down and works on olympiad problems.", "Arzu xanım": "Mrs. Arzu", "Əli, 6-cı sinif": "Ali, 6th grade", "Düzü bir neçə yerə getmişdik, uşaq heç birində çox həvəsli deyildi. Burada isə özü istəyərək dərsə girir. Müəllimin uşaqlarla münasibəti də çox xoşuma gəlir. İnşallah olimpiadada da yaxşı nəticələrimiz olar 🤲": "Honestly, we had tried several places and he was never very keen. Here he joins the lessons because he wants to. I also really like how the teacher treats the children. Hopefully we will get good results at the olympiad too 🤲", "Çimnaz xanım": "Mrs. Chimnaz", "Səfər, 5-ci sinif": "Safar, 5th grade", "Dünən qızımın ingiliscə danışdığını eşidəndə çox sevindim. Əvvəl səhv edərəm deyə heç ağzını açmırdı. İndi səhv də etsə danışır, çəkinmir. Müəlliməsinə çox təşəkkür edirəm, uşağa özgüvən verib.": "Yesterday I was so happy to hear my daughter speaking English. Before, she would not say a word for fear of making a mistake. Now she speaks even if she makes mistakes, without hesitation. Many thanks to her teacher for giving her confidence.", "Ellada xanım": "Mrs. Ellada", "Ayla, 7-ci sinif": "Ayla, 7th grade", "İlk dəfə eşidəndə dedim bu yaşda uşaq süni intellekti necə öyrənəcək axı 😅 Amma gördüm ki, çox maraqlı formada keçirlər. Qızım hər dərsdən sonra yeni bir şey göstərir. Hətta mən də bəzi şeyləri ondan öyrənirəm 😂": "When I first heard about it, I thought how can a child this age learn artificial intelligence 😅 But I saw the lessons are really engaging. After every lesson my daughter shows me something new. I even learn a few things from her 😂", "İlkin bəy": "Mr. Ilkin", "Dilarə, 3-cü sinif": "Dilara, 3rd grade", "Vallah əvvəllər oğlumu oturdub riyaziyyat elətdirə bilmirdim. İndi özü gəlib mənə sual göstərir ki, mama bax bunu necə həll eləmişəm. Çox sevinirəm. Müəllimimizə də ayrıca təşəkkür edirəm ❤️": "Honestly, I used to be unable to get my son to sit down and do math. Now he comes to me himself and says, mum, look how I solved this. I am so happy. A special thank you to our teacher ❤️", "Pərvanə xanım": "Mrs. Parvana", "Kənan, 5-ci sinif": "Kanan, 5th grade"});Object.assign(I18N.ru,{"Valideynlərimizin bizə yazdıqları, olduğu kimi.": "Что нам написали родители, слово в слово.", "Mən də əvvəl onlayn dərsə bir az tərəddüdlə yanaşırdım. Fikirləşirdim uşaq ekrandan nə qədər öyrənəcək. Amma indi görürəm ki, boşuna narahat olmuşam. Dərsdən sonra da oturub olimpiada sualları işləyir.": "Сначала я немного сомневалась в онлайн уроках. Думала, сколько ребёнок сможет усвоить с экрана. Но теперь вижу, что волновалась зря. Даже после урока он садится и решает олимпиадные задачи.", "Arzu xanım": "Арзу ханым", "Əli, 6-cı sinif": "Али, 6 класс", "Düzü bir neçə yerə getmişdik, uşaq heç birində çox həvəsli deyildi. Burada isə özü istəyərək dərsə girir. Müəllimin uşaqlarla münasibəti də çox xoşuma gəlir. İnşallah olimpiadada da yaxşı nəticələrimiz olar 🤲": "Честно говоря, мы ходили в несколько мест, и нигде ребёнок не проявлял особого интереса. А здесь он сам с желанием заходит на урок. Мне очень нравится, как учитель общается с детьми. Даст Бог, и на олимпиаде будут хорошие результаты 🤲", "Çimnaz xanım": "Чимназ ханым", "Səfər, 5-ci sinif": "Сафар, 5 класс", "Dünən qızımın ingiliscə danışdığını eşidəndə çox sevindim. Əvvəl səhv edərəm deyə heç ağzını açmırdı. İndi səhv də etsə danışır, çəkinmir. Müəlliməsinə çox təşəkkür edirəm, uşağa özgüvən verib.": "Вчера я очень обрадовалась, услышав, как моя дочь говорит по английски. Раньше она боялась ошибиться и молчала. Теперь говорит, даже если ошибается, и не стесняется. Огромное спасибо её учительнице, она дала ребёнку уверенность.", "Ellada xanım": "Эллада ханым", "Ayla, 7-ci sinif": "Айла, 7 класс", "İlk dəfə eşidəndə dedim bu yaşda uşaq süni intellekti necə öyrənəcək axı 😅 Amma gördüm ki, çox maraqlı formada keçirlər. Qızım hər dərsdən sonra yeni bir şey göstərir. Hətta mən də bəzi şeyləri ondan öyrənirəm 😂": "Когда я впервые услышал, подумал: как ребёнок в таком возрасте будет изучать искусственный интеллект 😅 Но увидел, что уроки проходят очень интересно. После каждого урока дочь показывает что то новое. Я даже сам кое чему у неё учусь 😂", "İlkin bəy": "Ильгин бей", "Dilarə, 3-cü sinif": "Дилара, 3 класс", "Vallah əvvəllər oğlumu oturdub riyaziyyat elətdirə bilmirdim. İndi özü gəlib mənə sual göstərir ki, mama bax bunu necə həll eləmişəm. Çox sevinirəm. Müəllimimizə də ayrıca təşəkkür edirəm ❤️": "Честно, раньше я не могла усадить сына за математику. А теперь он сам подходит и говорит: мама, смотри, как я это решил. Я очень рада. Отдельное спасибо нашему учителю ❤️", "Pərvanə xanım": "Парвана ханым", "Kənan, 5-ci sinif": "Канан, 5 класс"});
 Object.assign(I18N.en,{"Riyaziyyat": "Mathematics", "Dillər": "Languages", "Bütün rəflər": "All shelves", "Rəfə toxunun, qapıları açılsın": "Tap a shelf to open its doors", "Riyaziyyat rəfi": "Mathematics shelf", "Çin dili rəfi": "Chinese shelf", "Çin dili A1: dərslik və iş dəftəri, izah dili Azərbaycan dili": "Chinese A1: Student&#8217;s Book and Workbook, explained in Azerbaijani", "Nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun": "Tap a book to see sample pages", "Riyaziyyat rəfini aç": "Open the mathematics shelf", "Dillər rəfini aç": "Open the languages shelf"});Object.assign(I18N.ru,{"Riyaziyyat": "Математика", "Dillər": "Языки", "Bütün rəflər": "Все полки", "Rəfə toxunun, qapıları açılsın": "Нажмите на полку, чтобы открыть дверцы", "Riyaziyyat rəfi": "Полка математики", "Çin dili rəfi": "Полка китайского языка", "Çin dili A1: dərslik və iş dəftəri, izah dili Azərbaycan dili": "Китайский A1: учебник и рабочая тетрадь с объяснениями на азербайджанском", "Nümunə səhifələrə baxmaq üçün kitabın üzərinə toxunun": "Нажмите на книгу, чтобы посмотреть страницы", "Riyaziyyat rəfini aç": "Открыть полку математики", "Dillər rəfini aç": "Открыть полку языков"});
+Object.assign(I18N.en,{"Dərslik və iş kitabı": "Textbook and workbook", "1-ci sinifdən 9-cu sinfə qədər": "Grades 1 to 9", "Azərbaycan, ingilis və rus dillərində": "In Azerbaijani, English and Russian", "Dil kitabları": "Language books", "English Kids, 6 səviyyə": "English Kids, 6 levels", "Çin dili A1": "Chinese A1"});Object.assign(I18N.ru,{"Dərslik və iş kitabı": "Учебник и рабочая тетрадь", "1-ci sinifdən 9-cu sinfə qədər": "С 1 по 9 класс", "Azərbaycan, ingilis və rus dillərində": "На азербайджанском, английском и русском", "Dil kitabları": "Книги по языкам", "English Kids, 6 səviyyə": "English Kids, 6 уровней", "Çin dili A1": "Китайский A1"});
 const D=I18N[L]||{};
 const pick=o=>o[L]||o.az;
 const UI=pick({
@@ -1234,13 +1244,18 @@ if(shelfZh){ZH.forEach((bk,k)=>{const i=BOOKS.length;BOOKS.push(bk);const wb=bk.
 const wall=$('#wall');
 if(wall){
   const roomBooks={math:['#shelf'],lang:['#shelfEn','#shelfZh']};
-  const KBOOK={az:'kitab',en:'books',ru:'книг'}[L]||'kitab';
-  const spineCols=room=>roomBooks[room].flatMap(sel=>$$(sel+' .book').map(b=>[b.style.getPropertyValue('--c'),b.classList.contains('wb')]));
-  $$('.cab',wall).forEach(cab=>{const room=cab.dataset.room;const cols=spineCols(room);
-    $('.cnt',cab).textContent=cols.length+' '+KBOOK;
-    const rows=$$('.row',cab);const half=Math.ceil(cols.length/2);
-    cols.forEach(([c,wb],k)=>{const i=document.createElement('i');i.style.background=c||'#ccc';i.style.height=(wb?62:72)+(k%3)*4+'%';if(wb)i.style.width='7px';rows[k<half?0:1].appendChild(i);});
-    cab.addEventListener('click',()=>openRoom(room,cab));});
+  const fillMinis=()=>$$('.cab',wall).forEach(cab=>{const rows=$$('.row',cab);rows.forEach(r=>r.innerHTML='');
+    const books=roomBooks[cab.dataset.room].flatMap(sel=>$$(sel+' .book'));const half=Math.ceil(books.length/2);
+    const rh=rows[0].clientHeight, rw=rows[0].clientWidth*.86;
+    const tw=Math.max(...[books.slice(0,half),books.slice(half)].map(g=>g.reduce((t,b)=>t+(b.classList.contains('wb')?34:46)+2,0)));
+    const s=Math.min((rh-6)/300*.92, rw/tw);
+    books.forEach((b,k)=>{const wb=b.classList.contains('wb');const W=wb?34:46,H=wb?278:300;
+      const m=document.createElement('span');m.className='mini';m.style.width=(W*s)+'px';m.style.height=(H*s)+'px';
+      const inn=document.createElement('span');inn.className='book'+(wb?' wb':'');inn.setAttribute('aria-hidden','true');
+      inn.style.cssText=(b.getAttribute('style')||'')+`;position:absolute;left:0;top:0;width:${W}px;height:${H}px;transform:scale(${s});transform-origin:0 0;pointer-events:none;z-index:auto`;
+      const sp=b.querySelector('.sp');if(sp)inn.appendChild(sp.cloneNode(true));m.appendChild(inn);rows[k<half?0:1].appendChild(m);});});
+  fillMinis();let mt;addEventListener('resize',()=>{clearTimeout(mt);mt=setTimeout(fillMinis,200)});
+  $$('.cab',wall).forEach(cab=>cab.addEventListener('click',()=>openRoom(cab.dataset.room,cab)));
   const sec=$('#kitabxana'),hint=$('.wallhint');
   const toTop=()=>{const y=sec.getBoundingClientRect().top+window.scrollY;lenis?lenis.scrollTo(y,{duration:1}):window.scrollTo({top:y,behavior:'smooth'});};
   function drop(sel){if(window.gsap)gsap.from(sel+' .book',{y:-520,rotateZ:()=>(Math.random()-.5)*30,opacity:0,duration:1.4,ease:'bounce.out',stagger:{each:.07,from:'random'}});}
