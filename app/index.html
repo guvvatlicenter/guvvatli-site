@@ -32,13 +32,14 @@
 body.a1{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; --page:#FCE3DC; }
 body.a2{ --acc:#0F8B84; --dark:#08433F; --pale:#E2F4F2; --page:#DDF1EF; }
 body.b1{ --acc:#3F5BC4; --dark:#1F2F73; --pale:#E6EBFB; --page:#E1E7FA; }
+body.b2{ --acc:#7A4BB8; --dark:#45246F; --pale:#F1E8FB; --page:#EDE3F9; }
 body.langs{ --acc:#E4573D; --dark:#7A2213; --pale:#FDEBE6; --page:#FCE3DC; }
 body.mth,body.riy{ --acc:#3B4A9C; --dark:#232D66; --pale:#E8EBF8; --page:#E3E7F7; }
 body.ai{ --acc:#127A4F; --dark:#073D28; --pale:#E4F9B6; --page:#E4F9B6; }
 body.olp{ --acc:#B5531B; --dark:#6E2F0B; --pale:#FBEBDD; --page:#FBEBD0; }
 @media (prefers-color-scheme:dark){
   :root{ --bg:#0F1315; --card:#1A1F22; --ink:#ECEEF0; --muted:#9AA6A1; --line:#2A3034; --pale:#1F2A25; --page:#18210F; --lime-soft:#1E2A12; --coral-soft:#33201B; --teal-soft:#122C2A; --indigo-soft:#1C2140; --amber-soft:#33260F; }
-  body.a1,body.langs{ --pale:#2A1B18; --page:#26150F; } body.a2{ --pale:#11302E; --page:#0F2524; } body.b1{ --pale:#1B2244; --page:#141A36; } body.mth,body.riy{ --pale:#1C2140; --page:#161A33; } body.olp{ --pale:#33200F; --page:#2A1A0B; } body.ai{ --pale:#1E2A12; --page:#18210F; }
+  body.a1,body.langs{ --pale:#2A1B18; --page:#26150F; } body.a2{ --pale:#11302E; --page:#0F2524; } body.b1{ --pale:#1B2244; --page:#141A36; } body.b2{ --pale:#2A1D40; --page:#1F1633; } body.mth,body.riy{ --pale:#1C2140; --page:#161A33; } body.olp{ --pale:#33200F; --page:#2A1A0B; } body.ai{ --pale:#1E2A12; --page:#18210F; }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overflow-x:hidden;margin:0;background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -405,6 +406,7 @@ ru:{wc_rdy:"Карточки готовы",a1_st:"Аудио и карточки
  ol_h:"Олимпиадные <span>ключи</span>",ol_p:"Выберите олимпиаду. В каждой ключи, которые в ней помогают, и задачи в её стиле из наших книг.",problems:"задач",ol_keys:"Ключи этой олимпиады",show_all:"Показать все ключи ({n})",probs:"Задачи",hint:"Подсказка",key_b:"Ключ",more:"Ещё ({n})",final:"финал, доказательство",
  ord:g=>g}};
 const UNITS={a1:["Hello","Things","Family and friends","My day","Work and study","Food and drink","Home and city","Free time","Yesterday","Travel"],
+             b2:["Who we are becoming","Stories that stay with us","The future of work","Truth and trust online","Mind and body","Places and spaces","Taste and tradition","Risk and decisions","A planet under pressure","Money and fairness"],
              b1:["Who we are","Stories and memories","Work and ambition","Learning for life","Media and news","Science and technology","Body and mind","Journeys and cultures","Cities and the planet","Money and choices"],
              a2:["Life now","Stories from the past","Shopping and money","Plans and arrangements","Health and the body","Travel experiences","Work and skills","Where we live","Always online","Special days"]};
 const store={get(k,d){try{const v=localStorage.getItem('gc_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('gc_'+k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem('gc_'+k)}catch(e){}}};
@@ -525,7 +527,7 @@ function viewLangs(){
      '#FCE3DC','#F9D9A8').replace('--fc: #F4A896','--fc:#F4A896');
   wireRows();
 }
-const LVS=[['a1','A1','Beginner','#F4A896',1],['a2','A2','Elementary','#8FD3CC',1],['b1','B1','Intermediate','#AEBEF2',0,1],['b2','B2','Upper Intermediate','#D3B5EE',0]];
+const LVS=[['a1','A1','Beginner','#F4A896',1],['a2','A2','Elementary','#8FD3CC',1],['b1','B1','Intermediate','#AEBEF2',0,1],['b2','B2','Upper Intermediate','#D3B5EE',0,1]];
 async function viewEnglish(){
   if(!await gate('audio')) return;
   theme('a1','langs'); setTitle(t('lang_en'),'langs'); staticText(); hExtra.innerHTML='';
@@ -755,17 +757,17 @@ new MutationObserver(m=>{ if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&
 
 async function viewLevel(){
   if(!await gate('audio')) return;
-  if(!['a1','a2','b1'].includes(lv)) lv='a1';
+  if(!['a1','a2','b1','b2'].includes(lv)) lv='a1';
   theme(lv,'langs'); setTitle('General English '+lv.toUpperCase(),'en'); staticText(); hExtra.innerHTML='';
   head(`General English <span>${lv.toUpperCase()}</span>`,t('lv_p'));
-  const fc={a1:'#F4A896',a2:'#8FD3CC',b1:'#AEBEF2'}[lv];
-  const rows=(lv==='b1'?row({soon:1,img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_soon_d'),tag:`<span class="tag">${t('soon')}</span>`}):row({go:'audio',img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_audio_d')}))
+  const fc={a1:'#F4A896',a2:'#8FD3CC',b1:'#AEBEF2',b2:'#D3B5EE'}[lv];
+  const rows=(lv==='b1'||lv==='b2'?row({soon:1,img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_soon_d'),tag:`<span class="tag">${t('soon')}</span>`}):row({go:'audio',img:`/books/en/ge${lv}sb_0.jpg`,t:t('lv_audio'),d:t('lv_audio_d')}))
     +row({go:'words',ic:'<b class="aa">Aa</b>',t:t('wc_t'),d:t('wc_d').replace('{n}',WN[lv])});
-  view.innerHTML=stack('General English '+lv.toUpperCase(),{a1:'Beginner',a2:'Elementary',b1:'Intermediate'}[lv],fc,rows,{a1:'#FCE3DC',a2:'#DDF1EF',b1:'#E3E8FB'}[lv],'#F9D9A8');
+  view.innerHTML=stack('General English '+lv.toUpperCase(),{a1:'Beginner',a2:'Elementary',b1:'Intermediate',b2:'Upper Intermediate'}[lv],fc,rows,{a1:'#FCE3DC',a2:'#DDF1EF',b1:'#E3E8FB',b2:'#EFE4FA'}[lv],'#F9D9A8');
   wireRows();
 }
 /* ---------------- word cards ---------------- */
-const WN={a1:592,a2:614,b1:548}, WDS={}; let WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
+const WN={a1:592,a2:614,b1:548,b2:553}, WDS={}; let WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
 const wknown=new Set(store.get('wk',[]));
 const nb=h=>h.replace(/(^|[\s(>])([^\s<>()]*[-‑][^\s<>()]*)/g,'$1<span class="nw">$2</span>');
 const wid=x=>(lv==='a1'?'':lv+'|')+x[0]+'|'+x[2];
@@ -779,7 +781,7 @@ function wbuild(){
 function wsay(txt){ try{ const u=new SpeechSynthesisUtterance(txt.replace(/,.*$/,'').replace(/\(.*?\)/g,'')); u.lang='en-GB'; const v=speechSynthesis.getVoices().find(v=>/en[-_]GB/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^en/i.test(v.lang)); if(v)u.voice=v; u.rate=.85; speechSynthesis.cancel(); speechSynthesis.speak(u) }catch(e){} }
 async function viewWords(){
   if(!await gate('audio')) return;
-  if(!['a1','a2','b1'].includes(lv)) lv='a1'; wu=store.get(lv==='a1'?'wu':'wu_'+lv,0); wi=0;
+  if(!['a1','a2','b1','b2'].includes(lv)) lv='a1'; wu=store.get(lv==='a1'?'wu':'wu_'+lv,0); wi=0;
   theme(lv,'langs'); setTitle(t('wc_t')+' '+lv.toUpperCase(),'lv'); staticText(); head(t('wc_h'),t('wc_p').replace('{lv}',lv.toUpperCase()));
   hExtra.innerHTML=`<div class="wu" id="wu"></div>`;
   if(!WDS[lv]){view.innerHTML=`<div class="empty">${t('loading')}</div>`; WDS[lv]=await loadSec('audio',`d/words.${lv}.bin`); if(!WDS[lv]){location.hash='';return} }
