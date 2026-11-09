@@ -838,7 +838,7 @@ function renderWords(){
     <div class="wbtn"><button class="wsq" id="wPrev" aria-label="‹">‹</button><button class="wd" id="wDont">${t('wc_dont')}</button><button class="wk" id="wKnow">${t('wc_know')}</button></div>${opts}`;
     const fit=(el,max,min,mh)=>{ if(!el) return; let f=max; el.style.fontSize=f+'px'; while(f>min&&(el.scrollWidth>el.clientWidth+1||(mh&&el.offsetHeight>mh))){ f-=1; el.style.fontSize=f+'px' } };
     fit(view.querySelector('.ff.fr .ww'),42,16,$('fc').clientHeight*.38); fit(view.querySelector('.ff.fb .bw'),20,12);
-    const fc=$('fc'); fc.onclick=()=>fc.classList.toggle('flip');
+    const fc=$('fc'); fc.onclick=()=>{fc.classList.toggle('flip'); if(fc.classList.contains('flip'))wsay(w)};
     const next=()=>{ if(wleft){wbuild()} else wi=(wi+1)%wdeck.length; renderWords() };
     $('wKnow').onclick=()=>{wknown.add(wid(x));wsave();next()};
     $('wDont').onclick=()=>{wknown.delete(wid(x));wsave(); if(wleft) wi=(wi+1)%wdeck.length; else wi=(wi+1)%wdeck.length; renderWords()};
