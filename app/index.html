@@ -289,14 +289,14 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .ff{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:30px;padding:22px 22px 20px;box-shadow:0 18px 40px rgba(16,22,26,.13);overflow:hidden}
 .ff.fr{background:radial-gradient(120% 80% at 80% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),var(--acc);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
 .ff.fr .wg{position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.04em;opacity:.85}
-.ff.fr .ww{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,9vw,42px);line-height:1.15;overflow-wrap:anywhere;padding:0 6px}
+.ff.fr .ww{font-family:Unbounded,sans-serif;font-weight:700;font-size:42px;line-height:1.15;overflow-wrap:normal;word-break:normal;hyphens:none;-webkit-hyphens:none;padding:0 6px;max-width:100%}
 .ff.fr .wi{font-size:19px;opacity:.9;font-family:'Segoe UI',Onest,system-ui,sans-serif}
 .ff.fr .wp{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.2)}
 .ff.fr .wh{position:absolute;bottom:18px;left:0;right:0;font-size:12px;opacity:.7}
 .say{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-top:6px;box-shadow:0 8px 18px rgba(0,0,0,.15)}
 .say svg{width:24px;height:24px;stroke:var(--acc);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ff.fb{background:var(--card);color:var(--ink);transform:rotateY(180deg);overflow-y:auto;display:flex;flex-direction:column;gap:14px}
-.ff.fb .bw{font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;color:var(--acc);line-height:1.2}
+.ff.fb .bw{font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;color:var(--acc);line-height:1.2;overflow-wrap:normal;word-break:normal;hyphens:none;-webkit-hyphens:none}
 .ff.fb .wl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:5px}
 .ff.fb .wt{font-size:16px;line-height:1.45}
 .ff.fb .wt mark{background:none;color:var(--acc);font-weight:700}
@@ -806,6 +806,8 @@ function renderWords(){
         <div class="tr2"><div><div class="wl">${t('wc_az')}</div><div class="wt">${esc(az)}</div></div><div><div class="wl">${t('wc_ru')}</div><div class="wt">${esc(ru)}</div></div></div>
       </div></div></div>
     <div class="wbtn"><button class="wsq" id="wPrev" aria-label="‹">‹</button><button class="wd" id="wDont">${t('wc_dont')}</button><button class="wk" id="wKnow">${t('wc_know')}</button></div>${opts}`;
+    const fit=(el,max,min,mh)=>{ if(!el) return; let f=max; el.style.fontSize=f+'px'; while(f>min&&(el.scrollWidth>el.clientWidth+1||(mh&&el.offsetHeight>mh))){ f-=1; el.style.fontSize=f+'px' } };
+    fit(view.querySelector('.ff.fr .ww'),42,16,$('fc').clientHeight*.38); fit(view.querySelector('.ff.fb .bw'),20,12);
     const fc=$('fc'); fc.onclick=()=>fc.classList.toggle('flip');
     const next=()=>{ if(wleft){wbuild()} else wi=(wi+1)%wdeck.length; renderWords() };
     $('wKnow').onclick=()=>{wknown.add(wid(x));wsave();next()};
