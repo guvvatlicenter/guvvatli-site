@@ -275,6 +275,47 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 .pw .err{color:#C2412D;font-size:14px;min-height:20px;margin-top:8px}
 .pw .cancel{margin-top:8px;width:100%;padding:11px;color:var(--muted);font-weight:600}
 .logout{display:block;margin:20px auto 0;color:var(--muted);font-size:13px;text-decoration:underline}
+
+/* word cards */
+.wu{display:flex;gap:8px;overflow-x:auto;margin:10px -2px 0;padding:2px 2px 6px;scrollbar-width:none}
+.wu::-webkit-scrollbar{display:none}
+.wu button{flex:0 0 auto;padding:9px 14px;border-radius:999px;background:var(--card);font-weight:600;font-size:13px;color:var(--muted);white-space:nowrap;box-shadow:0 3px 10px rgba(16,22,26,.05)}
+.wu button.on{background:var(--ink);color:var(--bg)}
+.wtop{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--muted);margin-top:14px}
+.wbar{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:8px}.wbar i{display:block;height:100%;background:var(--acc);border-radius:6px;transition:width .3s}
+.fc{perspective:1400px;margin-top:14px;height:clamp(320px,calc(100svh - 470px),440px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fci{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.25,1);transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:30px;padding:22px 22px 20px;box-shadow:0 18px 40px rgba(16,22,26,.13);overflow:hidden}
+.ff.fr{background:radial-gradient(120% 80% at 80% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),var(--acc);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.ff.fr .wg{position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.04em;opacity:.85}
+.ff.fr .ww{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,9vw,42px);line-height:1.15;overflow-wrap:anywhere;padding:0 6px}
+.ff.fr .wi{font-size:19px;opacity:.9;font-family:'Segoe UI',Onest,system-ui,sans-serif}
+.ff.fr .wp{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.2)}
+.ff.fr .wh{position:absolute;bottom:18px;left:0;right:0;font-size:12px;opacity:.7}
+.say{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-top:6px;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+.say svg{width:24px;height:24px;stroke:var(--acc);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ff.fb{background:var(--card);color:var(--ink);transform:rotateY(180deg);overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.ff.fb .bw{font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;color:var(--acc);line-height:1.2}
+.ff.fb .wl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:5px}
+.ff.fb .wt{font-size:16px;line-height:1.45}
+.ff.fb .wt mark{background:none;color:var(--acc);font-weight:700}
+.ff.fb .sy{display:flex;flex-wrap:wrap;gap:6px}.ff.fb .sy span{background:var(--pale);border-radius:999px;padding:5px 11px;font-size:14px;font-weight:600}
+.ff.fb .tr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ff.fb .tr2>div{background:var(--bg);border-radius:16px;padding:11px 12px}
+.ff.fb .tr2 .wt{font-weight:600}
+.wbtn{display:grid;grid-template-columns:56px 1fr 1fr;gap:10px;margin-top:16px}
+.wbtn button{height:56px;border-radius:20px;font-weight:700;font-size:15px}
+.wbtn .wsq{background:var(--card);color:var(--ink);font-size:24px;box-shadow:0 3px 10px rgba(16,22,26,.05)}
+.wbtn .wd{background:var(--card);color:var(--ink);box-shadow:0 3px 10px rgba(16,22,26,.05)}
+.wbtn .wk{background:var(--ink);color:var(--bg)}
+.wopt{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.wopt button{padding:9px 14px;border-radius:999px;font-size:13px;font-weight:600;background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--line)}
+.wopt button.on{background:var(--pale);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--acc)}
+.wdone{background:var(--card);border-radius:28px;padding:30px 22px;text-align:center;margin-top:14px}
+.wdone b{display:block;font-family:Unbounded,sans-serif;font-size:20px;margin-bottom:8px}
+.wdone button{margin-top:16px;background:var(--ink);color:var(--bg);border-radius:18px;padding:13px 20px;font-weight:700}
+.card2 .pl.aa{font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:#fff}
 </style>
 </head>
 <body>
@@ -327,7 +368,7 @@ header{position:sticky;top:0;z-index:5;padding-top:calc(10px + var(--safe-t));pa
 <audio id="au" preload="auto"></audio>
 <script>
 const I18N={
-az:{practice:"Praktiki suallar",our_tests:"Bizim sınaq testlərimiz",n_links:"rəsmi kitabça",n_sets:"test",keys_lock:"Açarları açın",keys_lock_d:"Açarlar riyaziyyat bölməsinin şifrəsi ilə açılır",nav_ai:"Süni intellekt",ai_h:"Süni <span>intellekt</span>",ai_p:"Bu bölmə hazırlanır və tezliklə tətbiqə əlavə olunacaq.",ai_d:"Tezliklə əlavə olunacaq",riy_d:"Açarlar, qaydalar və olimpiada hazırlığı",other_d:"Yeni dillər tezliklə əlavə olunacaq",and_h:"Telefona quraşdırın",and1:"1. Chrome-da sağ üst küncdəki <b>⋮</b> menyusunu açın.",and2:"2. <b>Tətbiqi quraşdır</b> və ya <b>Ana ekrana əlavə et</b> seçin.",and3:"3. <b>Quraşdır</b> basın. Guvvatli Center ikonu ekranda görünəcək.",nav_home:"Ana səhifə",nav_langs:"Dillər",nav_math:"Riyaziyyat",nav_olymp:"Olimpiada",sections:"Bölmələr",sec_n:"3 bölmə",r_langs:"Dillər",r_langs_d:"İngilis dili audio: General English A1 və A2",r_math:"Riyaziyyat açarları",r_math_d:"1 ilə 9-cu sinif: qaydalar, düsturlar və fəndlər",r_olymp:"Olimpiada",r_olymp_d:"Lütfi Zadə, RFM, RFO və beynəlxalq olimpiadalar",cont:"Davam et",langs_h:"Dillər",langs_p:"Kitablarımızın audio materialları. İngilis dili hazırdır, yeni dillər tezliklə əlavə olunacaq.",lang_en:"İngilis dili",lang_en_d:"A1 və A2 audio, 432 trek",other_langs:"Digər dillər",lang_ru:"Rus dili",lang_de:"Alman dili",lang_tr:"Türk dili",soon:"Tezliklə",ready:"Hazırdır",en_h:"İngilis <span>dili</span>",en_p:"Səviyyəni seçin. A1 və A2-nin audiosu hazırdır, B1 və B2-nin audiosu tezliklə əlavə olunacaq.",audio_rdy:"Audio hazırdır",audio_soon:"Audio tezliklə",riy_h:"Riyaziyyat",riy_p:"Kitablarımızdakı açarlar, qaydalar və olimpiada hazırlığı bir yerdə.",ol_short:"Olimpiada açarları",off_links:"Rəsmi nümunələr",real:"Real formatda sınaq testləri",real_p:"Sualları Guvvatli Center rəsmi olimpiadanın formatı, mövzuları və sual tipləri əsasında hazırlayıb.",book_probs:"Kitablarımızdan məsələlər",pts:"bal",sol:"Həll",home_h:"“<span>Qüvvət</span> elmdədir, başqa cür heç kəs, heç kəsə üstünlük eyləyə bilməz!”",home_p:"Kitablarımızın audiosu, riyaziyyat və olimpiada açarları bir yerdə. İnternetsiz də işləyir.",
+az:{wc_t:"Söz kartları",wc_d:"{n} söz: tələffüz, mənası, sinonimlər, nümunə və tərcümə",wc_h:"Söz <span>kartları</span>",wc_p:"General English A1 kitabının lüğəti. Karta toxunun, arxasında mənası, sinonimləri, nümunə və tərcümə var.",wc_all:"Hamısı",wc_def:"Mənası",wc_syn:"Sinonimlər",wc_ex:"Nümunə",wc_az:"Azərbaycanca",wc_ru:"Rusca",wc_know:"Bilirəm",wc_dont:"Təkrarla",wc_known:"öyrənilib",wc_tap:"Çevirmək üçün toxunun",wc_mix:"Qarışdır",wc_left:"Öyrənilməyənlər",wc_done:"Bu bölmədəki bütün sözləri öyrəndiniz!",wc_done_p:"Başqa uniti seçin və ya kartları yenidən keçin.",wc_reset:"Yenidən başla",wc_say:"Dinlə",practice:"Praktiki suallar",our_tests:"Bizim sınaq testlərimiz",n_links:"rəsmi kitabça",n_sets:"test",keys_lock:"Açarları açın",keys_lock_d:"Açarlar riyaziyyat bölməsinin şifrəsi ilə açılır",nav_ai:"Süni intellekt",ai_h:"Süni <span>intellekt</span>",ai_p:"Bu bölmə hazırlanır və tezliklə tətbiqə əlavə olunacaq.",ai_d:"Tezliklə əlavə olunacaq",riy_d:"Açarlar, qaydalar və olimpiada hazırlığı",other_d:"Yeni dillər tezliklə əlavə olunacaq",and_h:"Telefona quraşdırın",and1:"1. Chrome-da sağ üst küncdəki <b>⋮</b> menyusunu açın.",and2:"2. <b>Tətbiqi quraşdır</b> və ya <b>Ana ekrana əlavə et</b> seçin.",and3:"3. <b>Quraşdır</b> basın. Guvvatli Center ikonu ekranda görünəcək.",nav_home:"Ana səhifə",nav_langs:"Dillər",nav_math:"Riyaziyyat",nav_olymp:"Olimpiada",sections:"Bölmələr",sec_n:"3 bölmə",r_langs:"Dillər",r_langs_d:"İngilis dili audio: General English A1 və A2",r_math:"Riyaziyyat açarları",r_math_d:"1 ilə 9-cu sinif: qaydalar, düsturlar və fəndlər",r_olymp:"Olimpiada",r_olymp_d:"Lütfi Zadə, RFM, RFO və beynəlxalq olimpiadalar",cont:"Davam et",langs_h:"Dillər",langs_p:"Kitablarımızın audio materialları. İngilis dili hazırdır, yeni dillər tezliklə əlavə olunacaq.",lang_en:"İngilis dili",lang_en_d:"A1 və A2 audio, 432 trek",other_langs:"Digər dillər",lang_ru:"Rus dili",lang_de:"Alman dili",lang_tr:"Türk dili",soon:"Tezliklə",ready:"Hazırdır",en_h:"İngilis <span>dili</span>",en_p:"Səviyyəni seçin. A1 və A2-nin audiosu hazırdır, B1 və B2-nin audiosu tezliklə əlavə olunacaq.",audio_rdy:"Audio hazırdır",audio_soon:"Audio tezliklə",riy_h:"Riyaziyyat",riy_p:"Kitablarımızdakı açarlar, qaydalar və olimpiada hazırlığı bir yerdə.",ol_short:"Olimpiada açarları",off_links:"Rəsmi nümunələr",real:"Real formatda sınaq testləri",real_p:"Sualları Guvvatli Center rəsmi olimpiadanın formatı, mövzuları və sual tipləri əsasında hazırlayıb.",book_probs:"Kitablarımızdan məsələlər",pts:"bal",sol:"Həll",home_h:"“<span>Qüvvət</span> elmdədir, başqa cür heç kəs, heç kəsə üstünlük eyləyə bilməz!”",home_p:"Kitablarımızın audiosu, riyaziyyat və olimpiada açarları bir yerdə. İnternetsiz də işləyir.",
  t_audio:"İngilis dili audio",d_audio:"General English A1 və A2. Student’s Book və Workbook, 432 trek",
  t_math:"Riyaziyyat açarları",d_math:"1 ilə 9-cu sinif. Çin, Hindistan və Sinqapur məktəblərinin üsulları, olimpiada fəndləri, qaydalar və düsturlar, hər biri nümunə ilə",
  t_olymp:"Olimpiada açarları",d_olymp:"Lütfi Zadə, RFM, RFO, Kenquru, SASMO, TIMO, Copernicus, AMO, FISO. Hər olimpiada üçün açarlar və kitablarımızdan məsələlər",
@@ -338,7 +379,7 @@ az:{practice:"Praktiki suallar",our_tests:"Bizim sınaq testlərimiz",n_links:"r
  rule:"Qayda",why:"Niyə işləyir?",ex:"Nümunə",normal:"Adi yol",withkey:"Açarla",answer:"Cavab",prev:"‹ Əvvəlki",next:"Növbəti ›",
  ol_h:"Olimpiada <span>açarları</span>",ol_p:"Olimpiadanı seç. Hər birində həmin olimpiadada işə yarayan açarlar və kitablarımızdan onun üslubunda məsələlər var.",problems:"məsələ",ol_keys:"Bu olimpiadanın açarları",show_all:"Bütün {n} açarı göstər",probs:"Məsələlər",hint:"İpucu",key_b:"Açar",more:"Daha çox ({n})",final:"final, sübut",
  ord:g=>g+({1:'-ci',2:'-ci',3:'-cü',4:'-cü',5:'-ci',6:'-cı',7:'-ci',8:'-ci',9:'-cu'}[g]||'-cu')},
-en:{practice:"Practice questions",our_tests:"Our practice tests",n_links:"official booklets",n_sets:"tests",keys_lock:"Unlock the keys",keys_lock_d:"Keys open with the maths section password",nav_ai:"AI",ai_h:"Artificial <span>intelligence</span>",ai_p:"This section is in preparation and will be added to the app soon.",ai_d:"Coming soon",riy_d:"Keys, rules and olympiad preparation",other_d:"New languages are coming soon",and_h:"Install on your phone",and1:"1. In Chrome, open the <b>⋮</b> menu in the top right corner.",and2:"2. Choose <b>Install app</b> or <b>Add to Home screen</b>.",and3:"3. Tap <b>Install</b>. The Guvvatli Center icon will appear on your screen.",nav_home:"Home",nav_langs:"Languages",nav_math:"Maths",nav_olymp:"Olympiad",sections:"Sections",sec_n:"3 sections",r_langs:"Languages",r_langs_d:"English audio: General English A1 and A2",r_math:"Maths keys",r_math_d:"Grades 1 to 9: rules, formulas and tricks",r_olymp:"Olympiad",r_olymp_d:"Lotfi Zadeh, RFM, RFO and international olympiads",cont:"Continue",langs_h:"Languages",langs_p:"Audio for our books. English is ready, other languages are coming soon.",lang_en:"English",lang_en_d:"A1 and A2 audio, 432 tracks",other_langs:"Other languages",lang_ru:"Russian",lang_de:"German",lang_tr:"Turkish",soon:"Coming soon",ready:"Ready",en_h:"<span>English</span>",en_p:"Choose a level. Audio for A1 and A2 is ready, audio for B1 and B2 is coming soon.",audio_rdy:"Audio ready",audio_soon:"Audio soon",riy_h:"Maths",riy_p:"Keys, rules and olympiad preparation from our books in one place.",ol_short:"Olympiad keys",off_links:"Official samples",real:"Practice tests in the real format",real_p:"Guvvatli Center wrote these questions following the official olympiad format, topics and question types.",book_probs:"Problems from our books",pts:"pts",sol:"Solution",home_h:"“<span>Power</span> lies in knowledge; in no other way can anyone rise above another!”",home_p:"Audio for our books, maths keys and olympiad keys in one place. Works offline too.",
+en:{wc_t:"Word cards",wc_d:"{n} words: pronunciation, meaning, synonyms, example and translation",wc_h:"Word <span>cards</span>",wc_p:"The vocabulary of General English A1. Tap a card to see the meaning, synonyms, an example and translations.",wc_all:"All",wc_def:"Meaning",wc_syn:"Synonyms",wc_ex:"Example",wc_az:"Azerbaijani",wc_ru:"Russian",wc_know:"I know it",wc_dont:"Again",wc_known:"learnt",wc_tap:"Tap to flip",wc_mix:"Shuffle",wc_left:"Not learnt yet",wc_done:"You have learnt every word in this set!",wc_done_p:"Choose another unit or go through the cards again.",wc_reset:"Start again",wc_say:"Listen",practice:"Practice questions",our_tests:"Our practice tests",n_links:"official booklets",n_sets:"tests",keys_lock:"Unlock the keys",keys_lock_d:"Keys open with the maths section password",nav_ai:"AI",ai_h:"Artificial <span>intelligence</span>",ai_p:"This section is in preparation and will be added to the app soon.",ai_d:"Coming soon",riy_d:"Keys, rules and olympiad preparation",other_d:"New languages are coming soon",and_h:"Install on your phone",and1:"1. In Chrome, open the <b>⋮</b> menu in the top right corner.",and2:"2. Choose <b>Install app</b> or <b>Add to Home screen</b>.",and3:"3. Tap <b>Install</b>. The Guvvatli Center icon will appear on your screen.",nav_home:"Home",nav_langs:"Languages",nav_math:"Maths",nav_olymp:"Olympiad",sections:"Sections",sec_n:"3 sections",r_langs:"Languages",r_langs_d:"English audio: General English A1 and A2",r_math:"Maths keys",r_math_d:"Grades 1 to 9: rules, formulas and tricks",r_olymp:"Olympiad",r_olymp_d:"Lotfi Zadeh, RFM, RFO and international olympiads",cont:"Continue",langs_h:"Languages",langs_p:"Audio for our books. English is ready, other languages are coming soon.",lang_en:"English",lang_en_d:"A1 and A2 audio, 432 tracks",other_langs:"Other languages",lang_ru:"Russian",lang_de:"German",lang_tr:"Turkish",soon:"Coming soon",ready:"Ready",en_h:"<span>English</span>",en_p:"Choose a level. Audio for A1 and A2 is ready, audio for B1 and B2 is coming soon.",audio_rdy:"Audio ready",audio_soon:"Audio soon",riy_h:"Maths",riy_p:"Keys, rules and olympiad preparation from our books in one place.",ol_short:"Olympiad keys",off_links:"Official samples",real:"Practice tests in the real format",real_p:"Guvvatli Center wrote these questions following the official olympiad format, topics and question types.",book_probs:"Problems from our books",pts:"pts",sol:"Solution",home_h:"“<span>Power</span> lies in knowledge; in no other way can anyone rise above another!”",home_p:"Audio for our books, maths keys and olympiad keys in one place. Works offline too.",
  t_audio:"English audio",d_audio:"General English A1 and A2. Student’s Book and Workbook, 432 tracks",
  t_math:"Maths keys",d_math:"Grades 1 to 9. Methods from Chinese, Indian and Singapore schools, olympiad tricks, rules and formulas, each with an example",
  t_olymp:"Olympiad keys",d_olymp:"Lotfi Zadeh, RFM, RFO, Kangaroo, SASMO, TIMO, Copernicus, AMO, FISO. Keys for every olympiad and problems from our books",
@@ -349,7 +390,7 @@ en:{practice:"Practice questions",our_tests:"Our practice tests",n_links:"offici
  rule:"Rule",why:"Why does it work?",ex:"Example",normal:"Usual way",withkey:"With the key",answer:"Answer",prev:"‹ Previous",next:"Next ›",
  ol_h:"Olympiad <span>keys</span>",ol_p:"Choose an olympiad. Each one has the keys that help in it and problems in its style from our books.",problems:"problems",ol_keys:"Keys for this olympiad",show_all:"Show all {n} keys",probs:"Problems",hint:"Hint",key_b:"Key",more:"More ({n})",final:"final, proof",
  ord:g=>g},
-ru:{practice:"Практические задания",our_tests:"Наши пробные тесты",n_links:"офиц. сборников",n_sets:"тестов",keys_lock:"Откройте ключи",keys_lock_d:"Ключи открываются паролем раздела математики",nav_ai:"ИИ",ai_h:"Искусственный <span>интеллект</span>",ai_p:"Этот раздел готовится и скоро появится в приложении.",ai_d:"Скоро появится",riy_d:"Ключи, правила и подготовка к олимпиадам",other_d:"Новые языки скоро появятся",and_h:"Установите на телефон",and1:"1. В Chrome откройте меню <b>⋮</b> в правом верхнем углу.",and2:"2. Выберите <b>Установить приложение</b> или <b>Добавить на главный экран</b>.",and3:"3. Нажмите <b>Установить</b>. Значок Guvvatli Center появится на экране.",nav_home:"Главная",nav_langs:"Языки",nav_math:"Математика",nav_olymp:"Олимпиада",sections:"Разделы",sec_n:"3 раздела",r_langs:"Языки",r_langs_d:"Аудио по английскому: General English A1 и A2",r_math:"Ключи по математике",r_math_d:"С 1 по 9 класс: правила, формулы и приёмы",r_olymp:"Олимпиада",r_olymp_d:"Лютфи Заде, РФМ, РФО и международные олимпиады",cont:"Продолжить",langs_h:"Языки",langs_p:"Аудио к нашим книгам. Английский готов, другие языки скоро появятся.",lang_en:"Английский язык",lang_en_d:"Аудио A1 и A2, 432 трека",other_langs:"Другие языки",lang_ru:"Русский язык",lang_de:"Немецкий язык",lang_tr:"Турецкий язык",soon:"Скоро",ready:"Готово",en_h:"Английский <span>язык</span>",en_p:"Выберите уровень. Аудио A1 и A2 готово, аудио B1 и B2 скоро появится.",audio_rdy:"Аудио готово",audio_soon:"Аудио скоро",riy_h:"Математика",riy_p:"Ключи, правила и подготовка к олимпиадам из наших книг в одном месте.",ol_short:"Олимпиадные ключи",off_links:"Официальные образцы",real:"Пробные тесты в реальном формате",real_p:"Вопросы составлены Guvvatli Center по формату, темам и типам заданий официальной олимпиады.",book_probs:"Задачи из наших книг",pts:"балл.",sol:"Решение",home_h:"«<span>Сила</span> в знании, иначе никто никого превзойти не сможет!»",home_p:"Аудио к нашим книгам, ключи по математике и олимпиадам в одном месте. Работает и без интернета.",
+ru:{wc_t:"Карточки слов",wc_d:"{n} слов: произношение, значение, синонимы, пример и перевод",wc_h:"Карточки <span>слов</span>",wc_p:"Словарь книги General English A1. Нажмите на карточку: на обороте значение, синонимы, пример и перевод.",wc_all:"Все",wc_def:"Значение",wc_syn:"Синонимы",wc_ex:"Пример",wc_az:"Азербайджанский",wc_ru:"Русский",wc_know:"Знаю",wc_dont:"Повторить",wc_known:"выучено",wc_tap:"Нажмите, чтобы перевернуть",wc_mix:"Перемешать",wc_left:"Невыученные",wc_done:"Вы выучили все слова этого раздела!",wc_done_p:"Выберите другой юнит или пройдите карточки заново.",wc_reset:"Начать заново",wc_say:"Слушать",practice:"Практические задания",our_tests:"Наши пробные тесты",n_links:"офиц. сборников",n_sets:"тестов",keys_lock:"Откройте ключи",keys_lock_d:"Ключи открываются паролем раздела математики",nav_ai:"ИИ",ai_h:"Искусственный <span>интеллект</span>",ai_p:"Этот раздел готовится и скоро появится в приложении.",ai_d:"Скоро появится",riy_d:"Ключи, правила и подготовка к олимпиадам",other_d:"Новые языки скоро появятся",and_h:"Установите на телефон",and1:"1. В Chrome откройте меню <b>⋮</b> в правом верхнем углу.",and2:"2. Выберите <b>Установить приложение</b> или <b>Добавить на главный экран</b>.",and3:"3. Нажмите <b>Установить</b>. Значок Guvvatli Center появится на экране.",nav_home:"Главная",nav_langs:"Языки",nav_math:"Математика",nav_olymp:"Олимпиада",sections:"Разделы",sec_n:"3 раздела",r_langs:"Языки",r_langs_d:"Аудио по английскому: General English A1 и A2",r_math:"Ключи по математике",r_math_d:"С 1 по 9 класс: правила, формулы и приёмы",r_olymp:"Олимпиада",r_olymp_d:"Лютфи Заде, РФМ, РФО и международные олимпиады",cont:"Продолжить",langs_h:"Языки",langs_p:"Аудио к нашим книгам. Английский готов, другие языки скоро появятся.",lang_en:"Английский язык",lang_en_d:"Аудио A1 и A2, 432 трека",other_langs:"Другие языки",lang_ru:"Русский язык",lang_de:"Немецкий язык",lang_tr:"Турецкий язык",soon:"Скоро",ready:"Готово",en_h:"Английский <span>язык</span>",en_p:"Выберите уровень. Аудио A1 и A2 готово, аудио B1 и B2 скоро появится.",audio_rdy:"Аудио готово",audio_soon:"Аудио скоро",riy_h:"Математика",riy_p:"Ключи, правила и подготовка к олимпиадам из наших книг в одном месте.",ol_short:"Олимпиадные ключи",off_links:"Официальные образцы",real:"Пробные тесты в реальном формате",real_p:"Вопросы составлены Guvvatli Center по формату, темам и типам заданий официальной олимпиады.",book_probs:"Задачи из наших книг",pts:"балл.",sol:"Решение",home_h:"«<span>Сила</span> в знании, иначе никто никого превзойти не сможет!»",home_p:"Аудио к нашим книгам, ключи по математике и олимпиадам в одном месте. Работает и без интернета.",
  t_audio:"Аудио по английскому",d_audio:"General English A1 и A2. Student’s Book и Workbook, 432 трека",
  t_math:"Ключи по математике",d_math:"С 1 по 9 класс. Методы китайской, индийской и сингапурской школ, олимпиадные приёмы, правила и формулы, каждый с примером",
  t_olymp:"Олимпиадные ключи",d_olymp:"Лютфи Заде, РФМ, РФО, Кенгуру, SASMO, TIMO, Copernicus, AMO, FISO. Ключи к каждой олимпиаде и задачи из наших книг",
@@ -486,6 +527,8 @@ async function viewEnglish(){
   theme('a1','langs'); setTitle(t('lang_en'),'langs'); staticText(); hExtra.innerHTML='';
   head(t('en_h'),t('en_p'));
   view.innerHTML=`<div class="tgrid">${LVS.map(([k,n,d,c,ok])=>`<button class="lvc${ok?'':' soon'}" style="background:${c}" ${ok?`data-lv="${k}"`:''}><b>${n}</b><small>${d}</small><span class="st">${ok?t('audio_rdy'):t('audio_soon')}</span><img src="/books/en/ge${k}sb_0.jpg" alt=""></button>`).join('')}</div>`;
+  view.insertAdjacentHTML('beforeend',`<button class="card2" id="wcBtn"><span class="pl aa">Aa</span><span><b>${t('wc_t')}: General English A1</b><small>${t('wc_d').replace('{n}',WN)}</small></span></button>`);
+  $('wcBtn').onclick=()=>{location.hash='words'};
   view.querySelectorAll('.lvc[data-lv]').forEach(b=>b.onclick=()=>{ lv=b.dataset.lv; store.set('lv',lv); location.hash='audio' });
 }
 function viewAI(){
@@ -705,6 +748,66 @@ let kmT=null;
 function km(){ clearTimeout(kmT); kmT=setTimeout(()=>{ if(window.renderMathInElement){ try{ renderMathInElement(view,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredClasses:['katex'],macros:{'\\frac':'\\dfrac'}}) }catch(e){} } else km(); },30) }
 new MutationObserver(m=>{ if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains('katex'))&&!n.closest?.('.katex')))) km() }).observe(view,{childList:true,subtree:true});
 
+
+/* ---------------- word cards ---------------- */
+const WN=592; let WD=null, wu=store.get('wu',0), wmix=store.get('wmix',false), wleft=store.get('wleft',false), wi=0, wdeck=[], wseed=Date.now()%9973;
+const wknown=new Set(store.get('wk',[]));
+const wid=x=>x[0]+'|'+x[2];
+function wsave(){store.set('wk',[...wknown])}
+function wbuild(){
+  let L=WD.map((x,i)=>i).filter(i=>!wu||WD[i][0]===wu);
+  if(wleft) L=L.filter(i=>!wknown.has(wid(WD[i])));
+  if(wmix){let s=wseed;for(let i=L.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[L[i],L[j]]=[L[j],L[i]]}}
+  wdeck=L; if(wi>=wdeck.length) wi=Math.max(0,wdeck.length-1);
+}
+function wsay(txt){ try{ const u=new SpeechSynthesisUtterance(txt.replace(/,.*$/,'').replace(/\(.*?\)/g,'')); u.lang='en-GB'; const v=speechSynthesis.getVoices().find(v=>/en[-_]GB/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^en/i.test(v.lang)); if(v)u.voice=v; u.rate=.85; speechSynthesis.cancel(); speechSynthesis.speak(u) }catch(e){} }
+async function viewWords(){
+  if(!await gate('audio')) return;
+  theme('a1','langs'); setTitle(t('wc_t'),'en'); staticText(); head(t('wc_h'),t('wc_p'));
+  hExtra.innerHTML=`<div class="wu" id="wu"></div>`;
+  if(!WD){view.innerHTML=`<div class="empty">${t('loading')}</div>`; WD=await loadSec('audio','d/words.a1.bin'); if(!WD){location.hash='';return} }
+  $('wu').innerHTML=[0,1,2,3,4,5,6,7,8,9,10].map(u=>`<button data-u="${u}" class="${u===wu?'on':''}">${u?u+'. '+esc(UNITS.a1[u-1]):t('wc_all')+' '+WD.length}</button>`).join('');
+  $('wu').querySelectorAll('button').forEach(b=>b.onclick=()=>{wu=+b.dataset.u;store.set('wu',wu);wi=0;$('wu').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));wbuild();renderWords()});
+  const on=$('wu').querySelector('.on'); if(on) on.scrollIntoView({inline:'center',block:'nearest'});
+  wbuild(); renderWords();
+}
+function renderWords(){
+  const set=WD.filter(x=>!wu||x[0]===wu), kn=set.filter(x=>wknown.has(wid(x))).length;
+  const opts=`<div class="wopt"><button id="wMix" class="${wmix?'on':''}">${t('wc_mix')}</button><button id="wLeft" class="${wleft?'on':''}">${t('wc_left')}</button></div>`;
+  if(!wdeck.length){
+    view.innerHTML=`<div class="wtop"><span>${kn} / ${set.length} ${t('wc_known')}</span></div><div class="wbar"><i style="width:${set.length?kn/set.length*100:0}%"></i></div><div class="wdone"><b>${t('wc_done')}</b><span>${t('wc_done_p')}</span><br><button id="wReset">${t('wc_reset')}</button></div>${opts}`;
+    $('wReset').onclick=()=>{set.forEach(x=>wknown.delete(wid(x)));wsave();wi=0;wbuild();renderWords()};
+  } else {
+    const x=WD[wdeck[wi]]; const [u,g,w,ipa,pos,def,syn,ex,az,ru]=x; const known=wknown.has(wid(x));
+    const alts=w.split(',').map(z=>z.trim().replace(/^(a|an|the)\s+/i,'')).filter(Boolean).sort((a,b)=>b.length-a.length).map(z=>z.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/’|'/g,"['’]")); const re=new RegExp('\\b('+alts.join('|')+')','i');
+    const exH=esc(ex).replace(re,'<mark>$1</mark>');
+    view.innerHTML=`<div class="wtop"><span>${wi+1} / ${wdeck.length}</span><span>${kn} / ${set.length} ${t('wc_known')}</span></div>
+    <div class="wbar"><i style="width:${set.length?kn/set.length*100:0}%"></i></div>
+    <div class="fc" id="fc"><div class="fci">
+      <div class="ff fr"><div class="wg"><span>Unit ${u}</span><span>${esc(g)}</span></div>
+        <div class="ww">${esc(w)}</div><div class="wi">${esc(ipa)}</div><span class="wp">${esc(pos)}${known?'&nbsp;&nbsp;✓':''}</span>
+        ${'speechSynthesis' in window?`<button class="say" id="wSay" aria-label="${t('wc_say')}"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>`:''}
+        <div class="wh">${t('wc_tap')}</div></div>
+      <div class="ff fb"><div class="bw">${esc(w)}</div>
+        <div><div class="wl">${t('wc_def')}</div><div class="wt">${esc(def)}</div></div>
+        ${syn&&syn.length?`<div><div class="wl">${t('wc_syn')}</div><div class="sy">${syn.map(z=>`<span>${esc(z)}</span>`).join('')}</div></div>`:''}
+        <div><div class="wl">${t('wc_ex')}</div><div class="wt">${exH}</div></div>
+        <div class="tr2"><div><div class="wl">${t('wc_az')}</div><div class="wt">${esc(az)}</div></div><div><div class="wl">${t('wc_ru')}</div><div class="wt">${esc(ru)}</div></div></div>
+      </div></div></div>
+    <div class="wbtn"><button class="wsq" id="wPrev" aria-label="‹">‹</button><button class="wd" id="wDont">${t('wc_dont')}</button><button class="wk" id="wKnow">${t('wc_know')}</button></div>${opts}`;
+    const fc=$('fc'); fc.onclick=e=>{ if(e.target.closest('#wSay')) return; fc.classList.toggle('flip') };
+    if($('wSay')) $('wSay').onclick=e=>{e.stopPropagation();wsay(w)};
+    const next=()=>{ if(wleft){wbuild()} else wi=(wi+1)%wdeck.length; renderWords() };
+    $('wKnow').onclick=()=>{wknown.add(wid(x));wsave();next()};
+    $('wDont').onclick=()=>{wknown.delete(wid(x));wsave(); if(wleft) wi=(wi+1)%wdeck.length; else wi=(wi+1)%wdeck.length; renderWords()};
+    $('wPrev').onclick=()=>{wi=(wi-1+wdeck.length)%wdeck.length;renderWords()};
+    let sx=null; fc.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+    fc.addEventListener('touchend',e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; sx=null; if(Math.abs(dx)>60){ e.preventDefault(); wi=dx<0?(wi+1)%wdeck.length:(wi-1+wdeck.length)%wdeck.length; renderWords() } });
+  }
+  $('wMix').onclick=()=>{wmix=!wmix;store.set('wmix',wmix);wseed=Date.now()%9973;wi=0;wbuild();renderWords()};
+  $('wLeft').onclick=()=>{wleft=!wleft;store.set('wleft',wleft);wi=0;wbuild();renderWords()};
+}
+document.addEventListener('keydown',e=>{ if(location.hash!=='#words'||!wdeck.length) return; if(e.key==='ArrowRight'){wi=(wi+1)%wdeck.length;renderWords()} else if(e.key==='ArrowLeft'){wi=(wi-1+wdeck.length)%wdeck.length;renderWords()} else if(e.key===' '){e.preventDefault();$('fc')&&$('fc').classList.toggle('flip')} });
 /* ---------------- router ---------------- */
 function route(){
   const h=location.hash.replace('#','');
@@ -714,6 +817,7 @@ function route(){
   else if(h==='riy') viewRiy();
   else if(h==='ai') viewAI();
   else if(h==='audio') viewAudio();
+  else if(h==='words') viewWords();
   else if(h==='math') viewMath();
   else if(h.startsWith('m/')) viewMathItem(+h.slice(2));
   else if(h.startsWith('mk/')){const [,i,o]=h.split('/');viewMathItem(+i,'o/'+o)}
