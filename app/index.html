@@ -861,7 +861,14 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;
 document.addEventListener('click',async e=>{ const ib=e.target.closest&&e.target.closest('#installBtn'); if(!ib) return; if(deferred){deferred.prompt();const ch=await deferred.userChoice;deferred=null;if(ch&&ch.outcome==='accepted')ib.hidden=true} else if(isIOS){staticText();$('iosSheet').hidden=false} else {$('iosH').textContent=t('and_h');$('ios1').innerHTML=t('and1');$('ios2').innerHTML=t('and2');$('ios3').innerHTML=t('and3');$('iosOk').textContent=t('ios_ok');$('iosSheet').hidden=false} });
 $('iosOk').onclick=()=>{$('iosSheet').hidden=true};
 if(isIOS&&!standalone&&!store.get('iosSeen',false)){setTimeout(()=>{staticText();$('iosSheet').hidden=false;store.set('iosSeen',true)},1500)}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+if('serviceWorker' in navigator){
+  const hadCtl=!!navigator.serviceWorker.controller; let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(hadCtl&&!reloaded){ reloaded=true; location.reload() } });
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{
+    const chk=()=>reg.update().catch(()=>{});
+    chk(); document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') chk() });
+  }).catch(()=>{});
+}
 
 let pendingLast=null;
 (async()=>{
