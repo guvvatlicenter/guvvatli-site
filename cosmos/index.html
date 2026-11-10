@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2304060A%27/%3E%3Cpath d=%27M16 5c4 4 5 9 5 13h-10c0-4 1-9 5-13zM11 19l-3 5h5zM21 19l3 5h-5z%27 fill=%27%23F2F5F7%27/%3E%3Ccircle cx=%2716%27 cy=%2713%27 r=%272%27 fill=%27%2300B5E2%27/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guvvatli.az/cosmos/">
+<meta property="og:title" content="Qırat kosmos missiyası">
+<meta property="og:description" content="Çənlibeldən start ver, Aya, Marsa və ya Saturna uç. Real missiyaların yolu, real görüntülər və faktlarla kosmos simulyatoru.">
+<meta property="og:image" content="https://guvvatli.az/cosmos/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://guvvatli.az/cosmos/">
+<title>Qırat kosmos missiyası</title>
+<meta name="description" content="Çənlibeldən start götürən Qırat raketi ilə real missiyaların yolu: BKS, Ay, Mars, Yupiter, Saturn və daha uzaqlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800;900&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Plan: qaranlıq kosmos fonu, ağ kinetik başlıqlar, bayraq rəngləri vurğu kimi; solda mətn, sağda görüntü */
+  --space:#04060A; --ink:#0B1016; --ink2:#131A22; --paper:#F3F5F4; --muted:#96A3AD; --dim:#5E6B76;
+  --blue:#00B5E2; --red:#EF3340; --green:#7BD148; --lime:#C6F26B;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif; --body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1); --gut:max(18px,4vw);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--space)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--space);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.flying{overflow:hidden;height:100%}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+img{max-width:100%;display:block}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.grain{position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* ===== giriş ===== */
+#land{position:relative;z-index:2}
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:16px var(--gut);pointer-events:none}
+.nav>*{pointer-events:auto}
+.brand{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:-.01em;display:flex;gap:10px;align-items:baseline}
+.brand small{font-family:var(--body);font-weight:500;font-size:13px;color:var(--muted)}
+.nav .go{font-family:var(--display);font-weight:600;font-size:12px;padding:11px 16px;border-radius:999px;background:var(--paper);color:var(--space);transition:transform .3s var(--ease)}
+.nav .go:hover{transform:translateY(-2px)}
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,6,10,.5) 0,rgba(4,6,10,0) 26%,rgba(4,6,10,0) 58%,rgba(4,6,10,.82) 100%);pointer-events:none}
+.hero .in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--gut) clamp(28px,6vh,64px)}
+.hero h1{font-weight:900;font-size:clamp(64px,19.5vw,330px);line-height:.82;letter-spacing:-.06em;margin-left:-.04em;display:flex;text-shadow:0 10px 60px rgba(0,0,0,.35)}
+.hero h1 .ch,.hero h1 .ci{display:inline-block;will-change:transform}
+@keyframes rise{from{opacity:0}to{opacity:1}}
+.hero .src,.cue{animation:rise 1s ease 1.1s backwards}
+.hero .sub{display:flex;gap:clamp(18px,4vw,64px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-top:clamp(14px,2.4vh,28px)}
+.hero .tag{font-family:var(--display);font-weight:400;font-size:clamp(15px,2vw,26px);letter-spacing:-.01em}
+.hero .lead{max-width:44ch;color:#DDE4E8;font-size:clamp(15px,1.25vw,18px)}
+.hero .src{position:absolute;right:var(--gut);top:72px;z-index:3;font-size:12px;color:#D5DCE1;text-align:right;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.mantra{position:absolute;inset:0;z-index:3;display:grid;place-items:center;pointer-events:none;padding:0 var(--gut)}
+.mantra p{grid-area:1/1;font-family:var(--display);font-weight:800;font-size:clamp(30px,6.4vw,112px);line-height:1;letter-spacing:-.04em;text-align:center;opacity:0;text-shadow:0 6px 50px rgba(0,0,0,.55);max-width:14ch}
+.mantra p.l{justify-self:start;text-align:left;max-width:9ch}
+.specs{position:absolute;z-index:3;left:var(--gut);top:50%;transform:translateY(-50%);display:grid;gap:clamp(12px,2.2vh,24px);pointer-events:none}
+.spec{opacity:0}
+.spec b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,76px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.spec span{color:#D5DCE1;font-size:clamp(13px,1.1vw,16px)}
+.cue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;font-size:12px;color:var(--muted);letter-spacing:.02em}
+
+.sec{position:relative;background:var(--space);padding:clamp(72px,13vh,160px) var(--gut)}
+.wrap{max-width:1360px;margin-inline:auto}
+.mani{min-height:100vh;display:grid;align-items:center}
+.mani .words{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.4vw,68px);line-height:1.12;letter-spacing:-.03em;max-width:21ch}
+.mani .w{opacity:.14;transition:none}
+.mani .w.r{color:var(--lime)}
+.site{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,80px);align-items:center}
+.site h2{font-weight:800;font-size:clamp(34px,5.2vw,84px)}
+.site .txt{display:grid;gap:18px;max-width:54ch;margin-top:26px;color:#CBD4DA}
+.site .facts{display:grid;gap:14px;margin-top:30px}
+.site .facts div{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+.site .facts b{font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper);min-width:5.5ch}
+.site .facts span{color:var(--muted);font-size:15px}
+.map{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--ink)}
+.map img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.map .pin{position:absolute;transform:translate(-50%,-50%);font-size:12px;font-weight:600;white-space:nowrap;text-shadow:0 1px 6px #000,0 0 2px #000}
+.map .pin::before{content:"";display:block;width:9px;height:9px;border-radius:50%;background:#fff;margin:0 auto 5px;box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.map .pin.main::before{width:15px;height:15px;background:var(--red);box-shadow:0 0 0 5px rgba(239,51,64,.3),0 0 0 12px rgba(239,51,64,.14)}
+.map .pin.main{font-family:var(--display);font-size:14px}
+.map figcaption{position:absolute;left:12px;bottom:10px;font-size:11.5px;color:#DDE4E8;text-shadow:0 1px 6px #000}
+figure{margin:0}
+
+.dest{padding-inline:0;overflow:hidden}
+.dest .head{padding-inline:var(--gut);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(24px,5vh,54px)}
+.dest h2{font-weight:800;font-size:clamp(34px,5.2vw,84px)}
+.dest .head p{color:var(--muted);max-width:40ch}
+.track{display:flex;gap:18px;padding-inline:var(--gut);will-change:transform}
+.card{flex:0 0 clamp(250px,25vw,370px);background:var(--ink);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;text-align:left;transition:transform .45s var(--ease),box-shadow .45s var(--ease);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.card .ph{aspect-ratio:1.08;background:#000;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.card:hover .ph img{transform:scale(1.06)}
+.card .bd{padding:18px 18px 20px;display:grid;gap:8px;flex:1}
+.card h3{font-weight:800;font-size:clamp(22px,2vw,30px)}
+.card .bl{color:#CBD4DA;font-size:15px}
+.card dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px}
+.card dt{color:var(--dim)} .card dd{margin:0;color:var(--muted)}
+.card .pick{margin-top:12px;font-family:var(--display);font-weight:600;font-size:12px;padding:12px 14px;border-radius:999px;background:rgba(255,255,255,.08);justify-self:start;transition:background .3s}
+.card:hover .pick{background:rgba(255,255,255,.16)}
+.card.on{box-shadow:inset 0 0 0 2px var(--lime)}
+.card.on .pick{background:var(--lime);color:var(--space)}
+
+.launch{min-height:100vh;display:grid;align-items:center;background:radial-gradient(120% 90% at 80% 110%,#0F2A3A 0,rgba(15,42,58,0) 60%),var(--space)}
+.launch .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,6vw,96px);align-items:center}
+.launch h2{font-weight:900;font-size:clamp(40px,6.4vw,110px);line-height:.92}
+.launch h2 em{font-style:normal;color:var(--lime);display:block}
+.launch .meta{margin-top:22px;color:#CBD4DA;max-width:46ch}
+.pnl{background:var(--ink);border-radius:10px;padding:clamp(20px,2.6vw,34px);display:grid;gap:22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.pnl h3{font-family:var(--body);font-weight:600;font-size:14px;color:var(--muted);letter-spacing:0}
+.durs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.durs button{padding:16px 6px;border-radius:8px;background:rgba(255,255,255,.06);display:grid;gap:2px;justify-items:center;transition:background .25s,transform .25s var(--ease)}
+.durs button b{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.2vw,30px);font-variant-numeric:tabular-nums}
+.durs button span{font-size:12px;color:var(--muted)}
+.durs button[aria-pressed="true"]{background:var(--paper);color:var(--space)}
+.durs button[aria-pressed="true"] span{color:#4a545c}
+.sum{display:grid;gap:6px;font-size:15px;color:#CBD4DA}
+.sum b{color:var(--paper)}
+.start{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.5vw,20px);padding:22px 20px;border-radius:999px;background:var(--red);color:#fff;transition:transform .3s var(--ease),box-shadow .3s;box-shadow:0 10px 40px rgba(239,51,64,.35)}
+.start:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(239,51,64,.5)}
+.note{font-size:13.5px;color:var(--muted)}
+.resume{font-size:14px;padding:12px 14px;border-radius:8px;background:rgba(198,242,107,.1);color:var(--lime);text-align:left}
+footer{background:var(--space);padding:44px var(--gut) 60px;color:var(--dim);font-size:13px;display:grid;gap:10px;border-top:1px solid rgba(255,255,255,.07)}
+footer b{color:var(--muted);font-weight:600}
+footer p{max-width:110ch}
+
+/* ===== missiya ===== */
+#mission{position:fixed;inset:0;z-index:20;pointer-events:none;font-variant-numeric:tabular-nums}
+#mission>*{pointer-events:auto}
+.vig{position:absolute;inset:0;pointer-events:none!important;background:radial-gradient(120% 100% at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+.bars{position:absolute;inset:0;pointer-events:none!important}
+.htop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:16px var(--gut) 40px;background:linear-gradient(180deg,rgba(4,6,10,.72),rgba(4,6,10,0));pointer-events:none!important}
+.htop>*{pointer-events:auto}
+.mname small{display:block;font-size:12px;color:var(--muted)}
+.mname b{font-family:var(--display);font-weight:800;font-size:clamp(18px,2vw,28px);letter-spacing:-.03em}
+.mname .phz{display:block;font-size:13px;color:var(--lime);margin-top:2px}
+.clock{text-align:right}
+.clock small{display:block;font-size:12px;color:var(--muted)}
+.clock b{font-family:var(--display);font-weight:600;font-size:clamp(18px,2vw,28px)}
+.ctrl{display:flex;gap:6px;margin-top:8px;justify-content:flex-end;flex-wrap:wrap}
+.ctrl button{font-size:12.5px;font-weight:600;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s}
+.ctrl button:hover{background:rgba(255,255,255,.2)}
+.ctrl button[aria-pressed="true"]{background:var(--paper);color:var(--space)}
+.tele{position:absolute;left:var(--gut);bottom:74px;display:grid;gap:10px;min-width:210px;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.tele div{display:grid}
+.tele small{font-size:11.5px;color:var(--muted)}
+.tele b{font-family:var(--display);font-weight:600;font-size:clamp(15px,1.5vw,21px);letter-spacing:-.02em}
+.src2{position:absolute;left:var(--gut);bottom:46px;font-size:11.5px;color:#B7C2CA;text-shadow:0 1px 6px #000}
+.tl{position:absolute;left:var(--gut);right:var(--gut);bottom:18px;height:18px}
+.tl .ln{position:absolute;left:0;right:0;top:8px;height:2px;background:rgba(255,255,255,.16);border-radius:2px}
+.tl .fill{position:absolute;left:0;top:8px;height:2px;background:var(--paper);border-radius:2px;width:0}
+.tl i{position:absolute;top:5px;width:2px;height:8px;background:rgba(255,255,255,.3);border-radius:1px}
+.tl i.p{height:14px;top:2px;background:var(--lime)}
+.tl i.seen{background:rgba(255,255,255,.75)}
+.info{position:absolute;right:var(--gut);top:118px;width:min(400px,34vw);background:rgba(9,13,19,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.08);transform:translateX(30px);opacity:0;transition:transform .7s var(--ease),opacity .5s;max-height:calc(100% - 210px);display:flex;flex-direction:column}
+.info.on{transform:none;opacity:1}
+.info figure{position:relative;background:#000;flex:0 1 auto;min-height:0;overflow:hidden}
+.info figure img{width:100%;max-height:36vh;object-fit:cover}
+.info figcaption{position:absolute;right:8px;bottom:6px;font-size:10.5px;color:#E3E8EB;text-shadow:0 1px 4px #000;background:rgba(0,0,0,.35);padding:2px 6px;border-radius:4px}
+.info .tx{padding:18px 20px 20px;display:grid;gap:10px;overflow:auto}
+.info h3{font-weight:800;font-size:clamp(18px,1.6vw,24px);line-height:1.08}
+.info p{font-size:15.5px;color:#D6DEE3}
+.info .bar{height:2px;background:rgba(255,255,255,.12)}
+.info .bar i{display:block;height:100%;background:var(--lime);width:0}
+.big{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none!important;text-align:center;padding:0 var(--gut)}
+.big b{font-family:var(--display);font-weight:900;font-size:clamp(44px,12vw,210px);letter-spacing:-.05em;line-height:.9;opacity:0;text-shadow:0 10px 80px rgba(0,0,0,.6)}
+.big b .ch{display:inline-block}
+.count{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none!important}
+.count b{font-family:var(--display);font-weight:900;font-size:clamp(120px,34vw,520px);letter-spacing:-.06em;line-height:1;color:#fff;text-shadow:0 10px 90px rgba(0,0,0,.55);font-variant-numeric:tabular-nums}
+.count small{position:absolute;top:calc(50% + clamp(70px,19vw,290px));font-size:15px;color:#E6ECEF;text-shadow:0 1px 10px #000}
+.labs{position:absolute;inset:0;pointer-events:none!important;overflow:hidden}
+.labs span{position:absolute;font-size:12px;font-weight:600;color:#E9EEF1;transform:translate(12px,-50%);white-space:nowrap;text-shadow:0 1px 6px #000,0 0 2px #000}
+.labs span::before{content:"";position:absolute;left:-18px;top:50%;width:12px;height:12px;margin-top:-6px;border:1px solid rgba(255,255,255,.7);border-radius:50%}
+.mapbox{position:absolute;right:var(--gut);bottom:52px;width:min(250px,30vw);aspect-ratio:1;background:rgba(9,13,19,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);overflow:hidden}
+.mapbox canvas{width:100%;height:100%;display:block}
+.mapbox small{position:absolute;left:10px;top:8px;font-size:11px;color:var(--muted)}
+.log{position:absolute;inset:0;background:rgba(4,6,10,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:5;display:grid;grid-template-rows:auto 1fr;padding:22px var(--gut)}
+.log header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.log h2{font-weight:800;font-size:clamp(24px,3vw,44px)}
+.log .x{padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:600;font-size:14px}
+.log ol{list-style:none;margin:0;padding:0 0 30px;overflow:auto;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));align-content:start}
+.log li{background:var(--ink);border-radius:8px;padding:16px;display:grid;gap:6px;align-content:start}
+.log li small{color:var(--lime);font-size:12px}
+.log li b{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.15}
+.log li p{font-size:14px;color:#C5CED4}
+.fin{position:absolute;inset:0;z-index:6;background:#000;display:grid;opacity:0;transition:opacity 2.2s ease}
+.fin.on{opacity:1}
+.fin .pic{position:absolute;inset:0;overflow:hidden}
+.fin .pic img{width:100%;height:100%;object-fit:cover;animation:kb 40s ease-in-out infinite alternate}
+.fin .pic.pano img{width:auto;max-width:none;height:118%;animation:pan 120s linear infinite alternate}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-1.5%,-1%)}}
+@keyframes pan{from{transform:translateX(0)}to{transform:translateX(calc(-100% + 100vw))}}
+.fin::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0) 35%,rgba(0,0,0,.85) 100%)}
+.fin .tx{position:relative;z-index:2;align-self:end;padding:0 var(--gut) clamp(26px,6vh,60px);display:grid;gap:16px;max-width:1100px}
+.fin h2{font-weight:900;font-size:clamp(36px,7.5vw,120px);line-height:.92}
+.fin p{max-width:62ch;color:#E3E9EC;font-size:clamp(15px,1.3vw,19px)}
+.fin .st{display:flex;gap:clamp(18px,3vw,46px);flex-wrap:wrap;margin-top:4px}
+.fin .st div small{display:block;font-size:12px;color:#B7C2CA}
+.fin .st div b{font-family:var(--display);font-weight:600;font-size:clamp(16px,1.6vw,22px)}
+.fin .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.fin .acts button{font-family:var(--display);font-weight:600;font-size:13px;padding:14px 18px;border-radius:999px;background:var(--paper);color:var(--space)}
+.fin .acts button.alt{background:rgba(255,255,255,.16);color:#fff}
+.fin .cr{position:absolute;right:var(--gut);top:16px;z-index:2;font-size:11.5px;color:#DDE4E8;text-shadow:0 1px 6px #000}
+.load{position:fixed;inset:0;z-index:60;background:var(--space);display:grid;place-items:center;text-align:center;padding:var(--gut)}
+.load b{font-family:var(--display);font-weight:800;font-size:clamp(22px,3.4vw,46px);letter-spacing:-.03em}
+.load .pb{width:min(360px,70vw);height:2px;background:rgba(255,255,255,.14);margin:22px auto 12px}
+.load .pb i{display:block;height:100%;width:0;background:var(--lime);transition:width .3s}
+.load small{color:var(--muted);font-size:13px}
+.paused{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,54px);background:rgba(4,6,10,.7);padding:18px 30px;border-radius:12px;backdrop-filter:blur(10px)}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none!important}
+
+@media (max-width:860px){
+  body{font-size:16px}
+  .site,.launch .g{grid-template-columns:1fr}
+  .specs{top:auto;bottom:16vh;transform:none}
+  .hero .src{top:64px;font-size:11px;max-width:60vw}
+  .track{flex-direction:column;transform:none!important}
+  .card{flex:none;flex-direction:row}
+  .card .ph{flex:0 0 38%;aspect-ratio:auto}
+  .card dl{display:none}
+  .info{left:12px;right:12px;top:auto;bottom:150px;width:auto;max-height:46vh;transform:translateY(30px)}
+  .info figure img{max-height:17vh}
+  .info .tx{padding:13px 15px 15px}
+  .info p{font-size:14.5px}
+  .tele{bottom:66px;grid-template-columns:1fr 1fr;gap:6px 18px;right:12px;left:12px;min-width:0}
+  .tele div:nth-child(n+5){display:none}
+  .src2{display:none}
+  .mapbox{display:none}
+  .tl{left:12px;right:12px}
+  .htop{padding:12px 12px 30px}
+  .ctrl button{padding:7px 10px;font-size:12px}
+  .durs button{padding:14px 2px}
+}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}.fin .pic img{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="land">
+  <div class="nav">
+    <div class="brand">Guvvatli Center <small>Kosmos simulyatoru</small></div>
+    <button class="go" data-go="launch">Missiyaya başla</button>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="src">Fon real fotodur: Şamaxı<br>Raket təsəvvürdür</div>
+    <div class="mantra" aria-hidden="true">
+      <p>Koroğlunun Qıratı dağları aşırdı.</p>
+      <p>Bu Qırat planetləri aşır.</p>
+    </div>
+    <div class="specs" aria-hidden="true">
+      <div class="spec"><b>70 m</b><span>hündürlük, 23 mərtəbəli bina qədər</span></div>
+      <div class="spec"><b>9</b><span>mühərrik birinci pillədə</span></div>
+      <div class="spec"><b>549 t</b><span>start kütləsi</span></div>
+      <div class="spec"><b>7,8 km/s</b><span>orbitə çıxmaq üçün lazım olan sürət</span></div>
+    </div>
+    <div class="in">
+      <h1 aria-label="Qırat" class="split">QIRAT</h1>
+      <div class="sub">
+        <p class="tag">Çənlibeldən ulduzlara</p>
+        <p class="lead">Azərbaycanın öz raketi olsaydı, Şamaxının dağlarından hara uçardın? İstiqaməti seç, startı ver və real missiyaların yolu ilə get.</p>
+      </div>
+    </div>
+    <div class="cue">Aşağı sürüşdür</div>
+  </section>
+
+  <section class="sec mani" id="mani">
+    <div class="wrap"><p class="words">Qırat raketi və Çənlibel kosmodromu təsəvvürdür. <span class="rr">Qalan hər şey realdır:</span> Şamaxının fotosu, peykdən çəkilmiş torpaq, planetlərin xəritələri, aparatların modelləri, yol boyu eşidəcəyin hər rəqəm və hər tarix.</p></div>
+  </section>
+
+  <section class="sec" id="site">
+    <div class="wrap site">
+      <div>
+        <h2>Çənlibel kosmodromu</h2>
+        <div class="txt">
+          <p>Yer olaraq Şamaxıdan şimal-şərqdə, Pirsaat çayının o tayındakı açıq yaşıl yaylanı seçdik. Dəniz səviyyəsindən 1 130 metr hündürdür, ətrafı boş çöllər və otlaqlardır.</p>
+          <p>Raket buradan şərqə, Xəzərin üzərinə uçur. Belə etmək həm Yerin fırlanmasından əlavə sürət qazandırır, həm də ayrılan pillələr yaşayış yerlərinin üstünə düşmür.</p>
+        </div>
+        <div class="facts">
+          <div><b>1959</b><span>Şamaxı Astrofizika Rəsədxanası yaradılıb. 2 metrlik teleskopu 1966-cı ildən işləyir, ildə 190-200 gecə səma açıq olur.</span></div>
+          <div><b>2013</b><span>Azərbaycanın ilk peyki Azerspace-1 fevralın 8-də orbitə çıxarılıb.</span></div>
+          <div><b>2018</b><span>Azerspace-2 geostasionar orbitdə, 45° şərq uzunluğunda yerləşdirilib.</span></div>
+        </div>
+      </div>
+      <figure class="map">
+        <img src="img/site/s2_L1.jpg" alt="Şamaxı rayonunun peyk görüntüsü" loading="lazy">
+        <span class="pin main" style="left:50%;top:50%">Çənlibel</span>
+        <span class="pin" style="left:39.4%;top:68%">Şamaxı</span>
+        <span class="pin" style="left:32.6%;top:42%">Rəsədxana</span>
+        <figcaption>Sentinel-2 peyk görüntüsü, 64 × 64 km</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec dest" id="dest">
+    <div class="head">
+      <h2>Hara uçuruq</h2>
+      <p>On istiqamət var. Hər biri real bir missiyanın yolu ilə gedir: eyni məsafə, eyni manevrlər, eyni tarixlər.</p>
+    </div>
+    <div class="track" id="track"></div>
+  </section>
+
+  <section class="sec launch" id="launch">
+    <div class="wrap g">
+      <div>
+        <h2>Qırat <em id="lname">Aya</em> uçur</h2>
+        <p class="meta" id="lmeta"></p>
+      </div>
+      <div class="pnl">
+        <h3>Missiya nə qədər çəksin</h3>
+        <div class="durs" id="durs">
+          <button aria-pressed="true" data-d="30"><b>30</b><span>dəqiqə</span></button>
+          <button aria-pressed="false" data-d="60"><b>60</b><span>dəqiqə</span></button>
+          <button aria-pressed="false" data-d="90"><b>90</b><span>dəqiqə</span></button>
+          <button aria-pressed="false" data-d="120"><b>120</b><span>dəqiqə</span></button>
+        </div>
+        <div class="sum" id="sum"></div>
+        <button class="resume" id="resume" hidden></button>
+        <button class="start" id="start">Geri sayımı başlat</button>
+        <p class="note">Uçuşu sürətləndirmək və ya ötürmək olmur, fasilə vermək olar. Start gurultusunu eşitmək üçün səsi açıq saxla.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Nə realdır, nə təsəvvür.</b> Qırat raketi, Qırat gəmisi və Çənlibel kosmodromu təsəvvürdür və 3D modeldir. Raketin ölçüləri və uçuş profili Falcon 9 raketinə əsaslanır. Missiyalar, məsafələr, tarixlər və kartlardakı bütün faktlar realdır.</p>
+    <p><b>Görüntülər.</b> Start fonu: Şamaxı, foto BayAygun, Wikimedia Commons, CC BY-SA 4.0. Peyk görüntüsü: Sentinel-2 cloudless, s2maps.eu, EOX IT Services GmbH (Copernicus Sentinel məlumatları 2016 və 2017), CC BY 4.0. Relyef: Mapzen/AWS Terrain Tiles. Yer: NASA Blue Marble. Ay: NASA LRO. Planet xəritələri: NASA və Solar System Scope, CC BY 4.0. Fotolar: NASA, JPL-Caltech və tərəfdaş qurumlar. Kosmik aparatların 3D modelləri: NASA 3D Resources.</p>
+    <p><b>Səslər.</b> Alışma, qalxış və pillənin eniş gurultusu NASA-nın Kennedi Kosmik Mərkəzində start meydançasının mikrofonları ilə yazılmış real səslərdir. Uçuş komandasının ratsiya danışıqları süni səsləndirmədir.</p>
+    <p>Guvvatli Center üçün hazırlanıb.</p>
+  </footer>
+</div>
+
+<div id="mission" hidden>
+  <div class="vig"></div>
+  <div class="labs" id="labs"></div>
+  <div class="htop">
+    <div class="mname"><small>Qırat missiyası</small><b id="mTitle">Ay</b><span class="phz" id="mPhase"></span></div>
+    <div class="clock">
+      <small id="cLab">Missiyanın sonuna</small><b id="cRem">30:00</b>
+      <div class="ctrl">
+        <button id="bPause" aria-pressed="false">Fasilə</button>
+        <button id="bSound" aria-pressed="true">Səs</button>
+        <button id="bMap" aria-pressed="true">Xəritə</button>
+        <button id="bLog">Jurnal</button>
+        <button id="bFull">Tam ekran</button>
+        <button id="bExit">Çıxış</button>
+      </div>
+    </div>
+  </div>
+  <div class="big" id="big"><b></b></div>
+  <div class="count" id="count" hidden><b></b><small>Çənlibel kosmodromu, Şamaxı</small></div>
+  <div class="tele" id="tele">
+    <div><small>Missiya vaxtı</small><b id="tMet">T+ 00:00:00</b></div>
+    <div><small id="tAltL">Hündürlük</small><b id="tAlt">0 km</b></div>
+    <div><small id="tSpdL">Sürət</small><b id="tSpd">0 km/saat</b></div>
+    <div><small>Hədəfə qalıb</small><b id="tTgt"></b></div>
+    <div><small>Yerlə siqnal gecikməsi</small><b id="tDel">0 san</b></div>
+  </div>
+  <div class="src2" id="src2"></div>
+  <div class="mapbox" id="mapbox"><small id="mapLab">Yol xəritəsi</small><canvas id="map" width="500" height="500"></canvas></div>
+  <aside class="info" id="info" aria-live="polite">
+    <figure id="iFig" hidden><img id="iImg" alt=""><figcaption id="iCr"></figcaption></figure>
+    <div class="bar"><i id="iBar"></i></div>
+    <div class="tx"><h3 id="iT"></h3><p id="iX"></p></div>
+  </aside>
+  <div class="tl" id="tl"><div class="ln"></div><div class="fill" id="tlFill"></div></div>
+  <div class="paused" id="paused" hidden>Fasilə</div>
+  <div class="flash" id="flash"></div>
+  <div class="log" id="log" hidden><header><h2>Missiya jurnalı</h2><button class="x" id="logX">Bağla</button></header><ol id="logList"></ol></div>
+  <div class="fin" id="fin" hidden>
+    <div class="pic" id="finPic"><img id="finImg" alt=""></div>
+    <div class="cr" id="finCr"></div>
+    <div class="tx"><h2 id="finT"></h2><p id="finX"></p><div class="st" id="finSt"></div>
+      <div class="acts"><button id="finLog">Jurnala bax</button><button class="alt" id="finNew">Yeni missiya seç</button></div></div>
+  </div>
+</div>
+<div class="load" id="load" hidden><div><b id="loadT">Qırat yanacaqla doldurulur</b><div class="pb"><i id="loadB"></i></div><small id="loadS">Real görüntülər yüklənir</small></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
