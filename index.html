@@ -852,7 +852,6 @@ filter:drop-shadow(0 1px 0 rgba(255,240,190,.5)) drop-shadow(0 3px 0 rgba(50,34,
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="glow" aria-hidden="true"></div>
   <span class="mk bigmark" aria-hidden="true"></span>
-  <div class="mantra" aria-hidden="true"><i class="mw">Amaravati</i><i class="mw">Amaravati</i><i class="mw big">Çandrika</i><i class="mw g2">Kintamani</i><i class="mw g2">Kintamani</i><i class="mw big g2 last">İşvara!</i></div><canvas class="mdust" aria-hidden="true"></canvas>
   <div class="wash" aria-hidden="true"></div>
   <div class="wrap in">
     <div class="top ov"></div>
@@ -1612,20 +1611,10 @@ const heroChars=$$('.hero .split').flatMap(splitChars);
   $$('.hero h1 .ch').forEach(c=>{const t=c.textContent; if(!'“”«»'.includes(t))return; const fs=parseFloat(getComputedStyle(c).fontSize); const em=c.offsetWidth/fs; c.style['“«'.includes(t)?'marginLeft':'marginRight']=(-em)+'em';});};
   hang(); document.fonts&&document.fonts.ready.then(hang);})();
 const FLY=false; window.name=window.name.replace('|gvfly','');
-const pre=document.createElement('div');pre.className='pre';pre.innerHTML='<span class="mk"></span><div><div class="num">0</div><div class="bar"><i></i></div></div>';
-document.body.appendChild(pre);
-const num=$('.num',pre), cnt={v:0};
-const intro=G.timeline({delay:.1});
-if(!FLY) intro.to(cnt,{v:100,duration:1.5,ease:'power2.inOut',onUpdate:()=>num.textContent=Math.round(cnt.v)},0)
-  .to($('.bar i',pre),{scaleX:1,duration:1.5,ease:'power2.inOut'},0)
-  .to($('.mk',pre),{rotate:360,duration:1.5,ease:'power2.inOut'},0)
-  .to(pre,{yPercent:-100,duration:1,ease:'expo.inOut'},1.65);
-intro.from(heroChars,{yPercent:115,rotate:8,duration:1.2,ease:'expo.out',stagger:.035},2.05)
-  .from('.hero .top span, .hero .lead, .hero .roll, .hero .btns',{y:30,opacity:0,duration:1,ease:'expo.out',stagger:.08},2.3)
-  .from('.nav',{yPercent:-120,duration:1,ease:'expo.out'},2.3)
-  .add(()=>{pre.remove()});
-if(FLY) intro.time(.4);
-setTimeout(()=>{if(pre.isConnected){intro.progress(1);}},5000);
+const intro=G.timeline({delay:.05});
+intro.from(heroChars,{yPercent:115,rotate:8,duration:1.2,ease:'expo.out',stagger:.035},0)
+  .from('.hero .top span, .hero .lead, .hero .roll, .hero .btns',{y:30,opacity:0,duration:1,ease:'expo.out',stagger:.08},.25)
+  .from('.nav',{yPercent:-120,duration:1,ease:'expo.out'},.25);
 
 // ---------- hero scroll: explode + mark zoom ----------
 const heroOuter=$$('.hero .ch');
